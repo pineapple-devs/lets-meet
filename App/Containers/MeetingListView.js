@@ -8,7 +8,7 @@ import AlertMessage from '../Components/AlertMessage'
 // Styles
 import styles from './Styles/ListviewExampleStyles'
 
-class ListviewExample extends React.Component {
+class MeetingListView extends React.Component {
   constructor (props) {
     super(props)
     /* ***********************************************************
@@ -103,4 +103,4 @@ const mapStateToProps = (state) => {
   }
 }
 
-export default connect(mapStateToProps)(ListviewExample)
+export default connect(mapStateToProps)(MeetingListView)

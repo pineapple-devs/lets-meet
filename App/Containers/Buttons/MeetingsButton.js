@@ -1,9 +1,9 @@
 import React from 'react'
 import { View, Modal } from 'react-native'
 import RoundedButton from '../../Components/RoundedButton'
-import PresentationScreen from '../../../ignite/DevScreens/PresentationScreen'
+import MeetingsScreen from '../MeetingsScreen'
 
-export default class SettingsButton extends React.Component {
+export default class MeetingsButton extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
@@ -19,13 +19,13 @@ export default class SettingsButton extends React.Component {
     return (
       <View>
         <RoundedButton onPress={this.toggleModal}>
-          Settings
+          Meetings
         </RoundedButton>
         <Modal
           visible={this.state.showModal}
           onRequestClose={this.toggleModal}
         >
-          <PresentationScreen screenProps={{ toggle: this.toggleModal }} />
+          <MeetingsScreen screenProps={{ toggle: this.toggleModal }} />
         </Modal>
       </View>
     )
