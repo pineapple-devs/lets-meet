@@ -35,7 +35,7 @@
     "react-native-calendar-strip": "^0.1.4",
     "react-native-config": "0.3.1",
     "react-native-device-info": "0.10.2",
-    "react-native-drawer": "2.3.0",
+    "react-native-drawer": "^2.3.0",
     "react-native-i18n": "^1.0.0",
     "react-native-router-flux": "3.38.0",
     "react-native-vector-icons": "^4.0.1",

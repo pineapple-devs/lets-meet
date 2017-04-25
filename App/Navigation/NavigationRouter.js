@@ -26,8 +26,7 @@ class NavigationRouter extends Component {
               initial
               key='launchScreen'
               component={LaunchScreen}
-              title='LaunchScreen'
-              hideNavBar
+              title='Welcome'
             />
           </Scene>
         </Scene>

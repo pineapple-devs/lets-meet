@@ -4,7 +4,6 @@ import { Images } from '../Themes'
 import ListviewExample from './ListviewExample.js'
 
 // Styles
-import styles from './Styles/CalendarScreenStyles'
 import listStyles from './Styles/ListviewExampleStyles'
 
 import CalendarStrip from 'react-native-calendar-strip'
