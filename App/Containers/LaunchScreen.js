@@ -1,6 +1,7 @@
 import React from 'react'
 import { ScrollView, Text, Image, View } from 'react-native'
-import GoToScheduleButton from '../Containers/LaunchScreen/GoToScheduleButton.js'
+import CalendarButton from '../Containers/Buttons/CalendarButton.js'
+import MeetingListView from './MeetingListView.js'
 
 import { Images } from '../Themes'
 
@@ -24,7 +25,15 @@ export default class LaunchScreen extends React.Component {
           </View>
           <View />
 
-          <GoToScheduleButton />
+          <CalendarButton />
+
+          <View>
+            <Text style={styles.sectionText}>
+              {'Your meetings are below'}
+            </Text>
+
+            <MeetingListView />
+          </View>
         </ScrollView>
       </View>
     )
