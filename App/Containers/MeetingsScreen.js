@@ -1,14 +1,14 @@
 import React from 'react'
 import { View, TouchableOpacity, Image } from 'react-native'
 import { Images } from '../Themes'
-import HourListView from './HourListView.js'
+import MeetingListView from './MeetingListView.js'
 
 // Styles
 import listStyles from './Styles/ListviewExampleStyles'
 
 import CalendarStrip from 'react-native-calendar-strip'
 
-class CalendarScreen extends React.Component {
+class MeetingsScreen extends React.Component {
   render () {
     return (
       <View style={listStyles.container}>
@@ -36,11 +36,11 @@ class CalendarScreen extends React.Component {
           iconContainer={{flex: 0}}
         />
         <View style={listStyles.container}>
-          <HourListView />
+          <MeetingListView />
         </View>
       </View>
     )
   }
 }
 
-export default CalendarScreen
+export default MeetingsScreen
