@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, ListView } from 'react-native'
+import { View, Text, ListView, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
 
 // For empty lists
@@ -51,10 +51,12 @@ class MeetingListView extends React.Component {
   *************************************************************/
   renderRow (rowData) {
     return (
-      <View style={styles.row}>
-        <Text style={styles.boldLabel}>{rowData.title}</Text>
-        <Text style={styles.label}>{rowData.description}</Text>
-      </View>
+      <TouchableOpacity>
+        <View style={styles.row}>
+          <Text style={styles.boldLabel}>{rowData.title}</Text>
+          <Text style={styles.label}>{rowData.description}</Text>
+        </View>
+      </TouchableOpacity>
     )
   }
 
