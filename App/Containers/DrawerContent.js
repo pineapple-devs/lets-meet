@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { ScrollView, Image, BackAndroid } from 'react-native'
 import styles from './Styles/DrawerContentStyles'
 import { Images } from '../Themes'
+import GoToScheduleButton from '../Containers/LaunchScreen/GoToScheduleButton.js'
 
 class DrawerContent extends Component {
   componentDidMount () {
@@ -22,6 +23,7 @@ class DrawerContent extends Component {
     return (
       <ScrollView style={styles.container}>
         <Image source={Images.logo} style={styles.logo} />
+        <GoToScheduleButton />
       </ScrollView>
     )
   }
