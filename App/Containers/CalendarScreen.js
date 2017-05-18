@@ -28,7 +28,7 @@ class CalendarScreen extends React.Component {
             borderHighlightColor: 'red'}}
           style={{height: 100, paddingTop: 20, paddingBottom: 10}}
           calendarHeaderStyle={{color: 'white'}}
-          calendarColor={'#7743CE'}
+          calendarColor={'#4d4d4d'}
           dateNumberStyle={{color: 'white'}}
           dateNameStyle={{color: 'white'}}
           iconLeft={Images.leftArrow}

@@ -1,6 +1,7 @@
 import React from 'react'
-import { View, Text, ListView, TouchableOpacity } from 'react-native'
+import { View, Text, ListView } from 'react-native'
 import { connect } from 'react-redux'
+import { Metrics, Colors } from '../Themes/'
 
 // For empty lists
 import AlertMessage from '../Components/AlertMessage'
@@ -17,27 +18,30 @@ class HourListView extends React.Component {
     * Usually this should come from Redux mapStateToProps
     *************************************************************/
     const dataObjects = [
-      {title: 'First Title', description: 'First Description'},
-      {title: 'Second Title', description: 'Second Description'},
-      {title: 'Third Title', description: 'Third Description'},
-      {title: 'Fourth Title', description: 'Fourth Description'},
-      {title: 'Fifth Title', description: 'Fifth Description'},
-      {title: 'Sixth Title', description: 'Sixth Description'},
-      {title: 'Seventh Title', description: 'Seventh Description'},
-      {title: 'Eighth Title', description: 'Eighth Description'},
-      {title: 'Ninth Title', description: 'Ninth Description'},
-      {title: 'Tenth Title', description: 'Tenth Description'},
-      {title: 'Eleventh Title', description: 'Eleventh Description'},
-      {title: '12th Title', description: '12th Description'},
-      {title: '13th Title', description: '13th Description'},
-      {title: '14th Title', description: '14th Description'},
-      {title: '15th Title', description: '15th Description'},
-      {title: '16th Title', description: '16th Description'},
-      {title: '17th Title', description: '17th Description'},
-      {title: '18th Title', description: '18th Description'},
-      {title: '19th Title', description: '19th Description'},
-      {title: '20th Title', description: '20th Description'},
-      {title: 'BLACKJACK!', description: 'BLACKJACK! Description'}
+          {title: '00:00', description: 'First Description'},
+          {title: '01:00', description: 'Second Description'},
+          {title: '02:00', description: 'Third Description'},
+          {title: '03:00', description: 'Fourth Description'},
+          {title: '04:00', description: 'Fifth Description'},
+          {title: '05:00', description: 'Sixth Description'},
+          {title: '06:00', description: 'Seventh Description'},
+          {title: '07:00', description: 'Eighth Description'},
+          {title: '08:00', description: 'Ninth Description'},
+          {title: '09:00', description: 'Tenth Description'},
+          {title: '10:00', description: 'Eleventh Description'},
+          {title: '11:00', description: '12th Description'},
+          {title: '12:00', description: '13th Description'},
+          {title: '13:00', description: '14th Description'},
+          {title: '14:00', description: '15th Description'},
+          {title: '15:00', description: '16th Description'},
+          {title: '16:00', description: '17th Description'},
+          {title: '17:00', description: '18th Description'},
+          {title: '18:00', description: '19th Description'},
+          {title: '19:00', description: '20th Description'},
+          {title: '20:00', description: 'Description'},
+          {title: '21:00', description: 'Description'},
+          {title: '22:00', description: 'Description'},
+          {title: '23:00', description: 'Description'}
     ]
 
     /* ***********************************************************
@@ -67,12 +71,12 @@ class HourListView extends React.Component {
   *************************************************************/
   renderRow (rowData) {
     return (
-      <TouchableOpacity>
-        <View style={styles.row}>
-          <Text style={styles.boldLabel}>{rowData.title}</Text>
-          <Text style={styles.label}>{rowData.description}</Text>
+      <View style={{flex: 1, alignItems: 'stretch', flexDirection: 'row'}}>
+        <View style={{height: 50, backgroundColor: Colors.backgroundColor, marginVertical: Metrics.smallMargin, justifyContent: 'center'}}>
+          <Text style={styles.label}>{rowData.title}</Text>
         </View>
-      </TouchableOpacity>
+        <View style={{flex: 1, height: 50, backgroundColor: Colors.backgroundColor, marginVertical: Metrics.smallMargin, borderTopColor: 'white', borderTopWidth: 1}} />
+      </View>
     )
   }
 
