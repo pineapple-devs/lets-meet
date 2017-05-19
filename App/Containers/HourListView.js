@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, ListView } from 'react-native'
 import { connect } from 'react-redux'
-import { Metrics, Colors } from '../Themes/'
+import { Colors } from '../Themes/'
 
 // For empty lists
 import AlertMessage from '../Components/AlertMessage'
@@ -70,12 +70,61 @@ class HourListView extends React.Component {
     return <MyCustomCell title={rowData.title} description={rowData.description} />
   *************************************************************/
   renderRow (rowData) {
+    const events = [
+            {title: 'Event2', startDate: '19 May 2017 02:30', endDate: '19 May 2017 03:10'},
+            {title: 'Event1', startDate: '19 May 2017 05:00', endDate: '19 May 2017 05:30'},
+            {title: 'Event3', startDate: '19 May 2017 07:45', endDate: '19 May 2017 09:25'}
+    ]
+    var dateHour = new Date('19 May 2017 ' + rowData.title)
+    var dateHour1 = new Date(dateHour)
+    dateHour1.setHours(dateHour.getHours() + 1)
+    var event = <View style={{flex: 1, height: 50, backgroundColor: Colors.backgroundColor, borderTopColor: 'white', borderTopWidth: 1}} />
+    for (var i = 0; i < events.length; i++) {
+      var startTime = new Date(events[i].startDate)
+      var endTime = new Date(events[i].endDate)
+      var startMinutes = startTime.getMinutes() / 60 * 100    // koliko minuta u procentima treba od pocetka sata do pocetka eventa. Npr za 15 min start minutes ces biti 25 %
+      var endMinutes = 100 - endTime.getMinutes() / 60 * 100    // procenti od kraja eventa do pocetka novog sata. Za 45 end minutes ce biti 15 do novog sata tj 25 %
+
+      if (startTime.getTime() <= dateHour.getTime()) {
+        if (endTime.getTime() > dateHour.getTime()) {
+          if (endTime.getTime() < dateHour1.getTime()) {
+            event =
+              <View style={{flex: 1, height: 50, backgroundColor: Colors.backgroundColor, borderTopColor: 'white', borderTopWidth: 1}}>
+                <View style={{flex: 100 - endMinutes, height: 50, backgroundColor: 'red', opacity: 0.5}} />
+                <View style={{flex: endMinutes, height: 50, backgroundColor: Colors.backgroundColor}} />
+              </View>
+          } else {
+            event =
+              <View style={{flex: 1, height: 50, backgroundColor: Colors.backgroundColor, borderTopColor: 'white', borderTopWidth: 1}}>
+                <View style={{flex: 1, height: 50, backgroundColor: 'red', opacity: 0.5}} />
+              </View>
+          }
+        }
+      } else {
+        if (startTime.getTime() < dateHour1.getTime()) {
+          if (endTime.getTime() >= dateHour1.getTime()) {
+            event =
+              <View style={{flex: 1, height: 50, backgroundColor: Colors.backgroundColor, borderTopColor: 'white', borderTopWidth: 1}}>
+                <View style={{flex: startMinutes, height: 50, backgroundColor: Colors.backgroundColor}} />
+                <View style={{flex: 100 - startMinutes, height: 50, backgroundColor: 'red', opacity: 0.5}} />
+              </View>
+          } else {
+            event =
+              <View style={{flex: 1, height: 50, backgroundColor: Colors.backgroundColor, borderTopColor: 'white', borderTopWidth: 1}}>
+                <View style={{flex: startMinutes, height: 50, backgroundColor: Colors.backgroundColor}} />
+                <View style={{flex: 100 - startMinutes - endMinutes, height: 50, backgroundColor: 'red', opacity: 0.5}} />
+                <View style={{flex: endMinutes, height: 50, backgroundColor: Colors.backgroundColor}} />
+              </View>
+          }
+        }
+      }
+    }
     return (
       <View style={{flex: 1, alignItems: 'stretch', flexDirection: 'row'}}>
-        <View style={{height: 50, backgroundColor: Colors.backgroundColor, marginVertical: Metrics.smallMargin, justifyContent: 'center'}}>
+        <View style={{height: 50, backgroundColor: Colors.backgroundColor, justifyContent: 'center'}}>
           <Text style={styles.label}>{rowData.title}</Text>
         </View>
-        <View style={{flex: 1, height: 50, backgroundColor: Colors.backgroundColor, marginVertical: Metrics.smallMargin, borderTopColor: 'white', borderTopWidth: 1}} />
+        {event}
       </View>
     )
   }
