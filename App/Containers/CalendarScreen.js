@@ -1,15 +1,21 @@
 import React from 'react'
-import { View, TouchableOpacity, Image, TouchableHighlight, Text } from 'react-native'
+import { View, TouchableOpacity, Image, TouchableHighlight, Text, Modal } from 'react-native'
 import { Images } from '../Themes'
 import HourListView from './HourListView.js'
 import styles from '../Components/Styles/AddNewButtonStyles'
-
+import NewMeetingModal from '../Components/NewMeetingModal.js'
+import AddNewMeetingButton from './Buttons/AddNewMeetingButton.js'
 // Styles
 import listStyles from './Styles/ListviewExampleStyles'
 
 import CalendarStrip from 'react-native-calendar-strip'
 
 class CalendarScreen extends React.Component {
+
+toggleModal = () => {
+    this.setState({ showModal: !this.state.showModal })
+  }
+
   render () {
     return (
       <View style={listStyles.container}>
@@ -40,12 +46,7 @@ class CalendarScreen extends React.Component {
 
         <View style={listStyles.container}>
           <HourListView />
-
-          <TouchableHighlight style={styles.addButton}
-             underlayColor='#696969' onPress={()=>{console.log('pressed')}}>
-             <Text style={{fontSize: 60, color: 'white'}}>+</Text>
-           </TouchableHighlight>
-
+          <AddNewMeetingButton />
         </View>
       </View>
     )
