@@ -1,7 +1,8 @@
 import React from 'react'
-import { View, TouchableOpacity, Image } from 'react-native'
+import { View, TouchableOpacity, Image, TouchableHighlight, Text } from 'react-native'
 import { Images } from '../Themes'
 import HourListView from './HourListView.js'
+import styles from '../Components/Styles/AddNewButtonStyles'
 
 // Styles
 import listStyles from './Styles/ListviewExampleStyles'
@@ -39,6 +40,12 @@ class CalendarScreen extends React.Component {
 
         <View style={listStyles.container}>
           <HourListView />
+
+          <TouchableHighlight style={styles.addButton}
+             underlayColor='#696969' onPress={()=>{console.log('pressed')}}>
+             <Text style={{fontSize: 60, color: 'white'}}>+</Text>
+           </TouchableHighlight>
+
         </View>
       </View>
     )
