@@ -3,8 +3,9 @@ import { View, TouchableOpacity, Image, TouchableHighlight, Text, Modal } from '
 import { Images } from '../Themes'
 import HourListView from './HourListView.js'
 import styles from '../Components/Styles/AddNewButtonStyles'
-import NewMeetingModal from '../Components/NewMeetingModal.js'
+import NewMeetingForm from '../Components/NewMeetingForm.js'
 import AddNewMeetingButton from './Buttons/AddNewMeetingButton.js'
+import DatePicker from 'react-native-datepicker'
 // Styles
 import listStyles from './Styles/ListviewExampleStyles'
 

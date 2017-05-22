@@ -4,7 +4,7 @@ import { Metrics, ApplicationStyles, Colors } from '../../Themes/'
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   addButton: {
-      backgroundColor: '#1A6600',
+      backgroundColor: '#8FBC8F',
       borderColor: '#696969',
       borderWidth: 1,
       height: 80,
