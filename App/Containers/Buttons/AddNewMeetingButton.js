@@ -1,8 +1,7 @@
 import React from 'react'
-import { View, Modal, TouchableHighlight, Text } from 'react-native'
-import RoundedButton from '../../Components/RoundedButton'
+import { View, Modal } from 'react-native'
+import CircledButton from '../../Components/CircledButton'
 import NewMeetingModal from '../../Components/NewMeetingModal'
-import styles from '../../Components/Styles/AddNewButtonStyles'
 
 export default class AddNewMeetingButton extends React.Component {
   constructor (props) {
@@ -19,15 +18,14 @@ export default class AddNewMeetingButton extends React.Component {
   render () {
     return (
     <View>
-      <TouchableHighlight style={styles.addButton}
-          underlayColor='#696969' onPress={this.toggleModal}>
-           <Text style={{fontSize: 60, color: 'white'}}>+</Text>
-      </TouchableHighlight>
+      <CircledButton onPress={this.toggleModal}>
+        +
+      </CircledButton>
 
       <Modal visible={this.state.showModal} onRequestClose={this.toggleModal}>
-          <NewMeetingModal screenProps={{ toggle: this.toggleModal }} />
+          <NewMeetingModal screenProps={{ toggle: this.state._setModalVisible}} />
       </Modal>
-      </View>
+    </View>
         )
 
   }
