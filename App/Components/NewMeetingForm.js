@@ -1,6 +1,6 @@
 import React from 'react';
 
-import {StyleSheet, Text, View, ScrollView} from 'react-native';
+import {StyleSheet, Text, View, ScrollView, TouchableHighlight} from 'react-native';
 
 
 import { Form,
@@ -37,6 +37,11 @@ export class NewMeetingForm extends React.Component{
   handleFormFocus(e, component){
     //console.log(e, component);
   }
+
+  handleSubmit(formData) {
+  }
+
+
   openTermsAndConditionsURL(){
 
   }
@@ -46,6 +51,7 @@ export class NewMeetingForm extends React.Component{
         ref='addNewMeetingForm'
         onFocus={this.handleFormFocus.bind(this)}
         onChange={this.handleFormChange.bind(this)}
+        onSubmit={formData => onSubmit(formData)}
         label="Personal Information">
         <Separator />
 
@@ -78,6 +84,7 @@ export class NewMeetingForm extends React.Component{
         <DatePickerField ref='meeting_date_time2'
           minimumDate={new Date('1/1/1900')}
           maximumDate={new Date()} mode="datetime" placeholder='Meeting 2'/>
+
         </Form>
         
         <Text>{JSON.stringify(this.state.formData)}</Text>
