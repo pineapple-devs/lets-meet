@@ -20,6 +20,7 @@ class CalendarScreen extends React.Component {
         }}>
           <Image source={Images.closeButton} />
         </TouchableOpacity>
+
         <CalendarStrip
           calendarAnimation={{type: 'sequence', duration: 30}}
           daySelectionAnimation={{type: 'border',
@@ -35,6 +36,7 @@ class CalendarScreen extends React.Component {
           iconRight={Images.rightArrow}
           iconContainer={{flex: 0}}
         />
+
         <View style={listStyles.container}>
           <HourListView />
         </View>

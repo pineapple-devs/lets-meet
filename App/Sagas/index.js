@@ -1,5 +1,6 @@
 import { takeLatest } from 'redux-saga/effects'
 import API from '../Services/Api'
+import MeetingAPI from '../Services/MeetingApi'
 import FixtureAPI from '../Services/FixtureApi'
 import DebugConfig from '../Config/DebugConfig'
 
@@ -9,6 +10,7 @@ import { StartupTypes } from '../Redux/StartupRedux'
 import { GithubTypes } from '../Redux/GithubRedux'
 import { LoginTypes } from '../Redux/LoginRedux'
 import { OpenScreenTypes } from '../Redux/OpenScreenRedux'
+import { MeetingTypes } from '../Redux/MeetingRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -16,12 +18,14 @@ import { startup } from './StartupSagas'
 import { login } from './LoginSagas'
 import { getUserAvatar } from './GithubSagas'
 import { openScreen } from './OpenScreenSagas'
+import { getMeetings, getMeeting } from './MeetingSagas'
 
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
 // to the sagas which need it.
 const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
+const meetingApi = MeetingAPI.create()
 
 /* ------------- Connect Types To Sagas ------------- */
 
@@ -33,6 +37,10 @@ export default function * root () {
     takeLatest(OpenScreenTypes.OPEN_SCREEN, openScreen),
 
     // some sagas receive extra parameters in addition to an action
-    takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api)
+    takeLatest(GithubTypes.USER_REQUEST, getUserAvatar, api),
+
+    // meeting sagas
+    takeLatest(MeetingTypes.FETCH_MEETINGS, getMeetings, meetingApi),
+    takeLatest(MeetingTypes.SHOW_MEETING, getMeeting, meetingApi)
   ]
 }
