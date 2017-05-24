@@ -22,9 +22,26 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   userId: null,
   meetings: null,
+  intervals: null,
   meeting: null,
   fetching: false
 })
+
+/* ------------- Helper functions ------------- */
+
+const formIntervalsWithMeetingInfo = (meetings) => {
+  let intervals = []
+
+  meetings.map((meeting) => {
+    meeting.intervals.map((interval) => {
+      interval.title = meeting.title
+      interval.description = meeting.description
+      intervals.push(interval)
+    })
+  })
+
+  return intervals;
+}
 
 /* ------------- reducers ------------- */
 
@@ -32,8 +49,14 @@ export const INITIAL_STATE = Immutable({
 export const request = (state) => state.merge({ fetching: true })
 
 // we've fetched meetings
-export const meetingsFetched = (state, { meetings }) =>
-  state.merge({ fetching: false, error: null, meetings: meetings })
+export const meetingsFetched = (state, { meetings }) => {
+  return state.merge({
+    fetching: false,
+    error: null,
+    meetings: meetings,
+    intervals: formIntervalsWithMeetingInfo(meetings)
+  })
+}
 
 // we've fetched a meetings
 export const meetingFetched = (state, { meeting }) =>

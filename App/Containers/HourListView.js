@@ -37,7 +37,7 @@ class HourListView extends React.Component {
 
     // DataSource configured
     const ds = new ListView.DataSource({rowHasChanged})
-    global.lastEnd = new Date('19 May 2017 00:00')
+    global.lastEnd = new Date('25 May 2017 00:00')
     global.numOfEvents = dataObjects.length
     // Datasource is always in state
     this.state = {
@@ -54,8 +54,8 @@ class HourListView extends React.Component {
     return <MyCustomCell title={rowData.title} description={rowData.description} />
   *************************************************************/
   renderRow (rowData) {
-    var startTime = new Date(rowData.startDate)
-    var endTime = new Date(rowData.endDate)
+    var startTime = new Date(rowData.start_time)
+    var endTime = new Date(rowData.end_time)
     var dif = startTime.getTime() - this.lastEnd.getTime()
     dif = dif / (1000 * 60) - 2
     dif = dif / 24 / 60 * 100
@@ -65,7 +65,7 @@ class HourListView extends React.Component {
     this.lastEnd = endTime
     this.numOfEvents--
     if (this.numOfEvents === 0) {
-      var end = new Date('20 May 2017 00:00')
+      var end = new Date('25 May 2017 00:00')
       end = end.getTime() - endTime.getTime()
       end = end / (1000 * 60) - 2
       end = end / 24 / 60 * 100
@@ -116,9 +116,9 @@ class HourListView extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.meetings) {
+    if (newProps.intervals) {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(newProps.meetings)
+        dataSource: this.state.dataSource.cloneWithRows(newProps.intervals)
       })
     }
   }
@@ -143,7 +143,7 @@ class HourListView extends React.Component {
 const mapStateToProps = (state) => {
   return {
     fetching: state.meeting.fetching,
-    meetings: state.meeting.meetings
+    intervals: state.meeting.intervals
   }
 }
 
