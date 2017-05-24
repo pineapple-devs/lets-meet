@@ -1,7 +1,8 @@
 import React from 'react';
 
-import {StyleSheet, Text, View, ScrollView, TouchableHighlight} from 'react-native';
-
+import {StyleSheet, Text, View, ScrollView, TouchableOpacity, TouchableHighlight} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
+import styles from './Styles/RectangleButtonStyles'
 
 import { Form,
   Separator,InputField, LinkField,
@@ -34,13 +35,14 @@ export class NewMeetingForm extends React.Component{
     this.setState({formData:formData})
     this.props.onFormChange && this.props.onFormChange(formData);
   }
+
   handleFormFocus(e, component){
     //console.log(e, component);
   }
 
   handleSubmit(formData) {
+    this.setState({formData:formData})
   }
-
 
   openTermsAndConditionsURL(){
 
@@ -56,6 +58,7 @@ export class NewMeetingForm extends React.Component{
         <Separator />
 
         <InputField ref='meeting_name' placeholder='Meeting name'/>
+
         <InputField
           multiline={true}
           ref='meeting_description'
@@ -65,7 +68,8 @@ export class NewMeetingForm extends React.Component{
 
         <SwitchField label='Repeat'
           ref="wants_reminder"
-          helpText='Check if you want meeting to repeat.'/>
+          helpText='Check if you want your meeting to repeat.'/>
+
         <PickerField ref='gender'
           label='Repeat settings'
           options={{
@@ -74,19 +78,34 @@ export class NewMeetingForm extends React.Component{
             every_week: 'Every week',
             every_month: 'Every month'
           }}/>
+
           <DatePickerField ref='meeting_date1'
           minimumDate={new Date('1/1/1900')}
           maximumDate={new Date()}
           placeholder='Date'/>
-        <TimePickerField ref='meeting_time1'
-      placeholder='Set time'/>
+
+          <TimePickerField ref='meeting_time1'
+                placeholder='Set time'
+                iconLeft={<Icon style={{alignSelf:'center', marginLeft:10}} name='ios-alarm' size={30} />}
+                prettyPrint={true}
+                pickerWrapper={<NewMeetingForm />}
+                />
 
         <DatePickerField ref='meeting_date_time2'
           minimumDate={new Date('1/1/1900')}
           maximumDate={new Date()} mode="datetime" placeholder='Meeting 2'/>
 
+
+         <TouchableOpacity style={styles.buttonSubmit} onPress={this.props.buttonSubmit}>
+                 <Text style={styles.buttonText}>Submit</Text>
+         </TouchableOpacity>
+
+          <TouchableOpacity style={styles.buttonCancel} onPress={this.props.screenProps.toggle}>
+                           <Text style={styles.buttonText}>Cancel</Text>
+          </TouchableOpacity>
+
         </Form>
-        
+
         <Text>{JSON.stringify(this.state.formData)}</Text>
 
       </ScrollView>);
