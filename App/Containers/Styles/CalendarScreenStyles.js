@@ -1,10 +1,9 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles, Colors } from '../../Themes/'
+import { Metrics, ApplicationStyles } from '../../Themes/'
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
-    paddingBottom: Metrics.baseMargin,
-    backgroundColor: Colors.background
+    paddingBottom: Metrics.baseMargin
   }
 })

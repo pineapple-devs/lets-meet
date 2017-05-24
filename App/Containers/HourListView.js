@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, Text, ListView } from 'react-native'
+import { View, Text, ListView, Image, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
 import { Colors } from '../Themes/'
 import MeetingActions from '../Redux/MeetingRedux'
+import { Images } from '../Themes/'
 
 // For empty lists
 import AlertMessage from '../Components/AlertMessage'
@@ -19,6 +20,12 @@ class HourListView extends React.Component {
     * Usually this should come from Redux mapStateToProps
     * USING IT FROM REDUX
     *************************************************************/
+    const dataObjects = [
+          {title: 'Event2', startDate: '19 May 2017 00:00', endDate: '19 May 2017 03:10'},
+          {title: 'Event1', startDate: '19 May 2017 05:00', endDate: '19 May 2017 06:00'},
+          {title: 'Event3', startDate: '19 May 2017 07:00', endDate: '19 May 2017 09:00'},
+          {title: 'Event3', startDate: '19 May 2017 22:00', endDate: '20 May 2017 00:00'}
+    ]
 
     /* ***********************************************************
     * STEP 2
@@ -30,7 +37,8 @@ class HourListView extends React.Component {
 
     // DataSource configured
     const ds = new ListView.DataSource({rowHasChanged})
-
+    global.lastEnd = new Date('19 May 2017 00:00')
+    global.numOfEvents = dataObjects.length
     // Datasource is always in state
     this.state = {
       dataSource: ds
@@ -46,63 +54,36 @@ class HourListView extends React.Component {
     return <MyCustomCell title={rowData.title} description={rowData.description} />
   *************************************************************/
   renderRow (rowData) {
-    const events = [
-      {title: 'Event2', startDate: '19 May 2017 02:30', endDate: '19 May 2017 03:10'},
-      {title: 'Event1', startDate: '19 May 2017 05:00', endDate: '19 May 2017 05:30'},
-      {title: 'Event3', startDate: '19 May 2017 07:45', endDate: '19 May 2017 09:25'}
-    ]
-    var dateHour = new Date('19 May 2017 ' + rowData.title)
-    var dateHour1 = new Date(dateHour)
-    dateHour1.setHours(dateHour.getHours() + 1)
-    var event = <View style={{flex: 1, height: 50, backgroundColor: Colors.backgroundColor, borderTopColor: 'white', borderTopWidth: 1}} />
-    for (var i = 0; i < events.length; i++) {
-      var startTime = new Date(events[i].startDate)
-      var endTime = new Date(events[i].endDate)
-      var startMinutes = startTime.getMinutes() / 60 * 100    // koliko minuta u procentima treba od pocetka sata do pocetka eventa. Npr za 15 min start minutes ces biti 25 %
-      var endMinutes = 100 - endTime.getMinutes() / 60 * 100    // procenti od kraja eventa do pocetka novog sata. Za 45 end minutes ce biti 15 do novog sata tj 25 %
-
-      if (startTime.getTime() <= dateHour.getTime()) {
-        if (endTime.getTime() > dateHour.getTime()) {
-          if (endTime.getTime() < dateHour1.getTime()) {
-            event =
-              <View style={{flex: 1, height: 50, backgroundColor: Colors.backgroundColor, borderTopColor: 'white', borderTopWidth: 1}}>
-                <View style={{flex: 100 - endMinutes, height: 50, backgroundColor: 'red', opacity: 0.5}} />
-                <View style={{flex: endMinutes, height: 50, backgroundColor: Colors.backgroundColor}} />
-              </View>
-          } else {
-            event =
-              <View style={{flex: 1, height: 50, backgroundColor: Colors.backgroundColor, borderTopColor: 'white', borderTopWidth: 1}}>
-                <View style={{flex: 1, height: 50, backgroundColor: 'red', opacity: 0.5}} />
-              </View>
-          }
-        }
-      } else {
-        if (startTime.getTime() < dateHour1.getTime()) {
-          if (endTime.getTime() >= dateHour1.getTime()) {
-            event =
-              <View style={{flex: 1, height: 50, backgroundColor: Colors.backgroundColor, borderTopColor: 'white', borderTopWidth: 1}}>
-                <View style={{flex: startMinutes, height: 50, backgroundColor: Colors.backgroundColor}} />
-                <View style={{flex: 100 - startMinutes, height: 50, backgroundColor: 'red', opacity: 0.5}} />
-              </View>
-          } else {
-            event =
-              <View style={{flex: 1, height: 50, backgroundColor: Colors.backgroundColor, borderTopColor: 'white', borderTopWidth: 1}}>
-                <View style={{flex: startMinutes, height: 50, backgroundColor: Colors.backgroundColor}} />
-                <View style={{flex: 100 - startMinutes - endMinutes, height: 50, backgroundColor: 'red', opacity: 0.5}} />
-                <View style={{flex: endMinutes, height: 50, backgroundColor: Colors.backgroundColor}} />
-              </View>
-          }
-        }
-      }
-    }
-    return (
-      <View style={{flex: 1, alignItems: 'stretch', flexDirection: 'row'}}>
-        <View style={{height: 50, backgroundColor: Colors.backgroundColor, justifyContent: 'center'}}>
-          <Text style={styles.label}>{rowData.title}</Text>
+    var startTime = new Date(rowData.startDate)
+    var endTime = new Date(rowData.endDate)
+    var dif = startTime.getTime() - this.lastEnd.getTime()
+    dif = dif / (1000 * 60) - 2
+    dif = dif / 24 / 60 * 100
+    var event = endTime.getTime() - startTime.getTime()
+    event = event / (1000 * 60)
+    event = event / 24 / 60 * 100
+    this.lastEnd = endTime
+    this.numOfEvents--
+    if (this.numOfEvents === 0) {
+      var end = new Date('20 May 2017 00:00')
+      end = end.getTime() - endTime.getTime()
+      end = end / (1000 * 60) - 2
+      end = end / 24 / 60 * 100
+      return (
+        <View style={{flex: dif + event + end}}>
+          <View style={{flex: dif, opacity: 0.1}} />
+          <Text style={{flex: event, backgroundColor: 'rgba(255,0,0,0.2)'}}>{rowData.title}</Text>
+          <View style={{flex: end, opacity: 0.1}} />
         </View>
-        {event}
-      </View>
-    )
+      )
+    } else {
+      return (
+        <View style={{flex: dif + event}}>
+          <View style={{flex: dif, opacity: 0.4}} />
+          <Text style={{flex: event, backgroundColor: 'rgba(255,0,0,0.2)'}}>{rowData.title}</Text>
+        </View>
+      )
+    }
   }
 
   /* ***********************************************************
@@ -144,15 +125,17 @@ class HourListView extends React.Component {
 
   render () {
     return (
-      <View style={styles.container}>
-        <AlertMessage title='Nothing to See Here, Move Along' show={this.noRowData()} />
-        <ListView
-          contentContainerStyle={styles.listContent}
-          dataSource={this.state.dataSource}
-          renderRow={this.renderRow}
-          pageSize={15}
-        />
-      </View>
+      <ScrollView style={styles.container}>
+        <Image source={Images.hours} style={styles.backgroundImage}>
+          <AlertMessage title='Nothing to See Here, Move Along' show={this.noRowData()} />
+          <ListView
+            contentContainerStyle={styles.listContainerContent}
+            dataSource={this.state.dataSource}
+            renderRow={this.renderRow}
+            pageSize={15}
+          />
+        </Image>
+      </ScrollView>
     )
   }
 }

@@ -1,5 +1,5 @@
 import {StyleSheet} from 'react-native'
-import {Fonts, Metrics, Colors} from '../../Themes/'
+import {Fonts, Metrics} from '../../Themes/'
 
 export default StyleSheet.create({
   applicationView: {
@@ -8,7 +8,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: Colors.background
+    backgroundColor: 'white'
   },
   welcome: {
     fontSize: 20,

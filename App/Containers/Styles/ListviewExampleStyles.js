@@ -7,6 +7,12 @@ export default StyleSheet.create({
     flex: 1,
     backgroundColor: Colors.background
   },
+  listContainerContent: {
+    flex: 1,
+    marginTop: 9,
+    marginBottom: 10,
+    marginLeft: 50
+  },
   row: {
     flex: 1,
     backgroundColor: Colors.fire,
@@ -22,10 +28,14 @@ export default StyleSheet.create({
   },
   label: {
     textAlign: 'center',
-    color: Colors.snow,
+    color: 'black',
     marginBottom: Metrics.smallMargin
   },
   listContent: {
     marginTop: Metrics.baseMargin
+  },
+  backgroundImage: {
+    flex: 1,
+    resizeMode: 'cover' // or 'stretch'
   }
 })
