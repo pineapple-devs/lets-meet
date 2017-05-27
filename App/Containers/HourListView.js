@@ -20,12 +20,7 @@ class HourListView extends React.Component {
     * Usually this should come from Redux mapStateToProps
     * USING IT FROM REDUX
     *************************************************************/
-    const dataObjects = [
-          {title: 'Event2', startDate: '19 May 2017 00:00', endDate: '19 May 2017 03:10'},
-          {title: 'Event1', startDate: '19 May 2017 05:00', endDate: '19 May 2017 06:00'},
-          {title: 'Event3', startDate: '19 May 2017 07:00', endDate: '19 May 2017 09:00'},
-          {title: 'Event3', startDate: '19 May 2017 22:00', endDate: '20 May 2017 00:00'}
-    ]
+    
 
     /* ***********************************************************
     * STEP 2
@@ -54,36 +49,23 @@ class HourListView extends React.Component {
     return <MyCustomCell title={rowData.title} description={rowData.description} />
   *************************************************************/
   renderRow (rowData) {
+    // meeting ne moraju biti sortirani, nema iscrtavanja praznih view-ova
+    // radi i za eventove koji pocinju u jednom a zavrsavaju u drugom danu
     var startTime = new Date(rowData.start_time)
     var endTime = new Date(rowData.end_time)
-    var dif = startTime.getTime() - this.lastEnd.getTime()
-    dif = dif / (1000 * 60) - 2
-    dif = dif / 24 / 60 * 100
-    var event = endTime.getTime() - startTime.getTime()
-    event = event / (1000 * 60)
-    event = event / 24 / 60 * 100
-    this.lastEnd = endTime
-    this.numOfEvents--
-    if (this.numOfEvents === 0) {
-      var end = new Date('25 May 2017 00:00')
-      end = end.getTime() - endTime.getTime()
-      end = end / (1000 * 60) - 2
-      end = end / 24 / 60 * 100
-      return (
-        <View style={{flex: dif + event + end}}>
-          <View style={{flex: dif, opacity: 0.1}} />
-          <Text style={{flex: event, backgroundColor: 'rgba(255,0,0,0.2)'}}>{rowData.title}</Text>
-          <View style={{flex: end, opacity: 0.1}} />
-        </View>
-      )
-    } else {
-      return (
-        <View style={{flex: dif + event}}>
-          <View style={{flex: dif, opacity: 0.4}} />
-          <Text style={{flex: event, backgroundColor: 'rgba(255,0,0,0.2)'}}>{rowData.title}</Text>
-        </View>
-      )
-    }
+    console.log('Start time: ' + startTime)
+    console.log('End time: ' + endTime)
+    var dif = new Date('24 May 2017 00:00:00')  // ovo dif Date treba da bude trenutno selektovani datum
+                                                // uzela sam 24.5 zato sto su nam svi intervali tog datuma
+    dif = (startTime.getTime() - dif.getTime()) / 3600000
+
+    var event = (endTime.getTime() - startTime.getTime()) / 3600000
+    // 58 je visina jednog sata, odnosno visina izmedju dvije iscrtane linije na pozadniskoj slici
+    // dif je start time u satima, npr za 15:30 dif je 15.5 -> dif * visina jednog sata odvaja tacno do pocetka meetinga
+    // isto za event * 58 -> trajanje meetinga
+    return (
+      <View style={{backgroundColor: 'red', opacity: 0.2, position:'absolute', height: event * 58, top: dif * 58, left: 0, right: 0}}><Text>{rowData.title}</Text></View>
+    )
   }
 
   /* ***********************************************************

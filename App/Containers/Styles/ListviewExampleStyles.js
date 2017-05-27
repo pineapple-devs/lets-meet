@@ -9,8 +9,8 @@ export default StyleSheet.create({
   },
   listContainerContent: {
     flex: 1,
-    marginTop: 9,
-    marginBottom: 10,
+    marginTop: 11,
+    marginBottom: 20,
     marginLeft: 50
   },
   row: {
