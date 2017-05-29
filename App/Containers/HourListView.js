@@ -20,7 +20,7 @@ class HourListView extends React.Component {
     * Usually this should come from Redux mapStateToProps
     * USING IT FROM REDUX
     *************************************************************/
-    
+
 
     /* ***********************************************************
     * STEP 2
@@ -29,11 +29,9 @@ class HourListView extends React.Component {
     *   (r1, r2) => r1.id !== r2.id}
     *************************************************************/
     const rowHasChanged = (r1, r2) => r1 !== r2
-
     // DataSource configured
     const ds = new ListView.DataSource({rowHasChanged})
-    global.lastEnd = new Date('25 May 2017 00:00')
-    global.numOfEvents = dataObjects.length
+    global.date = this.props.screenProps.date
     // Datasource is always in state
     this.state = {
       dataSource: ds
@@ -53,18 +51,16 @@ class HourListView extends React.Component {
     // radi i za eventove koji pocinju u jednom a zavrsavaju u drugom danu
     var startTime = new Date(rowData.start_time)
     var endTime = new Date(rowData.end_time)
-    console.log('Start time: ' + startTime)
-    console.log('End time: ' + endTime)
-    var dif = new Date('24 May 2017 00:00:00')  // ovo dif Date treba da bude trenutno selektovani datum
-                                                // uzela sam 24.5 zato sto su nam svi intervali tog datuma
-    dif = (startTime.getTime() - dif.getTime()) / 3600000
+    console.log('Start time: ' + startTime + ' - End time: ' + endTime)
 
+    var dif = (startTime.getTime() - this.date.getTime()) / 3600000
     var event = (endTime.getTime() - startTime.getTime()) / 3600000
+    console.log(this.date)
     // 58 je visina jednog sata, odnosno visina izmedju dvije iscrtane linije na pozadniskoj slici
     // dif je start time u satima, npr za 15:30 dif je 15.5 -> dif * visina jednog sata odvaja tacno do pocetka meetinga
     // isto za event * 58 -> trajanje meetinga
     return (
-      <View style={{backgroundColor: 'red', opacity: 0.2, position:'absolute', height: event * 58, top: dif * 58, left: 0, right: 0}}><Text>{rowData.title}</Text></View>
+      <View style={{backgroundColor: 'rgba(250,0,0,0.2)', position:'absolute', height: event * 58, top: dif * 58, left: 0, right: 0}}><Text>{rowData.title}</Text></View>
     )
   }
 
@@ -98,11 +94,16 @@ class HourListView extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
+    global.date = newProps.screenProps.date
+    if(this.props.screenProps.date.setHours(0,0,0,0) != newProps.screenProps.date.setHours(0,0,0,0)){
+     this.props.fetchMeetings(1)
+    }
     if (newProps.intervals) {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(newProps.intervals)
       })
     }
+    else console.log(newProps.intervals)
   }
 
   render () {

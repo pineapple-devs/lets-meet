@@ -13,8 +13,19 @@ import CalendarStrip from 'react-native-calendar-strip'
 
 class CalendarScreen extends React.Component {
 
-toggleModal = () => {
+  constructor (props) {
+    super(props)
+    this.state = {
+      date: new Date()
+    }
+  }
+
+  toggleModal = () => {
     this.setState({ showModal: !this.state.showModal })
+  }
+
+  setDate (moment)  {
+    this.setState({date: moment._d})
   }
 
   render () {
@@ -43,10 +54,12 @@ toggleModal = () => {
           iconLeft={Images.leftArrow}
           iconRight={Images.rightArrow}
           iconContainer={{flex: 0}}
+          onDateSelected={(event) => this.setDate(event)}
         />
 
+
         <View style={listStyles.container}>
-          <HourListView />
+          <HourListView screenProps={{date: this.state.date}} />
           <AddNewMeetingButton />
         </View>
       </View>
