@@ -17,20 +17,19 @@ class NavigationRouter extends Component {
   render () {
     return (
       <Router>
-        <Scene key='root'>
-
-          <Scene key='drawer' component={NavigationDrawer} open={false} />
+         <Scene key='drawer' component={NavigationDrawer} open={false} >
           <Scene
             key='drawerChildrenWrapper'
             navigationBarStyle={Styles.navBar}
             titleStyle={Styles.title}
             leftButtonIconStyle={Styles.leftButton}
             rightButtonTextStyle={Styles.rightButton}
-          />
-          <Scene initial key='launchScreen' component={LaunchScreen} title='Glad to have you back!' />
-          <Scene key="calendarScreen" component={CalendarScreen} title="Your calendar is here." />
-
+          >
+            <Scene initial key='launchScreen' component={LaunchScreen} title='Glad to have you back!' />
+            <Scene key="calendarScreen" component={CalendarScreen} title="Your calendar is here." />
+          </Scene>
         </Scene>
+
       </Router>
     )
   }
