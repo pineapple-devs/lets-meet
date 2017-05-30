@@ -6,6 +6,7 @@ import styles from '../Components/Styles/AddNewButtonStyles'
 import NewMeetingForm from '../Components/NewMeetingForm.js'
 import AddNewMeetingButton from './Buttons/AddNewMeetingButton.js'
 import DatePicker from 'react-native-datepicker'
+import { Actions } from 'react-native-router-flux';
 // Styles
 import listStyles from './Styles/ListviewExampleStyles'
 
@@ -20,14 +21,7 @@ toggleModal = () => {
   render () {
     return (
       <View style={listStyles.container}>
-        <TouchableOpacity onPress={this.props.screenProps.toggle} style={{
-          position: 'absolute',
-          paddingTop: 5,
-          paddingHorizontal: 5,
-          zIndex: 5
-        }}>
-          <Image source={Images.closeButton} />
-        </TouchableOpacity>
+
 
         <CalendarStrip
           calendarAnimation={{type: 'sequence', duration: 30}}
