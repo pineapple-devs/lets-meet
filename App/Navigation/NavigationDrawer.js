@@ -21,7 +21,7 @@ class NavigationDrawer extends Component {
         onOpen={() => NavigationActions.refresh({key: state.key, open: true})}
         onClose={() => NavigationActions.refresh({key: state.key, open: false})}
         content={<DrawerContent />}
-        styles={Styles}
+        styles={Styles.drawer}
         tapToClose
         openDrawerOffset={0.2}
         panCloseMask={0.2}

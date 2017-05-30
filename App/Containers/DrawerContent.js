@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { ScrollView, Image, BackAndroid } from 'react-native'
+import { ScrollView, Image, BackAndroid, Text } from 'react-native'
 import styles from './Styles/DrawerContentStyles'
 import { Images } from '../Themes'
+import { Actions } from 'react-native-router-flux';
+import MenuItem from './MenuItem.js'
 
 import CalendarButton from '../Containers/Buttons/CalendarButton.js'
 import SettingsButton from '../Containers/Buttons/SettingsButton.js'
@@ -24,8 +26,14 @@ class DrawerContent extends Component {
 
   render () {
     return (
-      <ScrollView style={styles.container}>
+      <ScrollView>
         <Image source={Images.logo} style={styles.logo} />
+
+        <Text onPress={() => {Actions.calendarScreen(); this.context.drawer.close();}} style={{color: 'white', backgroundColor: '#ffaaaa'}}>This is CalendarScreen!</Text>
+        <MenuItem onPress={() => {Actions.calendarScreen(); this.context.drawer.close();}}>
+          Test
+        </MenuItem>
+
         <CalendarButton />
         <MeetingsButton />
         <SettingsButton />
