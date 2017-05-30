@@ -1,7 +1,8 @@
 import React from 'react'
-import { ScrollView, Text, Image, View } from 'react-native'
+import { ScrollView, Text, Image, View, StyleSheet } from 'react-native'
 import CalendarButton from '../Containers/Buttons/CalendarButton.js'
 import MeetingListView from './MeetingListView.js'
+import { Actions } from 'react-native-router-flux';
 
 import { Images } from '../Themes'
 
@@ -22,6 +23,7 @@ export default class LaunchScreen extends React.Component {
             <Text style={styles.sectionText}>
               {'Hi there, welcome to LetsMeet application. This app will make it easy for you to arrange meetings with people!'}
             </Text>
+            <Text onPress={Actions.calendarScreen} style={{color: 'white'}}>This is CallendarScreen!</Text>
           </View>
           <View />
 

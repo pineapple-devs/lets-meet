@@ -1,12 +1,15 @@
-import React from 'react';
+import React, {Component} from 'react';
 
 import {StyleSheet, Text, View, ScrollView, TouchableOpacity, TouchableHighlight} from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import styles from './Styles/RectangleButtonStyles'
+import styles from './Styles/RectangleButtonStyles';
+import {DatePicker} from 'react-native-ui-xg';
+
+
 
 import { Form,
   Separator,InputField, LinkField,
-  SwitchField, PickerField,DatePickerField,TimePickerField
+  SwitchField, PickerField,DatePickerField
 } from 'react-native-form-generator';
 
 export class NewMeetingForm extends React.Component{
@@ -84,27 +87,31 @@ export class NewMeetingForm extends React.Component{
           maximumDate={new Date()}
           placeholder='Date'/>
 
-          <TimePickerField ref='meeting_time1'
-                placeholder='Set time'
-                iconLeft={<Icon style={{alignSelf:'center', marginLeft:10}} name='ios-alarm' size={30} />}
-                prettyPrint={true}
-                pickerWrapper={<NewMeetingForm />}
+                <DatePicker
+                  style={{width: 200}}
+                  mode="datetime"
+                  format="YYYY-MM-DD HH:mm"
+                  confirmBtnText="Confirm"
+                  cancelBtnText="Cancel"
+                  ref = "date_and_time"
+                  customStyles={{
+                    dateIcon: {
+                      position: 'absolute',
+                      left: 0,
+                      top: 4,
+                      marginLeft: 0
+                    },
+                    dateInput: {
+                      marginLeft: 36
+                    }
+                  }}
+                  minuteInterval={10}
                 />
 
-        <DatePickerField ref='meeting_date_time2'
-          minimumDate={new Date('1/1/1900')}
-          maximumDate={new Date()} mode="datetime" placeholder='Meeting 2'/>
 
-
-         <TouchableOpacity style={styles.buttonSubmit} onPress={this.props.buttonSubmit}>
-                 <Text style={styles.buttonText}>Submit</Text>
-         </TouchableOpacity>
-
-          <TouchableOpacity style={styles.buttonCancel} onPress={this.props.screenProps.toggle}>
-                           <Text style={styles.buttonText}>Cancel</Text>
-          </TouchableOpacity>
 
         </Form>
+         <Separator/>
 
         <Text>{JSON.stringify(this.state.formData)}</Text>
 
