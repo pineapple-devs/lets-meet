@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, TouchableOpacity, Image, TouchableHighlight, Text, Modal } from 'react-native'
+import { View, TouchableOpacity, Image, TouchableHighlight, Text, Modal, BackAndroid } from 'react-native'
 import { Images } from '../Themes'
 import HourListView from './HourListView.js'
 import styles from '../Components/Styles/AddNewButtonStyles'
@@ -13,10 +13,6 @@ import listStyles from './Styles/ListviewExampleStyles'
 import CalendarStrip from 'react-native-calendar-strip'
 
 class CalendarScreen extends React.Component {
-
-toggleModal = () => {
-    this.setState({ showModal: !this.state.showModal })
-  }
 
   render () {
     return (
