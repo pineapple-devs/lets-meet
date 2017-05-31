@@ -22,7 +22,9 @@ const images = {
   closeButton: require('../Images/Icons/close-button.png'),
   leftArrow: require('../Images/left-arrow.png'),
   rightArrow: require('../Images/right-arrow.png'),
-  hours: require('../Images/calendar-hours.png')
+  hours: require('../Images/calendar-hours.png'),
+  letsMeetLogo: require('../Images/lets-meet-logo.jpg'),
+  pattern1: require('../Images/pattern1.png'),
 }
 
 export default images

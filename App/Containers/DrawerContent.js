@@ -3,7 +3,8 @@ import { ScrollView, Image, BackAndroid, Text } from 'react-native'
 import styles from './Styles/DrawerContentStyles'
 import { Images } from '../Themes'
 import { Actions } from 'react-native-router-flux';
-import MenuItem from './MenuItem.js'
+import MenuItem from '../Components/MenuItem.js'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 import CalendarButton from '../Containers/Buttons/CalendarButton.js'
 import SettingsButton from '../Containers/Buttons/SettingsButton.js'
@@ -26,17 +27,30 @@ class DrawerContent extends Component {
 
   render () {
     return (
-      <ScrollView>
-        <Image source={Images.logo} style={styles.logo} />
+      <ScrollView style={styles.container}>
 
-        <Text onPress={() => {Actions.calendarScreen(); this.context.drawer.close();}} style={{color: 'white', backgroundColor: '#ffaaaa'}}>This is CalendarScreen!</Text>
-        <MenuItem onPress={() => {Actions.calendarScreen(); this.context.drawer.close();}}>
-          Test
+        <Image source={Images.pattern1} style={styles.logo} />
+
+        <MenuItem onPress={() => {Actions.launchScreen(); this.context.drawer.close();}}>
+           Home
         </MenuItem>
 
-        <CalendarButton />
-        <MeetingsButton />
-        <SettingsButton />
+        <MenuItem onPress={() => {Actions.calendarScreen(); this.context.drawer.close();}}>
+        <Icon name="calendar" size={20} style={styles.iconStyle} />
+          &nbsp;&nbsp;Calendar
+        </MenuItem>
+
+        <MenuItem onPress={() => {Actions.meetingsScreen(); this.context.drawer.close();}}>
+          <Icon name="calendar-o" size={20} style={styles.iconStyle} />
+          &nbsp;&nbsp;Meetings
+        </MenuItem>
+
+        <MenuItem onPress={() => {Actions.meetingsScreen(); this.context.drawer.close();}}>
+           <Icon name="user" size={20} style={styles.iconStyle} />
+           &nbsp;&nbsp;Profile
+        </MenuItem>
+
+
       </ScrollView>
     )
   }

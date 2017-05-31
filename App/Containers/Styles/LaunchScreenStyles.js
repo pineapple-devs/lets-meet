@@ -14,5 +14,10 @@ export default StyleSheet.create({
   },
   centered: {
     alignItems: 'center'
+  },
+  mainView: {
+    flex: 1,
+    justifyContent: 'center',
+    backgroundColor: '#007769',
   }
 })
