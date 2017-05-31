@@ -28,6 +28,10 @@ class CalendarScreen extends React.Component {
     this.setState({date: moment._d})
   }
 
+  setDate (moment)  {
+    this.setState({date: moment._d})
+  }
+
   render () {
     return (
       <View style={listStyles.container}>
