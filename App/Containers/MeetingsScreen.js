@@ -12,14 +12,6 @@ class MeetingsScreen extends React.Component {
   render () {
     return (
       <View style={listStyles.container}>
-        <TouchableOpacity onPress={this.props.screenProps.toggle} style={{
-          position: 'absolute',
-          paddingTop: 5,
-          paddingHorizontal: 5,
-          zIndex: 5
-        }}>
-          <Image source={Images.closeButton} />
-        </TouchableOpacity>
         <CalendarStrip
           calendarAnimation={{type: 'sequence', duration: 30}}
           daySelectionAnimation={{type: 'border',

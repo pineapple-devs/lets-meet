@@ -1,10 +1,14 @@
 export default {
   container: {
     flex: 1,
-    padding: 20,
-    backgroundColor: '#fafad2'
+    padding: 10,
+    backgroundColor: '#f5f5f5'
   },
   logo: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    resizeMode: 'contain',
+    height: 160,
+    marginBottom: 30
+
   }
 }

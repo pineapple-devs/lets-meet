@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { TotalNavHeight } from 'react-native';
 import { Scene, Router } from 'react-native-router-flux'
 import Styles from './Styles/NavigationBarStyles'
 import NavigationDrawer from './NavigationDrawer'
@@ -6,6 +7,7 @@ import NavigationDrawer from './NavigationDrawer'
 // screens identified by the router
 import LaunchScreen from '../Containers/LaunchScreen'
 import CalendarScreen from '../Containers/CalendarScreen'
+import MeetingsScreen from '../Containers/MeetingsScreen'
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -17,7 +19,7 @@ class NavigationRouter extends Component {
   render () {
     return (
       <Router>
-         <Scene key='drawer' component={NavigationDrawer} open={false} >
+         <Scene key='drawer' component={NavigationDrawer} open={false}>
           <Scene
             key='drawerChildrenWrapper'
             navigationBarStyle={Styles.navBar}
@@ -25,8 +27,9 @@ class NavigationRouter extends Component {
             leftButtonIconStyle={Styles.leftButton}
             rightButtonTextStyle={Styles.rightButton}
           >
-            <Scene initial key='launchScreen' component={LaunchScreen} title='Glad to have you back!' />
-            <Scene key="calendarScreen" component={CalendarScreen} title="Your calendar is here." />
+            <Scene initial key='launchScreen' component={LaunchScreen} title='Glad to have you back!' sceneStyle={{paddingTop: 54}} />
+            <Scene key="calendarScreen" component={CalendarScreen} title="Your calendar is here." sceneStyle={{paddingTop: 54}} />
+            <Scene key="meetingsScreen" component={MeetingsScreen} sceneStyle={{paddingTop: 54}} />
           </Scene>
         </Scene>
 

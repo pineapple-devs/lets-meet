@@ -17,10 +17,11 @@ export default class CircledButton extends React.Component {
 
   render () {
     return (
-    <TouchableHighlight style={styles.addButton}
-              underlayColor='#696969' onPress={this.props.onPress}>
-               <Text style={{fontSize: 60, color: 'white'}}>{this.getText()}</Text>
-          </TouchableHighlight>
+      <TouchableHighlight style={styles.addButton} underlayColor='#696969' onPress={this.props.onPress}>
+         <Text style={{fontSize: 50, color: 'white', textAlign: 'center', textAlignVertical: 'center'}}>
+            {this.getText()}
+         </Text>
+      </TouchableHighlight>
 
     )
   }
