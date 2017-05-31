@@ -31,7 +31,7 @@ class HourListView extends React.Component {
     const rowHasChanged = (r1, r2) => r1 !== r2
     // DataSource configured
     const ds = new ListView.DataSource({rowHasChanged})
-    global.date = this.props.screenProps.date
+    global.date = this.props.date
     // Datasource is always in state
     this.state = {
       dataSource: ds
@@ -94,8 +94,8 @@ class HourListView extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    global.date = newProps.screenProps.date
-    if(this.props.screenProps.date.setHours(0,0,0,0) != newProps.screenProps.date.setHours(0,0,0,0)){
+    global.date = newProps.date
+    if(this.props.date.setHours(0,0,0,0) != newProps.date.setHours(0,0,0,0)){
      this.props.fetchMeetings(1)
     }
     if (newProps.intervals) {
