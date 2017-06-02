@@ -48,7 +48,10 @@ class HoursScreen extends React.Component {
           iconRight={Images.rightArrow}
           iconContainer={{flex: 0}}
           onDateSelected={(event) => Actions.refresh({title: this.monthYear(event._d), date: event._d})}
-          onWeekChanged={(event) => Actions.refresh({title: this.monthYear(new Date(event._d.setDate(event._d.getDate()+this.props.date.getDay()-1))), date: event._d})}
+          onWeekChanged={(event) => Actions.refresh({
+                                                      title: this.monthYear(new Date(event._d.setDate(event._d.getDate()+((this.props.date.getDay() == 0) ? 6 : this.props.date.getDay()-1)))),
+                                                      date: event._d
+                                                    })}
         />
         <View style={listStyles.container}>
           <HourListView date={this.props.date} />
