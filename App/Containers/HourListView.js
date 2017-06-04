@@ -95,12 +95,23 @@ class HourListView extends React.Component {
 
   componentWillReceiveProps (newProps) {
     global.date = newProps.date
-    if(this.props.date.setHours(0,0,0,0) != newProps.date.setHours(0,0,0,0)){
-     this.props.fetchMeetings(1)
-    }
-    if (newProps.intervals) {
+      if (newProps.intervals) {
+      var newIntervals = []
+      var tomorrow = new Date(newProps.date.getFullYear(), newProps.date.getMonth(), newProps.date.getDate() + 1)
+      var start
+      var end
+      for (var i = 0; i < newProps.intervals.length; i++) {
+        start = new Date(newProps.intervals[i].start_time)
+        end = new Date(newProps.intervals[i].end_time)
+        if (start >= newProps.date && start < tomorrow)
+          newIntervals.push(newProps.intervals[i])
+        else if (end > newProps.date && end <= tomorrow)
+          newIntervals.push(newProps.intervals[i])
+        else if (start < newProps && end > tomorrow)
+          newIntervals.push(newProps.intervals[i])
+      }
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(newProps.intervals)
+        dataSource: this.state.dataSource.cloneWithRows(newIntervals)
       })
     }
     else console.log(newProps.intervals)
