@@ -40,8 +40,9 @@ class LoginScreen extends React.Component {
   componentWillReceiveProps (newProps) {
     this.forceUpdate()
     // Did the login attempt complete?
-    if (this.isAttempting && !newProps.fetching) {
-      NavigationActions.pop()
+    if (this.isAttempting && !newProps.fetching && !newProps.error) {
+      //NavigationActions.pop()
+
     }
   }
 
@@ -156,7 +157,9 @@ class LoginScreen extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    fetching: state.login.fetching
+    fetching: state.login.fetching,
+    username: state.login.username,
+    error: state.login.error
   }
 }
 

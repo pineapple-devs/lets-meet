@@ -13,6 +13,10 @@ class CalendarScreen extends React.Component {
   constructor (props) {
     super(props)
     this.onDayPress = this.onDayPress.bind(this)
+    debugger;
+    var date = new Date()
+    date.setHours(date.getHours() + 2) // vremenska zona nam je GTM+2
+    this.state = {selected: date.toISOString().slice(0, 10)}
   }
 
   monthYear (day) {
@@ -22,20 +26,17 @@ class CalendarScreen extends React.Component {
     return monthNames[d.getMonth()]+" "+d.getFullYear()
   }
 
-  toggleModal = () => {
-    this.setState({ showModal: !this.state.showModal })
-  }
-
   onDayPress(day) {
-    debugger;
     this.setState({ selected: day.dateString })
+    Actions.hoursScreen({title: this.monthYear(day), date: new Date(day.dateString)})
   }
 
   render () {
     return (
       <View style={listStyles.container}>
         <CalendarList
-          onDayPress={(day) => Actions.hoursScreen({title: this.monthYear(day), date: new Date(day.dateString)})}
+          onDayPress={(day) => this.onDayPress(day)}
+           markedDates={{[this.state.selected]: {selected: true}}}
           pastScrollRange={24}
           futureScrollRange={24}/>
       </View>

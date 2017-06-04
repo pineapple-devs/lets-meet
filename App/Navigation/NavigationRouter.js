@@ -6,6 +6,7 @@ import NavigationDrawer from './NavigationDrawer'
 
 // screens identified by the router
 import LaunchScreen from '../Containers/LaunchScreen'
+import LoginScreen from '../Containers/LoginScreen'
 import CalendarScreen from '../Containers/CalendarScreen'
 import HoursScreen from '../Containers/HoursScreen'
 import MeetingsScreen from '../Containers/MeetingsScreen'
@@ -20,6 +21,7 @@ class NavigationRouter extends Component {
   render () {
     return (
       <Router>
+
          <Scene key='drawer' component={NavigationDrawer} open={false}>
           <Scene
             key='drawerChildrenWrapper'
@@ -29,7 +31,7 @@ class NavigationRouter extends Component {
             rightButtonTextStyle={Styles.rightButton}
           >
             <Scene initial key='launchScreen' component={LaunchScreen} title='Glad to have you back!' sceneStyle={{paddingTop: 54}} />
-             <Scene key="calendarScreen" component={CalendarScreen} title="" sceneStyle={{paddingTop: 54}} />
+            <Scene key="calendarScreen" component={CalendarScreen} title="" sceneStyle={{paddingTop: 54}} />
             <Scene key="hoursScreen" component={HoursScreen} title="Your calendar is here." sceneStyle={{paddingTop: 54}} />
             <Scene key="meetingsScreen" component={MeetingsScreen} sceneStyle={{paddingTop: 54}} />
           </Scene>
