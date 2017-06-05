@@ -13,7 +13,6 @@ class CalendarScreen extends React.Component {
   constructor (props) {
     super(props)
     this.onDayPress = this.onDayPress.bind(this)
-    debugger;
     var date = new Date()
     date.setHours(date.getHours() + 2) // vremenska zona nam je GTM+2
     this.state = {selected: date.toISOString().slice(0, 10)}

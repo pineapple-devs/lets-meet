@@ -42,7 +42,7 @@ class LoginScreen extends React.Component {
     // Did the login attempt complete?
     if (this.isAttempting && !newProps.fetching && !newProps.error) {
       //NavigationActions.pop()
-
+      NavigationActions.launchScreen({hideNavBar: false})
     }
   }
 
