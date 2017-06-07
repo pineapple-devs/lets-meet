@@ -53,7 +53,7 @@ class HourListView extends React.Component {
     var endTime = new Date(rowData.end_time)
     console.log('Start time: ' + startTime + ' - End time: ' + endTime)
 
-    var dif = (startTime.getTime() - this.date.getTime()) / 3600000
+    var dif = (startTime.getTime() - this.date.getTime()) / 3600000 + 2 // + 2 zbog vremenske zone
     var event = (endTime.getTime() - startTime.getTime()) / 3600000
     console.log(this.date)
     // 58 je visina jednog sata, odnosno visina izmedju dvije iscrtane linije na pozadniskoj slici

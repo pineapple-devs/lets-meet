@@ -5,13 +5,6 @@ import styles from './Styles/MenuItemStyles.js';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 class MenuItem extends Component {
-static propTypes = {
-    onPress: PropTypes.func,
-    text: PropTypes.string,
-    children: PropTypes.string,
-    navigator: PropTypes.object
-  }
-
    getText () {
       const buttonText = this.props.text || this.props.children || ''
       return buttonText

@@ -12,7 +12,7 @@ class MeetingsScreen extends React.Component {
   render () {
     return (
       <View style={listStyles.container}>
-        <CalendarStrip
+        {false && <CalendarStrip
           calendarAnimation={{type: 'sequence', duration: 30}}
           daySelectionAnimation={{type: 'border',
             duration: 300,
@@ -26,7 +26,7 @@ class MeetingsScreen extends React.Component {
           iconLeft={Images.leftArrow}
           iconRight={Images.rightArrow}
           iconContainer={{flex: 0}}
-        />
+        /> }
         <View style={listStyles.container}>
           <MeetingListView />
         </View>

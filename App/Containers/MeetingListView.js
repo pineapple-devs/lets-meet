@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, ListView, TouchableOpacity } from 'react-native'
 import { connect } from 'react-redux'
+import MeetingActions from '../Redux/MeetingRedux'
 
 // For empty lists
 import AlertMessage from '../Components/AlertMessage'
@@ -16,13 +17,13 @@ class MeetingListView extends React.Component {
     * This is an array of objects with the properties you desire
     * Usually this should come from Redux mapStateToProps
     *************************************************************/
-    const dataObjects = [
+    /*const dataObjects = [
       {title: 'Gym with Djoka', description: 'Get SWOLE'},
       {title: 'Running with Marko', description: 'Get RIPPED'},
       {title: 'Hookah with Nemanja', description: 'Smoke some'},
       {title: 'Study', description: 'Get SMART'},
       {title: 'Work', description: 'Level up quickly'}
-    ]
+    ]*/
 
     /* ***********************************************************
     * STEP 2
@@ -37,7 +38,7 @@ class MeetingListView extends React.Component {
 
     // Datasource is always in state
     this.state = {
-      dataSource: ds.cloneWithRows(dataObjects)
+      dataSource: ds
     }
   }
 
@@ -50,11 +51,13 @@ class MeetingListView extends React.Component {
     return <MyCustomCell title={rowData.title} description={rowData.description} />
   *************************************************************/
   renderRow (rowData) {
+    var dateFormat = require('dateformat')
     return (
-      <TouchableOpacity>
+      <TouchableOpacity onPress={() => console.log(rowData)}>
         <View style={styles.row}>
           <Text style={styles.boldLabel}>{rowData.title}</Text>
-          <Text style={styles.label}>{rowData.description}</Text>
+          <Text style={styles.label}>{dateFormat(rowData.start_time, 'dd.mm.yyyy')}{new Date(rowData.start_time).toLocaleDateString()==new Date(rowData.end_time).toLocaleDateString() ? '':dateFormat(rowData.end_time, ' - dd.mm.yyyy')}</Text>
+          <Text style={styles.label}>{dateFormat(rowData.start_time, 'HH:MM - ')}{dateFormat(rowData.end_time, 'HH:MM')}</Text>
         </View>
       </TouchableOpacity>
     )
@@ -84,6 +87,19 @@ class MeetingListView extends React.Component {
     return this.state.dataSource.getRowCount() === 0
   }
 
+  componentDidMount () {
+      const userId = 1 // nikolalsvk
+      this.props.fetchMeetings(userId)
+    }
+
+  componentWillReceiveProps (newProps) {
+    if (newProps.intervals) {
+      this.setState({
+        dataSource: this.state.dataSource.cloneWithRows(newProps.intervals)
+      })
+    }
+  }
+
   render () {
     return (
       <View style={styles.container}>
@@ -101,8 +117,15 @@ class MeetingListView extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    // ...redux state to props here
+    fetching: state.meeting.fetching,
+    intervals: state.meeting.intervals
   }
 }
 
-export default connect(mapStateToProps)(MeetingListView)
+const mapDispatchToProps = (dispatch) => {
+  return {
+    fetchMeetings: (userId) => dispatch(MeetingActions.fetchMeetings(userId))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(MeetingListView)

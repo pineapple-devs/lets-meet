@@ -42,10 +42,10 @@ class NavigationRouter extends Component {
             <Scene
               initial
               key="root"
-              component={connect(state=>({username:state.login.username}))(Switch)}
+              component={connect(state=>({username:state.login.error}))(Switch)}
               tabs={true}
               unmountScenes
-              selector={props=>!props.username ? "loginScreen" : "launchScreen"}
+              selector={props=>props.username ? "launchScreen" : "loginScreen"}
               >
               <Scene key="loading" component={loading} title="" sceneStyle={{paddingTop: 54}} />
               <Scene key='launchScreen' component={LaunchScreen} title='Glad to have you back!' sceneStyle={{paddingTop: 54}} navigationBarStyle={Styles.navBar} titleStyle={Styles.title} leftButtonIconStyle={Styles.leftButton}/>
