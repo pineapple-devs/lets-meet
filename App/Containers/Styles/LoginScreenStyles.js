@@ -4,12 +4,13 @@ import { Colors, Metrics } from '../../Themes'
 export default StyleSheet.create({
   container: {
     paddingTop: 70,
-    backgroundColor: Colors.background
+    backgroundColor: '#00796b'
   },
   form: {
     backgroundColor: Colors.snow,
     margin: Metrics.baseMargin,
-    borderRadius: 4
+    borderRadius: 4,
+    marginTop: 130
   },
   row: {
     paddingVertical: Metrics.doubleBaseMargin,
@@ -37,8 +38,8 @@ export default StyleSheet.create({
   loginButton: {
     flex: 1,
     borderWidth: 1,
-    borderColor: Colors.charcoal,
-    backgroundColor: Colors.panther,
+    borderColor: '#212121',
+    backgroundColor: '#004c40',
     padding: 6
   },
   loginText: {
@@ -48,5 +49,13 @@ export default StyleSheet.create({
   topLogo: {
     alignSelf: 'center',
     resizeMode: 'contain'
+  },
+  pattern: {
+     flex: 1,
+     width: undefined,
+     height: undefined,
+     backgroundColor:'transparent',
+     justifyContent: 'center',
+     alignItems: 'center',
   }
 })

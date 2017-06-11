@@ -98,8 +98,8 @@ class LoginScreen extends React.Component {
     const editable = !fetching
     const textInputStyle = editable ? Styles.textInput : Styles.textInputReadonly
     return (
+
       <ScrollView contentContainerStyle={{justifyContent: 'center'}} style={[Styles.container, {height: this.state.visibleHeight}]} keyboardShouldPersistTaps='always'>
-        <Image source={Images.logo} style={[Styles.topLogo, this.state.topLogo]} />
         <View style={Styles.form}>
           <View style={Styles.row}>
             <Text style={Styles.rowLabel}>Username</Text>
@@ -149,8 +149,8 @@ class LoginScreen extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-
       </ScrollView>
+
     )
   }
 }
