@@ -29,8 +29,8 @@ class LoginScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      username: 'reactnative@infinite.red',
-      password: 'password',
+      username: '',
+      password: '',
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth }
     }
@@ -40,8 +40,9 @@ class LoginScreen extends React.Component {
   componentWillReceiveProps (newProps) {
     this.forceUpdate()
     // Did the login attempt complete?
-    if (this.isAttempting && !newProps.fetching) {
-      NavigationActions.pop()
+    if (newProps.userId) {
+      //NavigationActions.pop()
+      NavigationActions.launchScreen({hideNavBar: false})
     }
   }
 
@@ -97,8 +98,8 @@ class LoginScreen extends React.Component {
     const editable = !fetching
     const textInputStyle = editable ? Styles.textInput : Styles.textInputReadonly
     return (
+
       <ScrollView contentContainerStyle={{justifyContent: 'center'}} style={[Styles.container, {height: this.state.visibleHeight}]} keyboardShouldPersistTaps='always'>
-        <Image source={Images.logo} style={[Styles.topLogo, this.state.topLogo]} />
         <View style={Styles.form}>
           <View style={Styles.row}>
             <Text style={Styles.rowLabel}>Username</Text>
@@ -148,15 +149,17 @@ class LoginScreen extends React.Component {
             </TouchableOpacity>
           </View>
         </View>
-
       </ScrollView>
+
     )
   }
 }
 
 const mapStateToProps = (state) => {
   return {
-    fetching: state.login.fetching
+    fetching: state.login.fetching,
+    userId: state.login.userId,
+    error: state.login.error
   }
 }
 

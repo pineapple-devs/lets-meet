@@ -53,7 +53,7 @@ class HourListView extends React.Component {
     var endTime = new Date(rowData.end_time)
     console.log('Start time: ' + startTime + ' - End time: ' + endTime)
 
-    var dif = (startTime.getTime() - this.date.getTime()) / 3600000
+    var dif = (startTime.getTime() - this.date.getTime()) / 3600000 + 2 // + 2 zbog vremenske zone
     var event = (endTime.getTime() - startTime.getTime()) / 3600000
     console.log(this.date)
     // 58 je visina jednog sata, odnosno visina izmedju dvije iscrtane linije na pozadniskoj slici
@@ -89,18 +89,29 @@ class HourListView extends React.Component {
   }
 
   componentDidMount () {
-    const userId = 1 // nikolalsvk
+    const userId = this.props.userId
     this.props.fetchMeetings(userId)
   }
 
   componentWillReceiveProps (newProps) {
     global.date = newProps.date
-    if(this.props.date.setHours(0,0,0,0) != newProps.date.setHours(0,0,0,0)){
-     this.props.fetchMeetings(1)
-    }
     if (newProps.intervals) {
+      var newIntervals = []
+      var tomorrow = new Date(newProps.date.getFullYear(), newProps.date.getMonth(), newProps.date.getDate() + 1)
+      var start
+      var end
+      for (var i = 0; i < newProps.intervals.length; i++) {
+        start = new Date(newProps.intervals[i].start_time)
+        end = new Date(newProps.intervals[i].end_time)
+        if (start >= newProps.date && start < tomorrow)
+          newIntervals.push(newProps.intervals[i])
+        else if (end > newProps.date && end <= tomorrow)
+          newIntervals.push(newProps.intervals[i])
+        else if (start < newProps && end > tomorrow)
+          newIntervals.push(newProps.intervals[i])
+      }
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(newProps.intervals)
+        dataSource: this.state.dataSource.cloneWithRows(newIntervals)
       })
     }
     else console.log(newProps.intervals)
@@ -126,7 +137,8 @@ class HourListView extends React.Component {
 const mapStateToProps = (state) => {
   return {
     fetching: state.meeting.fetching,
-    intervals: state.meeting.intervals
+    intervals: state.meeting.intervals,
+    userId: state.login.userId
   }
 }
 

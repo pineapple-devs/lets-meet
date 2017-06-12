@@ -5,7 +5,7 @@ export default StyleSheet.create({
   ...ApplicationStyles.screen,
   container: {
     flex: 1,
-    backgroundColor: Colors.background
+    backgroundColor: Colors.snow
   },
   listContainerContent: {
     flex: 1,
@@ -15,20 +15,20 @@ export default StyleSheet.create({
   },
   row: {
     flex: 1,
-    backgroundColor: Colors.fire,
+    backgroundColor: 'rgba(72, 169, 153, 0.2)',
     marginVertical: Metrics.smallMargin,
     justifyContent: 'center'
   },
   boldLabel: {
     fontWeight: 'bold',
     alignSelf: 'center',
-    color: Colors.snow,
+    color: 'black',
     textAlign: 'center',
     marginVertical: Metrics.smallMargin
   },
   label: {
     textAlign: 'center',
-    color: 'black',
+    color: 'gray',
     marginBottom: Metrics.smallMargin
   },
   listContent: {

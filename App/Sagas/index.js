@@ -1,6 +1,7 @@
 import { takeLatest } from 'redux-saga/effects'
 import API from '../Services/Api'
 import MeetingAPI from '../Services/MeetingApi'
+import LoginAPI from '../Services/LoginApi'
 import FixtureAPI from '../Services/FixtureApi'
 import DebugConfig from '../Config/DebugConfig'
 
@@ -26,6 +27,7 @@ import { getMeetings, getMeeting } from './MeetingSagas'
 // to the sagas which need it.
 const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 const meetingApi = MeetingAPI.create()
+const loginApi = LoginAPI.create()
 
 /* ------------- Connect Types To Sagas ------------- */
 
@@ -33,7 +35,7 @@ export default function * root () {
   yield [
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
-    takeLatest(LoginTypes.LOGIN_REQUEST, login),
+    takeLatest(LoginTypes.LOGIN_REQUEST, login, loginApi),
     takeLatest(OpenScreenTypes.OPEN_SCREEN, openScreen),
 
     // some sagas receive extra parameters in addition to an action
