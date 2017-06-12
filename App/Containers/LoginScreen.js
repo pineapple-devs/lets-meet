@@ -29,8 +29,8 @@ class LoginScreen extends React.Component {
   constructor (props) {
     super(props)
     this.state = {
-      username: 'reactnative@infinite.red',
-      password: 'password',
+      username: '',
+      password: '',
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth }
     }
@@ -40,7 +40,7 @@ class LoginScreen extends React.Component {
   componentWillReceiveProps (newProps) {
     this.forceUpdate()
     // Did the login attempt complete?
-    if (this.isAttempting && !newProps.fetching && !newProps.error) {
+    if (newProps.userId) {
       //NavigationActions.pop()
       NavigationActions.launchScreen({hideNavBar: false})
     }
@@ -158,7 +158,7 @@ class LoginScreen extends React.Component {
 const mapStateToProps = (state) => {
   return {
     fetching: state.login.fetching,
-    username: state.login.username,
+    userId: state.login.userId,
     error: state.login.error
   }
 }
