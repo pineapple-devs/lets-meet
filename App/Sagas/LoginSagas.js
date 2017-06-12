@@ -5,11 +5,11 @@ import LoginActions from '../Redux/LoginRedux'
 export function * login (api, action) {
   const {username, password} = action
 
- const response = yield call(api.login, username, password)
+  const response = yield call(api.login, username, password)
 
-   if (response.ok) {
-     yield put(LoginActions.loginSuccess(response.data))
-   } else {
-     yield put(LoginActions.loginFailure('Invalid username/password!'))
-   }
+  if (response.ok) {
+    yield put(LoginActions.loginSuccess(response.data))
+  } else {
+    yield put(LoginActions.loginFailure('Invalid username/password!'))
+  }
 }
