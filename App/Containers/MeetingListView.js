@@ -12,25 +12,6 @@ import styles from './Styles/ListviewExampleStyles'
 class MeetingListView extends React.Component {
   constructor (props) {
     super(props)
-    /* ***********************************************************
-    * STEP 1
-    * This is an array of objects with the properties you desire
-    * Usually this should come from Redux mapStateToProps
-    *************************************************************/
-    /*const dataObjects = [
-      {title: 'Gym with Djoka', description: 'Get SWOLE'},
-      {title: 'Running with Marko', description: 'Get RIPPED'},
-      {title: 'Hookah with Nemanja', description: 'Smoke some'},
-      {title: 'Study', description: 'Get SMART'},
-      {title: 'Work', description: 'Level up quickly'}
-    ]*/
-
-    /* ***********************************************************
-    * STEP 2
-    * Teach datasource how to detect if rows are different
-    * Make this function fast!  Perhaps something like:
-    *   (r1, r2) => r1.id !== r2.id}
-    *************************************************************/
     const rowHasChanged = (r1, r2) => r1 !== r2
 
     // DataSource configured
@@ -42,14 +23,6 @@ class MeetingListView extends React.Component {
     }
   }
 
-  /* ***********************************************************
-  * STEP 3
-  * `renderRow` function -How each cell/row should be rendered
-  * It's our best practice to place a single component here:
-  *
-  * e.g.
-    return <MyCustomCell title={rowData.title} description={rowData.description} />
-  *************************************************************/
   renderRow (rowData) {
     var dateFormat = require('dateformat')
     return (
@@ -63,34 +36,14 @@ class MeetingListView extends React.Component {
     )
   }
 
-  /* ***********************************************************
-  * STEP 4
-  * If your datasource is driven by Redux, you'll need to
-  * reset it when new data arrives.
-  * DO NOT! place `cloneWithRows` inside of render, since render
-  * is called very often, and should remain fast!  Just replace
-  * state's datasource on newProps.
-  *
-  * e.g.
-    componentWillReceiveProps (newProps) {
-      if (newProps.someData) {
-        this.setState({
-          dataSource: this.state.dataSource.cloneWithRows(newProps.someData)
-        })
-      }
-    }
-  *************************************************************/
-
-  // Used for friendly AlertMessage
-  // returns true if the dataSource is empty
   noRowData () {
     return this.state.dataSource.getRowCount() === 0
   }
 
   componentDidMount () {
-      const userId = 1 // nikolalsvk
-      this.props.fetchMeetings(userId)
-    }
+    const userId = this.props.userId
+    this.props.fetchMeetings(userId)
+  }
 
   componentWillReceiveProps (newProps) {
     if (newProps.intervals) {
@@ -118,7 +71,8 @@ class MeetingListView extends React.Component {
 const mapStateToProps = (state) => {
   return {
     fetching: state.meeting.fetching,
-    intervals: state.meeting.intervals
+    intervals: state.meeting.intervals,
+    userId: state.login.userId
   }
 }
 

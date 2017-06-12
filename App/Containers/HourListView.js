@@ -89,13 +89,13 @@ class HourListView extends React.Component {
   }
 
   componentDidMount () {
-    const userId = 1 // nikolalsvk
+    const userId = this.props.userId
     this.props.fetchMeetings(userId)
   }
 
   componentWillReceiveProps (newProps) {
     global.date = newProps.date
-      if (newProps.intervals) {
+    if (newProps.intervals) {
       var newIntervals = []
       var tomorrow = new Date(newProps.date.getFullYear(), newProps.date.getMonth(), newProps.date.getDate() + 1)
       var start
@@ -137,7 +137,8 @@ class HourListView extends React.Component {
 const mapStateToProps = (state) => {
   return {
     fetching: state.meeting.fetching,
-    intervals: state.meeting.intervals
+    intervals: state.meeting.intervals,
+    userId: state.login.userId
   }
 }
 
