@@ -10,7 +10,7 @@ const { Types, Creators } = createActions({
   fetchMeetingsSuccess: ['meetings'],
   showMeeting: ['userId', 'meetingId'],
   showMeetingSuccess: ['meeting'],
-  createMeeting: ['userId', 'title', 'description'],
+  createMeeting: ['userId', 'meetingParams'],
   destroyMeeting: ['userId', 'meetingId']
 })
 

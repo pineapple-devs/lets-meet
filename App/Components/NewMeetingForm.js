@@ -7,6 +7,7 @@ import {
   ScrollView,
   TouchableOpacity,
   TouchableHighlight,
+  Button,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from './Styles/RectangleButtonStyles';
@@ -38,10 +39,10 @@ export class NewMeetingForm extends React.Component {
     in this example.
 
     formData = {
-    meeting_name:"",
-    meeting_description:"",
+    meetingName:"",
+    meetingDescription:"",
     repeat: '',
-    wants_repeat: bool
+    repeatFrequency: '',
     }
     */
 
@@ -53,8 +54,8 @@ export class NewMeetingForm extends React.Component {
     // console.log(e, component);
   }
 
-  handleSubmit(formData) {
-    this.setState({formData: formData});
+  handleSubmit() {
+    // call API here and create meeting
   }
 
   render() {
@@ -66,26 +67,25 @@ export class NewMeetingForm extends React.Component {
           ref="addNewMeetingForm"
           onFocus={this.handleFormFocus.bind(this)}
           onChange={this.handleFormChange.bind(this)}
-          onSubmit={formData => onSubmit(formData)}
-          label="Personal Information">
-          <InputField ref="meeting_name" placeholder="Meeting name" />
+          label="New Meeting">
+          <InputField ref="meetingName" placeholder="Meeting name" />
 
           <InputField
             multiline={true}
-            ref="meeting_description"
-            placeholder="Description"
+            ref="meetingDescription"
+            placeholder="Meeting description"
             helpText="Write down some special reminders for your meeting!"
           />
 
           <SwitchField
             label="Repeat"
-            ref="wants_reminder"
+            ref="repeat"
             helpText="Check if you want your meeting to repeat."
           />
 
-          {this.state.formData.wants_reminder && (
+          {this.state.formData.repeat && (
             <PickerField
-              ref="gender"
+              ref="repeatFrequency"
               label="Repeat settings"
               options={{
                 every_day: 'Every day',
@@ -148,10 +148,73 @@ export class NewMeetingForm extends React.Component {
             }}
           />
         </Form>
+=======
+        </Form>
+
+        {/*
+        DatePicker is not from react-native-form-generator package
+        so we're not fetching it from ref. We're setting onDateChange
+        function which will do setState({date: date})
+        */}
+        <Text>{'When will this meeting start?'}</Text>
+        <DatePicker
+          style={{width: 200}}
+          mode="datetime"
+          format="YYYY-MM-DD HH:mm"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0,
+            },
+            dateInput: {
+              marginLeft: 36,
+            },
+          }}
+          minuteInterval={10}
+          onDateChange={chosenDate => {
+            this.setState({startDate: chosenDate});
+          }}
+        />
+
+        <Text>{'When will this meeting end?'}</Text>
+        <DatePicker
+          style={{width: 200}}
+          mode="datetime"
+          format="YYYY-MM-DD HH:mm"
+          confirmBtnText="Confirm"
+          cancelBtnText="Cancel"
+          customStyles={{
+            dateIcon: {
+              position: 'absolute',
+              left: 0,
+              top: 4,
+              marginLeft: 0,
+            },
+            dateInput: {
+              marginLeft: 36,
+            },
+          }}
+          minuteInterval={10}
+          onDateChange={chosenDate => {
+            this.setState({endDate: chosenDate});
+          }}
+        />
 
         <Text>{JSON.stringify(this.state.formData)}</Text>
         <Text>{JSON.stringify(this.state.startDate)}</Text>
         <Text>{JSON.stringify(this.state.endDate)}</Text>
+
+        <Button
+          icon="md-checkmark"
+          iconPlacement="right"
+          onPress={this.handleSubmit}
+          title="Save">
+          "Save"
+        </Button>
       </ScrollView>
     );
   }

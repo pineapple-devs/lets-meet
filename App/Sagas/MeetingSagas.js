@@ -1,30 +1,34 @@
-import { call, put } from 'redux-saga/effects'
-import MeetingActions from '../Redux/MeetingRedux'
+import {call, put} from 'redux-saga/effects';
+import MeetingActions from '../Redux/MeetingRedux';
 
-export function * getMeetings (api, action) {
-  const { userId } = action
+export function* getMeetings(api, action) {
+  const {userId} = action;
 
-  const response = yield call(api.getMeetings, userId)
+  const response = yield call(api.getMeetings, userId);
 
-  yield put(MeetingActions.performingRequest())
+  yield put(MeetingActions.performingRequest());
 
   if (response.ok) {
-    yield put(MeetingActions.fetchMeetingsSuccess(response.data))
+    yield put(MeetingActions.fetchMeetingsSuccess(response.data));
   } else {
-    yield put(MeetingActions.requestFailed())
+    yield put(MeetingActions.requestFailed());
   }
 }
 
-export function * getMeeting (api, action) {
-  const { userId, meetingId } = action
+export function* getMeeting(api, action) {
+  const {userId, meetingId} = action;
 
-  const response = yield call(api.getMeeting, userId, meetingId)
+  const response = yield call(api.getMeeting, userId, meetingId);
 
-  yield put(MeetingActions.performingRequest())
+  yield put(MeetingActions.performingRequest());
 
   if (response.ok) {
-    yield put(MeetingActions.fetchMeeting(response.data))
+    yield put(MeetingActions.fetchMeeting(response.data));
   } else {
-    yield put(MeetingActions.requestFailed())
+    yield put(MeetingActions.requestFailed());
   }
+}
+
+export function* createMeeting(api, action) {
+  const {userId, meetingParams} = action;
 }
