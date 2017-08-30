@@ -26,7 +26,8 @@ export class NewMeetingForm extends React.Component {
     super(props);
     this.state = {
       formData: {},
-      dateTime: new Date(),
+      startDate: new Date(),
+      endDate: new Date(),
       showModal: false,
     };
   }
@@ -67,8 +68,6 @@ export class NewMeetingForm extends React.Component {
           onChange={this.handleFormChange.bind(this)}
           onSubmit={formData => onSubmit(formData)}
           label="Personal Information">
-          <Separator />
-
           <InputField ref="meeting_name" placeholder="Meeting name" />
 
           <InputField
@@ -77,7 +76,6 @@ export class NewMeetingForm extends React.Component {
             placeholder="Description"
             helpText="Write down some special reminders for your meeting!"
           />
-          <Separator />
 
           <SwitchField
             label="Repeat"
@@ -85,21 +83,24 @@ export class NewMeetingForm extends React.Component {
             helpText="Check if you want your meeting to repeat."
           />
 
-          <PickerField
-            ref="gender"
-            label="Repeat settings"
-            options={{
-              every_day: 'Every day',
-              every_week: 'Every week',
-              every_month: 'Every month',
-            }}
-          />
+          {this.state.formData.wants_reminder && (
+            <PickerField
+              ref="gender"
+              label="Repeat settings"
+              options={{
+                every_day: 'Every day',
+                every_week: 'Every week',
+                every_month: 'Every month',
+              }}
+            />
+          )}
 
           {/*
           DatePicker is not from react-native-form-generator package
           so we're not fetching it from ref. We're setting onDateChange
           function which will do setState({date: date})
           */}
+          <Separator label="Meeting start" />
           <DatePicker
             style={{width: 200}}
             mode="datetime"
@@ -119,14 +120,38 @@ export class NewMeetingForm extends React.Component {
             }}
             minuteInterval={10}
             onDateChange={chosenDate => {
-              this.setState({date: chosenDate});
+              this.setState({startDate: chosenDate});
+            }}
+          />
+
+          <Separator label="Meeting end" />
+          <DatePicker
+            style={{width: 200}}
+            mode="datetime"
+            format="YYYY-MM-DD HH:mm"
+            confirmBtnText="Confirm"
+            cancelBtnText="Cancel"
+            customStyles={{
+              dateIcon: {
+                position: 'absolute',
+                left: 0,
+                top: 4,
+                marginLeft: 0,
+              },
+              dateInput: {
+                marginLeft: 36,
+              },
+            }}
+            minuteInterval={10}
+            onDateChange={chosenDate => {
+              this.setState({endDate: chosenDate});
             }}
           />
         </Form>
-        <Separator />
 
         <Text>{JSON.stringify(this.state.formData)}</Text>
-        <Text>{JSON.stringify(this.state.date)}</Text>
+        <Text>{JSON.stringify(this.state.startDate)}</Text>
+        <Text>{JSON.stringify(this.state.endDate)}</Text>
       </ScrollView>
     );
   }
