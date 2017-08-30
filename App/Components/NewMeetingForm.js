@@ -19,7 +19,6 @@ import {
   LinkField,
   SwitchField,
   PickerField,
-  DatePickerField,
 } from 'react-native-form-generator';
 
 export class NewMeetingForm extends React.Component {
@@ -27,6 +26,7 @@ export class NewMeetingForm extends React.Component {
     super(props);
     this.state = {
       formData: {},
+      dateTime: new Date(),
       showModal: false,
     };
   }
@@ -40,7 +40,6 @@ export class NewMeetingForm extends React.Component {
     meeting_name:"",
     meeting_description:"",
     repeat: '',
-    meeting_date1: Date,
     wants_repeat: bool
     }
     */
@@ -57,7 +56,6 @@ export class NewMeetingForm extends React.Component {
     this.setState({formData: formData});
   }
 
-  openTermsAndConditionsURL() {}
   render() {
     return (
       <ScrollView
@@ -91,27 +89,23 @@ export class NewMeetingForm extends React.Component {
             ref="gender"
             label="Repeat settings"
             options={{
-              '': '',
               every_day: 'Every day',
               every_week: 'Every week',
               every_month: 'Every month',
             }}
           />
 
-          <DatePickerField
-            ref="meeting_date1"
-            minimumDate={new Date('1/1/1900')}
-            maximumDate={new Date()}
-            placeholder="Date"
-          />
-
+          {/*
+          DatePicker is not from react-native-form-generator package
+          so we're not fetching it from ref. We're setting onDateChange
+          function which will do setState({date: date})
+          */}
           <DatePicker
             style={{width: 200}}
             mode="datetime"
             format="YYYY-MM-DD HH:mm"
             confirmBtnText="Confirm"
             cancelBtnText="Cancel"
-            ref="date_and_time"
             customStyles={{
               dateIcon: {
                 position: 'absolute',
@@ -124,11 +118,15 @@ export class NewMeetingForm extends React.Component {
               },
             }}
             minuteInterval={10}
+            onDateChange={chosenDate => {
+              this.setState({date: chosenDate});
+            }}
           />
         </Form>
         <Separator />
 
         <Text>{JSON.stringify(this.state.formData)}</Text>
+        <Text>{JSON.stringify(this.state.date)}</Text>
       </ScrollView>
     );
   }
