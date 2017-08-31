@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import {connect} from 'react-redux';
 
 import {
   StyleSheet,
@@ -25,6 +26,13 @@ import {
 export class NewMeetingForm extends React.Component {
   constructor(props) {
     super(props);
+
+    const formData = {
+      meetingName: '',
+      meetingDescription: '',
+      repeat: false,
+    };
+
     this.state = {
       formData: {},
       startDate: new Date(),
@@ -33,19 +41,14 @@ export class NewMeetingForm extends React.Component {
     };
   }
 
-  handleFormChange(formData) {
-    /*
-    formData will contain all the values of the form,
-    in this example.
-
-    formData = {
-    meetingName:"",
-    meetingDescription:"",
-    repeat: '',
-    repeatFrequency: '',
+  componentWillReceiveProps(newProps) {
+    if (newProps.meeting) {
+      //NavigationActions.pop()
+      NavigationActions.launchScreen({hideNavBar: false});
     }
-    */
+  }
 
+  handleFormChange(formData) {
     this.setState({formData: formData});
     this.props.onFormChange && this.props.onFormChange(formData);
   }
@@ -56,6 +59,21 @@ export class NewMeetingForm extends React.Component {
 
   handleSubmit() {
     // call API here and create meeting
+    const formData = this.state.formData;
+    const userId = this.props.userId;
+    const startTime = this.state.startDate;
+    const endTime = this.state.endDate;
+
+    const meetingParams = {
+      meeting: {
+        title: formData.meetingName,
+        description: formData.meetingDescription,
+        user_id: userId,
+      },
+      intervals: [{start_time: startTime, end_date: endTime}],
+    };
+
+    this.props.createMeeting(userId, meetingParams);
   }
 
   render() {
@@ -94,61 +112,6 @@ export class NewMeetingForm extends React.Component {
               }}
             />
           )}
-
-          {/*
-          DatePicker is not from react-native-form-generator package
-          so we're not fetching it from ref. We're setting onDateChange
-          function which will do setState({date: date})
-          */}
-          <Separator label="Meeting start" />
-          <DatePicker
-            style={{width: 200}}
-            mode="datetime"
-            format="YYYY-MM-DD HH:mm"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            customStyles={{
-              dateIcon: {
-                position: 'absolute',
-                left: 0,
-                top: 4,
-                marginLeft: 0,
-              },
-              dateInput: {
-                marginLeft: 36,
-              },
-            }}
-            minuteInterval={10}
-            onDateChange={chosenDate => {
-              this.setState({startDate: chosenDate});
-            }}
-          />
-
-          <Separator label="Meeting end" />
-          <DatePicker
-            style={{width: 200}}
-            mode="datetime"
-            format="YYYY-MM-DD HH:mm"
-            confirmBtnText="Confirm"
-            cancelBtnText="Cancel"
-            customStyles={{
-              dateIcon: {
-                position: 'absolute',
-                left: 0,
-                top: 4,
-                marginLeft: 0,
-              },
-              dateInput: {
-                marginLeft: 36,
-              },
-            }}
-            minuteInterval={10}
-            onDateChange={chosenDate => {
-              this.setState({endDate: chosenDate});
-            }}
-          />
-        </Form>
-=======
         </Form>
 
         {/*
@@ -219,4 +182,21 @@ export class NewMeetingForm extends React.Component {
     );
   }
 }
-export default NewMeetingForm;
+
+const mapStateToProps = state => {
+  return {
+    fetching: state.meeting.fetching,
+    userId: state.login.userId,
+    meeting: state.meeting.meeting,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    createMeeting: (userId, meetingParams) => {
+      return dispatch(MeetingActions.createMeeting(userId, meetingParams));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewMeetingForm);
