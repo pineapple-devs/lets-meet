@@ -77,7 +77,8 @@ const create = (baseURL = 'https://lets-meet-api.herokuapp.com/') => {
     // a list of the API functions from step 2
     getRoot,
     getMeetings,
-    getMeeting
+    getMeeting,
+    createMeeting
   }
 }
 

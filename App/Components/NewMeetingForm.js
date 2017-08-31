@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
+import MeetingActions from '../Redux/MeetingRedux';
 
 import {
   StyleSheet,
@@ -39,6 +40,8 @@ export class NewMeetingForm extends React.Component {
       endDate: new Date(),
       showModal: false,
     };
+
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   componentWillReceiveProps(newProps) {

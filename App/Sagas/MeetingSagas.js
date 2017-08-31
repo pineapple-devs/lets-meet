@@ -32,7 +32,7 @@ export function* getMeeting(api, action) {
 export function* createMeeting(api, action) {
   const {userId, meetingParams} = action;
 
-  const response = yield call(api.getMeeting, userId, meetingParams);
+  const response = yield call(api.createMeeting, userId, meetingParams);
 
   yield put(MeetingActions.performingRequest());
 

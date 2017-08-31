@@ -19,7 +19,7 @@ import { startup } from './StartupSagas'
 import { login } from './LoginSagas'
 import { getUserAvatar } from './GithubSagas'
 import { openScreen } from './OpenScreenSagas'
-import { getMeetings, getMeeting } from './MeetingSagas'
+import { getMeetings, getMeeting, createMeeting } from './MeetingSagas'
 
 /* ------------- API ------------- */
 
@@ -43,6 +43,7 @@ export default function * root () {
 
     // meeting sagas
     takeLatest(MeetingTypes.FETCH_MEETINGS, getMeetings, meetingApi),
-    takeLatest(MeetingTypes.SHOW_MEETING, getMeeting, meetingApi)
+    takeLatest(MeetingTypes.SHOW_MEETING, getMeeting, meetingApi),
+    takeLatest(MeetingTypes.CREATE_MEETING, createMeeting, meetingApi)
   ]
 }

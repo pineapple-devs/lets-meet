@@ -8,6 +8,7 @@ const { Types, Creators } = createActions({
   requestFailed: ['error'],
   fetchMeetings: ['userId'],
   fetchMeetingsSuccess: ['meetings'],
+  fetchMeeting: ['meeting'],
   showMeeting: ['userId', 'meetingId'],
   showMeetingSuccess: ['meeting'],
   createMeeting: ['userId', 'meetingParams'],
@@ -90,7 +91,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.PERFORMING_REQUEST]: request,
   [Types.REQUEST_FAILED]: failure,
   [Types.FETCH_MEETINGS_SUCCESS]: meetingsFetched,
+  [Types.FETCH_MEETING_SUCCESS]: meetingFetched,
   [Types.SHOW_MEETING_SUCCESS]: meetingFetched,
-  [Types.CREATE_MEETING]: meetingFetched,
   [Types.DESTROY_MEETING]: meetingFetched
 })
