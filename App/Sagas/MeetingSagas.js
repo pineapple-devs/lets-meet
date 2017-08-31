@@ -31,4 +31,14 @@ export function* getMeeting(api, action) {
 
 export function* createMeeting(api, action) {
   const {userId, meetingParams} = action;
+
+  const response = yield call(api.getMeeting, userId, meetingParams);
+
+  yield put(MeetingActions.performingRequest());
+
+  if (response.ok) {
+    yield put(MeetingActions.fetchMeeting(response.data));
+  } else {
+    yield put(MeetingActions.requestFailed());
+  }
 }

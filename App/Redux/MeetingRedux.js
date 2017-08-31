@@ -29,7 +29,7 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Helper functions ------------- */
 
-const formIntervalsWithMeetingInfo = (meetings) => {
+const formIntervalsWithMeetingsInfo = (meetings) => {
   let intervals = []
 
   meetings.map((meeting) => {
@@ -38,6 +38,18 @@ const formIntervalsWithMeetingInfo = (meetings) => {
       interval.description = meeting.description
       intervals.push(interval)
     })
+  })
+
+  return intervals;
+}
+
+const formIntervalsWithMeetingInfo = (meeting) => {
+  let intervals = []
+
+  meeting.intervals.map((interval) => {
+    interval.title = meeting.title
+    interval.description = meeting.description
+    intervals.push(interval)
   })
 
   return intervals;
@@ -54,13 +66,19 @@ export const meetingsFetched = (state, { meetings }) => {
     fetching: false,
     error: null,
     meetings: meetings,
-    intervals: formIntervalsWithMeetingInfo(meetings)
+    intervals: formIntervalsWithMeetingsInfo(meetings)
   })
 }
 
 // we've fetched a meetings
-export const meetingFetched = (state, { meeting }) =>
-  state.merge({ fetching: false, error: null, meeting: meeting })
+export const meetingFetched = (state, { meeting }) => {
+  return state.merge({
+    fetching: false,
+    error: null,
+    meeting: meeting,
+    intervals: formIntervalsWithMeetingInfo(meeting)
+  })
+}
 
 // we've had a problem logging in
 export const failure = (state, { error }) =>
