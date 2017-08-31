@@ -54,6 +54,12 @@ const create = (baseURL = 'https://lets-meet-api.herokuapp.com/') => {
       return response
     })
   }
+  const createMeeting = (userId, meetingParams) => {
+    return api.post(`users/${userId}/meetings`, meetingParams)
+    .then((response) => {
+      return response
+    })
+  }
 
   // ------
   // STEP 3
@@ -71,7 +77,8 @@ const create = (baseURL = 'https://lets-meet-api.herokuapp.com/') => {
     // a list of the API functions from step 2
     getRoot,
     getMeetings,
-    getMeeting
+    getMeeting,
+    createMeeting
   }
 }
 

@@ -8,9 +8,10 @@ const { Types, Creators } = createActions({
   requestFailed: ['error'],
   fetchMeetings: ['userId'],
   fetchMeetingsSuccess: ['meetings'],
+  fetchMeetingSuccess: ['meeting'],
   showMeeting: ['userId', 'meetingId'],
   showMeetingSuccess: ['meeting'],
-  createMeeting: ['userId', 'title', 'description'],
+  createMeeting: ['userId', 'meetingParams'],
   destroyMeeting: ['userId', 'meetingId']
 })
 
@@ -29,7 +30,7 @@ export const INITIAL_STATE = Immutable({
 
 /* ------------- Helper functions ------------- */
 
-const formIntervalsWithMeetingInfo = (meetings) => {
+const formIntervalsWithMeetingsInfo = (meetings) => {
   let intervals = []
 
   meetings.map((meeting) => {
@@ -38,6 +39,18 @@ const formIntervalsWithMeetingInfo = (meetings) => {
       interval.description = meeting.description
       intervals.push(interval)
     })
+  })
+
+  return intervals;
+}
+
+const formIntervalsWithMeetingInfo = (meeting) => {
+  let intervals = []
+
+  meeting.intervals.map((interval) => {
+    interval.title = meeting.title
+    interval.description = meeting.description
+    intervals.push(interval)
   })
 
   return intervals;
@@ -54,13 +67,19 @@ export const meetingsFetched = (state, { meetings }) => {
     fetching: false,
     error: null,
     meetings: meetings,
-    intervals: formIntervalsWithMeetingInfo(meetings)
+    intervals: formIntervalsWithMeetingsInfo(meetings)
   })
 }
 
-// we've fetched a meetings
-export const meetingFetched = (state, { meeting }) =>
-  state.merge({ fetching: false, error: null, meeting: meeting })
+// we've fetched a meeting
+export const meetingFetched = (state, { meeting }) => {
+  return state.merge({
+    fetching: false,
+    error: null,
+    meeting: meeting,
+    intervals: formIntervalsWithMeetingInfo(meeting)
+  })
+}
 
 // we've had a problem logging in
 export const failure = (state, { error }) =>
@@ -72,7 +91,7 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.PERFORMING_REQUEST]: request,
   [Types.REQUEST_FAILED]: failure,
   [Types.FETCH_MEETINGS_SUCCESS]: meetingsFetched,
+  [Types.FETCH_MEETING_SUCCESS]: meetingFetched,
   [Types.SHOW_MEETING_SUCCESS]: meetingFetched,
-  [Types.CREATE_MEETING]: meetingFetched,
   [Types.DESTROY_MEETING]: meetingFetched
 })
