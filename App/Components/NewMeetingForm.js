@@ -47,6 +47,7 @@ export class NewMeetingForm extends React.Component {
 
   componentWillReceiveProps(newProps) {
     if (newProps.meeting) {
+      this.props.screenProps.toggle();
       NavigationActions.meetingsScreen();
     }
   }

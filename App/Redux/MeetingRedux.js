@@ -8,7 +8,7 @@ const { Types, Creators } = createActions({
   requestFailed: ['error'],
   fetchMeetings: ['userId'],
   fetchMeetingsSuccess: ['meetings'],
-  fetchMeeting: ['meeting'],
+  fetchMeetingSuccess: ['meeting'],
   showMeeting: ['userId', 'meetingId'],
   showMeetingSuccess: ['meeting'],
   createMeeting: ['userId', 'meetingParams'],
@@ -71,7 +71,7 @@ export const meetingsFetched = (state, { meetings }) => {
   })
 }
 
-// we've fetched a meetings
+// we've fetched a meeting
 export const meetingFetched = (state, { meeting }) => {
   return state.merge({
     fetching: false,

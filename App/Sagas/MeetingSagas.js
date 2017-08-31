@@ -37,7 +37,7 @@ export function* createMeeting(api, action) {
   yield put(MeetingActions.performingRequest());
 
   if (response.ok) {
-    yield put(MeetingActions.fetchMeeting(response.data));
+    yield put(MeetingActions.fetchMeetingSuccess(response.data));
   } else {
     yield put(MeetingActions.requestFailed());
   }
