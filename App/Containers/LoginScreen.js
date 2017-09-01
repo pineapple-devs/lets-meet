@@ -112,7 +112,6 @@ class LoginScreen extends React.Component {
         keyboardShouldPersistTaps="always">
         <View style={Styles.form}>
           <View style={Styles.row}>
-            <Text style={Styles.rowLabel}>Username</Text>
             <TextInput
               ref="username"
               style={textInputStyle}
@@ -130,7 +129,6 @@ class LoginScreen extends React.Component {
           </View>
 
           <View style={Styles.row}>
-            <Text style={Styles.rowLabel}>Password</Text>
             <TextInput
               ref="password"
               style={textInputStyle}

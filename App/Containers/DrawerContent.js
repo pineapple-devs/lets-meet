@@ -50,7 +50,7 @@ class DrawerContent extends Component {
            &nbsp;&nbsp;Profile
         </MenuItem>
 
-        <MenuItem onPress={() => {Actions.meetingsScreen(); this.context.drawer.close();}}>
+        <MenuItem onPress={() => {Actions.loginScreen(); this.context.drawer.close();}}>
                    <Icon name="user-o" size={17} style={styles.iconStyle} />
                    &nbsp;&nbsp;Logout
         </MenuItem>

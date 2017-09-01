@@ -16,20 +16,18 @@ export default class LaunchScreen extends React.Component {
       <View style={styles.mainView}>
 
         <ScrollView >
-           <Icon name="meetup" size={100} style={{alignSelf: 'center', paddingTop: 15, paddingBottom: 15}} color="snow" />
+            <View style={styles.logoSection} >
+              <Image source={Images.handshake} style={styles.logo} />
+            </View>
 
-          <View style={styles.section, {backgroundColor: '#8e8e8e'}} >
+          <View style={styles.section} >
             <Text style={styles.sectionText}>
-              {'Hi there, welcome to LetsMeet application. This app will make it easy for you to arrange meetings with people!'}
+              {'Hi there, welcome to LetsMeet! This application will make it easy for you to arrange meetings with other people! \n \n Your meetings are below'}
             </Text>
           </View>
           <View />
 
-          <View>
-            <Text style={styles.sectionText}>
-              {'Your meetings are below'}
-            </Text>
-
+          <View style={styles.meetings}>
             <MeetingListView />
           </View>
 

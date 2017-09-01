@@ -10,7 +10,9 @@ export default StyleSheet.create({
     backgroundColor: Colors.snow,
     margin: Metrics.baseMargin,
     borderRadius: 4,
-    marginTop: 130
+    marginTop: 130,
+    width: 330,
+    alignSelf: 'center'
   },
   row: {
     paddingVertical: Metrics.doubleBaseMargin,
@@ -37,10 +39,21 @@ export default StyleSheet.create({
   },
   loginButton: {
     flex: 1,
-    borderWidth: 1,
-    borderColor: '#212121',
     backgroundColor: '#004c40',
-    padding: 6
+    padding: 6,
+    marginRight: 2,
+    borderRadius: 10,
+    width: 135,
+    alignSelf: 'flex-start'
+  },
+  cancelButton: {
+    flex: 1,
+    backgroundColor: '#004c40',
+    padding: 6,
+    marginLeft: 2,
+    borderRadius: 10,
+    width: 135,
+    alignSelf: 'flex-end'
   },
   loginText: {
     textAlign: 'center',

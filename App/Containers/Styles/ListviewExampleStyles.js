@@ -32,7 +32,8 @@ export default StyleSheet.create({
     marginBottom: Metrics.smallMargin
   },
   listContent: {
-    marginTop: Metrics.baseMargin
+    marginTop: Metrics.smallMargin,
+    marginBottom: Metrics.smallMargin
   },
   backgroundImage: {
     flex: 1,

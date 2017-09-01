@@ -7,10 +7,11 @@ export default StyleSheet.create({
     paddingBottom: Metrics.baseMargin
   },
   logo: {
-    marginTop: Metrics.doubleSection,
-    height: Metrics.images.logo,
-    width: Metrics.images.logo,
-    resizeMode: 'contain'
+    alignSelf: 'center',
+    paddingTop: 15,
+    paddingBottom: 15,
+    width: 330,
+    height: 180
   },
   centered: {
     alignItems: 'center'
@@ -19,5 +20,20 @@ export default StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     backgroundColor: '#007769',
+  },
+  section: {
+    paddingTop: 10,
+    paddingBottom: 10
+  },
+  logoSection: {
+    backgroundColor: 'white'
+  },
+  sectionText: {
+    color: 'white',
+    fontSize: 16,
+    fontStyle: 'italic',
+    textAlign: 'center',
+    paddingLeft: 10,
+    paddingRight: 10
   }
 })

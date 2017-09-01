@@ -25,7 +25,8 @@ const images = {
   hours: require('../Images/calendar-hours.png'),
   letsMeetLogo: require('../Images/lets-meet-logo.jpg'),
   pattern1: require('../Images/pattern1.png'),
-  pattern2: require('../Images/pattern2.jpg')
+  pattern2: require('../Images/pattern2.jpg'),
+  handshake: require('../Images/handshake.jpg')
 }
 
 export default images

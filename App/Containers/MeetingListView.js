@@ -56,7 +56,7 @@ class MeetingListView extends React.Component {
   render () {
     return (
       <View style={styles.container}>
-        <AlertMessage title='Nothing to See Here, Move Along' show={this.noRowData()} />
+        <AlertMessage title='Nothing to see here, Move along' show={this.noRowData()} />
         <ListView
           contentContainerStyle={styles.listContent}
           dataSource={this.state.dataSource}
