@@ -1,5 +1,5 @@
-import {call, put} from 'redux-saga/effects';
-import LoginActions from '../Redux/LoginRedux';
+import { call, put } from "redux-saga/effects";
+import LoginActions from "../Redux/LoginRedux";
 
 // attempts to login
 export function* login(api, action) {
@@ -21,4 +21,8 @@ export function* login(api, action) {
     yield put(LoginActions.loginFailure('Invalid username/password!'));
   }
   */
+}
+
+export function* logout() {
+  yield put(LoginActions.logout());
 }
