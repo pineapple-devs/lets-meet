@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component, PropTypes } from "react";
 import { ScrollView, Image, BackAndroid, Text } from "react-native";
 import styles from "./Styles/DrawerContentStyles";
 import { Images } from "../Themes";
@@ -79,7 +79,7 @@ class DrawerContent extends Component {
 
         <MenuItem
           onPress={() => {
-            this.handlePressLogout;
+            this.handlePressLogout();
             Actions.loginScreen();
             this.context.drawer.close();
           }}
@@ -102,7 +102,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    attemptLogout: () => dispatch(LoginActions.logout)
+    attemptLogout: () => dispatch(LoginActions.logoutRequest())
   };
 };
 

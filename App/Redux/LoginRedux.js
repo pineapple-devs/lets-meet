@@ -7,7 +7,8 @@ const { Types, Creators } = createActions({
   loginRequest: ["username", "password"],
   loginSuccess: ["userId"],
   loginFailure: ["error"],
-  logout: null
+  logout: null,
+  logoutRequest: null
 });
 
 export const LoginTypes = Types;

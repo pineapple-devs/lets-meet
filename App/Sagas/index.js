@@ -36,7 +36,7 @@ export default function* root() {
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
     takeLatest(LoginTypes.LOGIN_REQUEST, login, loginApi),
-    takeLatest(LoginTypes.LOGOUT, logout),
+    takeLatest(LoginTypes.LOGOUT_REQUEST, logout),
     takeLatest(OpenScreenTypes.OPEN_SCREEN, openScreen),
 
     // some sagas receive extra parameters in addition to an action
