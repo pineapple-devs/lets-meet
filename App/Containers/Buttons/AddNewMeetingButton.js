@@ -1,7 +1,7 @@
 import React from 'react';
 import {View, Modal} from 'react-native';
 import CircledButton from '../../Components/CircledButton';
-import NewMeetingForm from '../../Components/NewMeetingForm';
+import NewMeetingForm from '../../Containers/NewMeetingForm';
 
 export default class AddNewMeetingButton extends React.Component {
   constructor(props) {

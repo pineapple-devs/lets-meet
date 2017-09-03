@@ -12,7 +12,7 @@ import {
   Button,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
-import styles from './Styles/RectangleButtonStyles';
+import styles from '../Components/Styles/RectangleButtonStyles';
 import {DatePicker} from 'react-native-ui-xg';
 import {Actions as NavigationActions} from 'react-native-router-flux';
 
