@@ -11,6 +11,7 @@ import LoginScreen from '../Containers/LoginScreen'
 import CalendarScreen from '../Containers/CalendarScreen'
 import HoursScreen from '../Containers/HoursScreen'
 import MeetingsScreen from '../Containers/MeetingsScreen'
+import MeetingDetailsScreen from '../Containers/MeetingDetailsScreen'
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -81,6 +82,12 @@ class NavigationRouter extends Component {
             <Scene
               key='meetingsScreen'
               component={MeetingsScreen}
+              sceneStyle={{ paddingTop: 54 }}
+            />
+            <Scene
+              key="meetingDetailsScreen"
+              component={MeetingDetailsScreen}
+              title="Meeting details"
               sceneStyle={{ paddingTop: 54 }}
             />
           </Scene>
