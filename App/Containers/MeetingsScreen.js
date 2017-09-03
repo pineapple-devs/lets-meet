@@ -2,6 +2,7 @@ import React from 'react'
 import { View, TouchableOpacity, Image } from 'react-native'
 import { Images } from '../Themes'
 import MeetingListView from './MeetingListView.js'
+import AddNewMeetingButton from './Buttons/AddNewMeetingButton.js'
 
 // Styles
 import listStyles from './Styles/ListviewExampleStyles'
@@ -30,6 +31,7 @@ class MeetingsScreen extends React.Component {
         <View style={listStyles.container}>
           <MeetingListView />
         </View>
+        <AddNewMeetingButton />
       </View>
     )
   }

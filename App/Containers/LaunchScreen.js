@@ -4,6 +4,7 @@ import CalendarButton from "../Containers/Buttons/CalendarButton.js";
 import MeetingListView from "./MeetingListView.js";
 import { Actions } from "react-native-router-flux";
 import Icon from "react-native-vector-icons/FontAwesome";
+import AddNewMeetingButton from './Buttons/AddNewMeetingButton.js'
 
 import { Images } from "../Themes";
 
@@ -32,6 +33,7 @@ export default class LaunchScreen extends React.Component {
             <MeetingListView />
           </View>
         </ScrollView>
+        <AddNewMeetingButton />
       </View>
     );
   }
