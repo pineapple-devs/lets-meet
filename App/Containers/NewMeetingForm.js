@@ -11,6 +11,7 @@ import {
   TouchableHighlight,
   Button,
 } from 'react-native';
+import CheckBox from 'react-native-check-box';
 import Icon from 'react-native-vector-icons/Ionicons';
 import styles from '../Components/Styles/RectangleButtonStyles';
 import {DatePicker} from 'react-native-ui-xg';
@@ -35,10 +36,17 @@ export class NewMeetingForm extends React.Component {
       repeat: false,
     };
 
+    const guests = [
+      {text: 'Nikola <nikolaseap@gmail.com>', checked: false},
+      {text: 'Jana <jana_vojnovic@hotmail.com>', checked: false},
+      {text: 'Marina <marina_nenic@hotmail.com>', checked: false},
+    ];
+
     this.state = {
       formData: {},
       startDate: new Date(),
       endDate: new Date(),
+      guests: guests,
       showModal: false,
     };
 
@@ -78,6 +86,16 @@ export class NewMeetingForm extends React.Component {
     };
 
     this.props.createMeeting(userId, meetingParams);
+  }
+
+  toggleGuest(toggledGuest) {
+    const guests = this.state.guests.map(guest => {
+      if (toggledGuest.name == guest.name) {
+        guest.checked = !guest.checked;
+      }
+
+      return guest;
+    });
   }
 
   render() {
@@ -171,11 +189,23 @@ export class NewMeetingForm extends React.Component {
               this.setState({endDate: chosenDate});
             }}
           />
+
+          <Text>{'Having guests?'}</Text>
+
+          {this.state.guests.map(guest => {
+            <CheckBox
+              rightText={guest.text}
+              onClick={() => this.toggleGuest(guest)}
+              isChecked={guest.checked}
+            />;
+          })}
         </Form>
 
+        {/*
         <Text>{JSON.stringify(this.state.formData)}</Text>
         <Text>{JSON.stringify(this.state.startDate)}</Text>
         <Text>{JSON.stringify(this.state.endDate)}</Text>
+        */}
 
         <Button
           icon="md-checkmark"
