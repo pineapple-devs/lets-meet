@@ -1,5 +1,7 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, Dimensions } from "react-native";
 import { Metrics, ApplicationStyles } from "../../Themes/";
+
+var width = Dimensions.get('window').width;
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -10,9 +12,17 @@ export default StyleSheet.create({
     paddingTop: 20,
     height: 200,
     backgroundColor: "yellow",
-    alignSelf: "center"
+    alignSelf: "center",
+    width: width * .7
   },
   text: {
     textAlign: "center"
+  },
+
+  editButtonTH: {
+    marginTop: 20,
+    width: 25
+
   }
+
 });

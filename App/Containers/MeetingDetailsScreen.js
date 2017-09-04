@@ -6,12 +6,12 @@ import {
   View,
   StyleSheet,
   Modal,
-  TouchableHighlight
+  TouchableHighlight,
+  Dimensions
 } from "react-native";
 import CalendarButton from "../Containers/Buttons/CalendarButton.js";
 import { Actions } from "react-native-router-flux";
 import Icon from "react-native-vector-icons/FontAwesome";
-
 import { Images } from "../Themes";
 
 // Styles
@@ -21,6 +21,7 @@ export default class LaunchScreen extends React.Component {
   constructor(props) {
     super(props);
   }
+
 
   state = {
     modalVisible: false
@@ -35,6 +36,8 @@ export default class LaunchScreen extends React.Component {
       <ScrollView keyboardShouldPersistTaps="always" style={styles.mainView}>
         <Text style={styles.text}>{this.props.meetingData.title}</Text>
         <Text style={styles.text}>{this.props.meetingData.description}</Text>
+        <Text style={styles.text}>{this.props.meetingData.start_time}</Text>
+        <Text style={styles.text}>{this.props.meetingData.end_time}</Text>
 
         <Modal
           animationType="slide"
@@ -65,6 +68,12 @@ export default class LaunchScreen extends React.Component {
         >
           <Text>Show Modal</Text>
         </TouchableHighlight>
+
+
+        <TouchableHighlight underlyingColor='#cfcfcf' style={styles.editButtonTH} onPress={() => {debugger; Actions.editMeetingForm({meetingData : this.props.meetingData }) } }>
+           <Icon name="edit" size={25} />
+        </TouchableHighlight>
+
       </ScrollView>
     );
   }

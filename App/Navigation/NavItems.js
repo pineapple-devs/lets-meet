@@ -47,6 +47,26 @@ export default {
         />
       </TouchableOpacity>
     )
-  }
+  },
+
+  saveButton () {
+    return(
+      <TouchableOpacity onPress={this.PropTypes}>
+        <Icon name='save'
+          size={Metrics.icons.small}
+          color={Colors.snow}
+          style={styles.searchButton}
+        />
+      </TouchableOpacity>
+    )
+  },
+
+  cancelButton () {
+      return (
+        <TouchableOpacity onPress={NavigationActions.pop}>
+          <Text style={{color: 'white',textAlign: 'left',fontSize: 17,}}>Cancel</Text>
+        </TouchableOpacity>
+      )
+    },
 
 }
