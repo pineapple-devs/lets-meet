@@ -9,10 +9,13 @@ import {
   ScrollView,
   TouchableOpacity,
   TouchableHighlight,
+  ToastAndroid,
+  TextInput,
   Button,
 } from 'react-native';
+import CheckBox from 'react-native-check-box';
 import Icon from 'react-native-vector-icons/Ionicons';
-import styles from './Styles/RectangleButtonStyles';
+import styles from '../Components/Styles/RectangleButtonStyles';
 import {DatePicker} from 'react-native-ui-xg';
 import {Actions as NavigationActions} from 'react-native-router-flux';
 
@@ -35,14 +38,23 @@ export class NewMeetingForm extends React.Component {
       repeat: false,
     };
 
+    const guests = [
+      {name: 'Nikola', email: '<nikolaseap@gmail.com>', checked: false},
+      {name: 'Jana', email: '<jana_vojnovic@hotmail.com>', checked: false},
+      {name: 'Marina', email: '<marina_nenic@hotmail.com>', checked: false},
+    ];
+
     this.state = {
       formData: {},
       startDate: new Date(),
       endDate: new Date(),
+      guests: guests,
+      newGuest: 'invite.user@via.email',
       showModal: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.addToGuests = this.addToGuests.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -67,6 +79,10 @@ export class NewMeetingForm extends React.Component {
     const userId = this.props.userId;
     const startTime = this.state.startDate;
     const endTime = this.state.endDate;
+    const invitedGuests = this.state.guests.filter(guest => guest.checked);
+    const invitations = invitedGuests.map(guest => {
+      return {email: guest.email};
+    });
 
     const meetingParams = {
       meeting: {
@@ -75,9 +91,44 @@ export class NewMeetingForm extends React.Component {
         user_id: userId,
       },
       intervals: [{start_time: startTime, end_time: endTime}],
+      invitations: invitations,
     };
 
     this.props.createMeeting(userId, meetingParams);
+  }
+
+  toggleGuest(toggledGuest) {
+    const guests = this.state.guests.map(guest => {
+      if (toggledGuest.email === guest.email) {
+        guest.checked = !guest.checked;
+      }
+
+      return guest;
+    });
+
+    this.setState({guests});
+  }
+
+  validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(email);
+  }
+
+  addToGuests(newGuest) {
+    const newGuestEmail = newGuest.nativeEvent.text;
+    if (!this.validateEmail(newGuestEmail)) {
+      ToastAndroid.showWithGravity(
+        'Not a valid email',
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+      );
+      return;
+    }
+
+    const guests = this.state.guests;
+    guests.push({name: '', email: newGuestEmail, checked: true});
+
+    this.setState({newGuest: 'invite.user@via.email', guests});
   }
 
   render() {
@@ -173,9 +224,28 @@ export class NewMeetingForm extends React.Component {
           />
         </Form>
 
+        <Text>{'Having guests?'}</Text>
+        {this.state.guests.map(guest => (
+          <CheckBox
+            rightText={`${guest.name} ${guest.email}`.trim()}
+            onClick={() => this.toggleGuest(guest)}
+            isChecked={guest.checked}
+          />
+        ))}
+
+        <TextInput
+          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+          onChangeText={text => this.setState({newGuest: text})}
+          value={this.state.newGuest}
+          underlineColorAndroid="transparent"
+          onSubmitEditing={this.addToGuests}
+          keyboardType="email-address"
+        />
+
         <Text>{JSON.stringify(this.state.formData)}</Text>
         <Text>{JSON.stringify(this.state.startDate)}</Text>
         <Text>{JSON.stringify(this.state.endDate)}</Text>
+        <Text>{JSON.stringify(this.state.guests)}</Text>
 
         <Button
           icon="md-checkmark"

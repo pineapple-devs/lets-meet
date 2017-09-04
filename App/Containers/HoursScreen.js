@@ -3,7 +3,6 @@ import { View, TouchableOpacity, Image, TouchableHighlight, Text, Modal, BackAnd
 import { Images } from '../Themes'
 import HourListView from './HourListView.js'
 import styles from '../Components/Styles/AddNewButtonStyles'
-import NewMeetingForm from '../Components/NewMeetingForm.js'
 import AddNewMeetingButton from './Buttons/AddNewMeetingButton.js'
 import DatePicker from 'react-native-datepicker'
 import { Actions } from 'react-native-router-flux';
