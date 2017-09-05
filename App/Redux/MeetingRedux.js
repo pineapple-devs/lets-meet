@@ -41,7 +41,7 @@ const formIntervalsWithMeetingsInfo = (meetings) => {
     })
   })
 
-  return intervals;
+  return intervals
 }
 
 const formIntervalsWithMeetingInfo = (meeting) => {
@@ -53,7 +53,7 @@ const formIntervalsWithMeetingInfo = (meeting) => {
     intervals.push(interval)
   })
 
-  return intervals;
+  return intervals
 }
 
 /* ------------- reducers ------------- */

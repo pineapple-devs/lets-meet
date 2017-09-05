@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import { TotalNavHeight, Text, View } from "react-native";
-import { Scene, Router, Switch } from "react-native-router-flux";
-import Styles from "./Styles/NavigationBarStyles";
-import NavigationDrawer from "./NavigationDrawer";
-import { connect } from "react-redux";
+import React, { Component } from 'react'
+import { Text, View } from 'react-native'
+import { Scene, Router, Switch } from 'react-native-router-flux'
+import Styles from './Styles/NavigationBarStyles'
+import NavigationDrawer from './NavigationDrawer'
+import { connect } from 'react-redux'
 
 // screens identified by the router
-import LaunchScreen from "../Containers/LaunchScreen";
-import LoginScreen from "../Containers/LoginScreen";
-import CalendarScreen from "../Containers/CalendarScreen";
-import HoursScreen from "../Containers/HoursScreen";
-import MeetingsScreen from "../Containers/MeetingsScreen";
+import LaunchScreen from '../Containers/LaunchScreen'
+import LoginScreen from '../Containers/LoginScreen'
+import CalendarScreen from '../Containers/CalendarScreen'
+import HoursScreen from '../Containers/HoursScreen'
+import MeetingsScreen from '../Containers/MeetingsScreen'
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -20,18 +20,18 @@ import MeetingsScreen from "../Containers/MeetingsScreen";
 
 const loading = props => {
   return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
       <Text>Loading...</Text>
     </View>
-  );
-};
+  )
+}
 class NavigationRouter extends Component {
-  render() {
+  render () {
     return (
       <Router>
-        <Scene key="drawer" component={NavigationDrawer} open={false}>
+        <Scene key='drawer' component={NavigationDrawer} open={false}>
           <Scene
-            key="drawerChildrenWrapper"
+            key='drawerChildrenWrapper'
             navigationBarStyle={Styles.navBar}
             titleStyle={Styles.title}
             leftButtonIconStyle={Styles.leftButton}
@@ -39,55 +39,55 @@ class NavigationRouter extends Component {
           >
             <Scene
               initial
-              key="root"
+              key='root'
               component={connect(state => ({
                 userId: state.login.userId
               }))(Switch)}
-              tabs={true}
+              tabs
               unmountScenes
               selector={props =>
-                props.userId ? "launchScreen" : "loginScreen"}
+                props.userId ? 'launchScreen' : 'loginScreen'}
             >
               <Scene
-                key="loading"
+                key='loading'
                 component={loading}
-                title=""
+                title=''
                 sceneStyle={{ paddingTop: 54 }}
               />
               <Scene
-                key="launchScreen"
+                key='launchScreen'
                 component={LaunchScreen}
-                title="Glad to have you back!"
+                title='Glad to have you back!'
                 sceneStyle={{ paddingTop: 54 }}
                 navigationBarStyle={Styles.navBar}
                 titleStyle={Styles.title}
                 leftButtonIconStyle={Styles.leftButton}
               />
-              <Scene key="loginScreen" component={LoginScreen} hideNavBar />
+              <Scene key='loginScreen' component={LoginScreen} hideNavBar />
             </Scene>
 
             <Scene
-              key="calendarScreen"
+              key='calendarScreen'
               component={CalendarScreen}
-              title=""
+              title=''
               sceneStyle={{ paddingTop: 54 }}
             />
             <Scene
-              key="hoursScreen"
+              key='hoursScreen'
               component={HoursScreen}
-              title="Your calendar is here."
+              title='Your calendar is here.'
               sceneStyle={{ paddingTop: 54 }}
             />
             <Scene
-              key="meetingsScreen"
+              key='meetingsScreen'
               component={MeetingsScreen}
               sceneStyle={{ paddingTop: 54 }}
             />
           </Scene>
         </Scene>
       </Router>
-    );
+    )
   }
 }
 
-export default NavigationRouter;
+export default NavigationRouter

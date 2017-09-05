@@ -8,9 +8,12 @@ test('attempt', (t) => {
 })
 
 test('success', (t) => {
-  const state = reducer(INITIAL_STATE, Actions.loginSuccess('hi'))
+  const state = reducer(INITIAL_STATE, Actions.loginSuccess(
+    { userId: 'hi', appCredentials: { googlePlacesApiKey: 'asj314' } }
+  ))
 
-  t.is(state.username, 'hi')
+  t.is(state.userId, 'hi')
+  t.is(state.googlePlacesApiKey, 'asj314')
 })
 
 test('failure', (t) => {
@@ -21,7 +24,9 @@ test('failure', (t) => {
 })
 
 test('logout', (t) => {
-  const loginState = reducer(INITIAL_STATE, Actions.loginSuccess('hi'))
+  const loginState = reducer(INITIAL_STATE, Actions.loginSuccess(
+    { userId: 'hi', appCredentials: { googlePlacesApiKey: 'asj314' } }
+  ))
   const state = reducer(loginState, Actions.logout())
 
   t.falsy(state.username)

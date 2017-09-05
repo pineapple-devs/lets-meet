@@ -1,37 +1,37 @@
-import { takeLatest } from "redux-saga/effects";
-import API from "../Services/Api";
-import MeetingAPI from "../Services/MeetingApi";
-import LoginAPI from "../Services/LoginApi";
-import FixtureAPI from "../Services/FixtureApi";
-import DebugConfig from "../Config/DebugConfig";
+import { takeLatest } from 'redux-saga/effects'
+import API from '../Services/Api'
+import MeetingAPI from '../Services/MeetingApi'
+import LoginAPI from '../Services/LoginApi'
+import FixtureAPI from '../Services/FixtureApi'
+import DebugConfig from '../Config/DebugConfig'
 
 /* ------------- Types ------------- */
 
-import { StartupTypes } from "../Redux/StartupRedux";
-import { GithubTypes } from "../Redux/GithubRedux";
-import { LoginTypes } from "../Redux/LoginRedux";
-import { OpenScreenTypes } from "../Redux/OpenScreenRedux";
-import { MeetingTypes } from "../Redux/MeetingRedux";
+import { StartupTypes } from '../Redux/StartupRedux'
+import { GithubTypes } from '../Redux/GithubRedux'
+import { LoginTypes } from '../Redux/LoginRedux'
+import { OpenScreenTypes } from '../Redux/OpenScreenRedux'
+import { MeetingTypes } from '../Redux/MeetingRedux'
 
 /* ------------- Sagas ------------- */
 
-import { startup } from "./StartupSagas";
-import { login, logout } from "./LoginSagas";
-import { getUserAvatar } from "./GithubSagas";
-import { openScreen } from "./OpenScreenSagas";
-import { getMeetings, getMeeting, createMeeting } from "./MeetingSagas";
+import { startup } from './StartupSagas'
+import { login, logout } from './LoginSagas'
+import { getUserAvatar } from './GithubSagas'
+import { openScreen } from './OpenScreenSagas'
+import { getMeetings, getMeeting, createMeeting } from './MeetingSagas'
 
 /* ------------- API ------------- */
 
 // The API we use is only used from Sagas, so we create it here and pass along
 // to the sagas which need it.
-const api = DebugConfig.useFixtures ? FixtureAPI : API.create();
-const meetingApi = MeetingAPI.create();
-const loginApi = LoginAPI.create();
+const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
+const meetingApi = MeetingAPI.create()
+const loginApi = LoginAPI.create()
 
 /* ------------- Connect Types To Sagas ------------- */
 
-export default function* root() {
+export default function* root () {
   yield [
     // some sagas only receive an action
     takeLatest(StartupTypes.STARTUP, startup),
@@ -46,5 +46,5 @@ export default function* root() {
     takeLatest(MeetingTypes.FETCH_MEETINGS, getMeetings, meetingApi),
     takeLatest(MeetingTypes.SHOW_MEETING, getMeeting, meetingApi),
     takeLatest(MeetingTypes.CREATE_MEETING, createMeeting, meetingApi)
-  ];
+  ]
 }

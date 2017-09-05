@@ -1,18 +1,15 @@
-import React from "react";
-import { ScrollView, Text, Image, View, StyleSheet } from "react-native";
-import CalendarButton from "../Containers/Buttons/CalendarButton.js";
-import MeetingListView from "./MeetingListView.js";
-import { Actions } from "react-native-router-flux";
-import Icon from "react-native-vector-icons/FontAwesome";
+import React from 'react'
+import { ScrollView, Text, Image, View } from 'react-native'
+import MeetingListView from './MeetingListView.js'
 import AddNewMeetingButton from './Buttons/AddNewMeetingButton.js'
 
-import { Images } from "../Themes";
+import { Images } from '../Themes'
 
 // Styles
-import styles from "./Styles/LaunchScreenStyles";
+import styles from './Styles/LaunchScreenStyles'
 
 export default class LaunchScreen extends React.Component {
-  render() {
+  render () {
     return (
       <View style={styles.mainView}>
         <ScrollView>
@@ -23,7 +20,7 @@ export default class LaunchScreen extends React.Component {
           <View style={styles.section}>
             <Text style={styles.sectionText}>
               {
-                "Hi there, welcome to LetsMeet! This application will make it easy for you to arrange meetings with other people! \n \n Your meetings are below"
+                'Hi there, welcome to LetsMeet! This application will make it easy for you to arrange meetings with other people! \n \n Your meetings are below'
               }
             </Text>
           </View>
@@ -35,6 +32,6 @@ export default class LaunchScreen extends React.Component {
         </ScrollView>
         <AddNewMeetingButton />
       </View>
-    );
+    )
   }
 }

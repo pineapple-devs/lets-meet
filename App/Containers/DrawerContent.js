@@ -1,47 +1,43 @@
-import React, { Component, PropTypes } from "react";
-import { ScrollView, Image, BackAndroid, Text } from "react-native";
-import styles from "./Styles/DrawerContentStyles";
-import { Images } from "../Themes";
-import { Actions } from "react-native-router-flux";
-import MenuItem from "../Components/MenuItem.js";
-import Icon from "react-native-vector-icons/FontAwesome";
+import React, { Component } from 'react'
+import { ScrollView, Image, BackAndroid } from 'react-native'
+import styles from './Styles/DrawerContentStyles'
+import { Images } from '../Themes'
+import { Actions } from 'react-native-router-flux'
+import MenuItem from '../Components/MenuItem.js'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
-import CalendarButton from "../Containers/Buttons/CalendarButton.js";
-import SettingsButton from "../Containers/Buttons/SettingsButton.js";
-import MeetingsButton from "../Containers/Buttons/MeetingsButton.js";
+import LoginActions from '../Redux/LoginRedux'
 
-import LoginActions from "../Redux/LoginRedux";
-
-import { connect } from "react-redux";
+import { connect } from 'react-redux'
 
 class DrawerContent extends Component {
-  componentDidMount() {
-    BackAndroid.addEventListener("hardwareBackPress", () => {
+  componentDidMount () {
+    BackAndroid.addEventListener('hardwareBackPress', () => {
       if (this.context.drawer.props.open) {
-        this.toggleDrawer();
-        return true;
+        this.toggleDrawer()
+        return true
       }
-      return false;
-    });
+      return false
+    })
   }
 
-  toggleDrawer() {
-    this.context.drawer.toggle();
+  toggleDrawer () {
+    this.context.drawer.toggle()
   }
 
   handlePressLogout = () => {
-    this.props.attemptLogout();
+    this.props.attemptLogout()
   };
 
-  render() {
+  render () {
     return (
       <ScrollView style={styles.container}>
         <Image source={Images.pattern1} style={styles.logo} />
 
         <MenuItem
           onPress={() => {
-            Actions.launchScreen();
-            this.context.drawer.close();
+            Actions.launchScreen()
+            this.context.drawer.close()
           }}
         >
           Home
@@ -49,61 +45,61 @@ class DrawerContent extends Component {
 
         <MenuItem
           onPress={() => {
-            Actions.calendarScreen();
-            this.context.drawer.close();
+            Actions.calendarScreen()
+            this.context.drawer.close()
           }}
         >
-          <Icon name="calendar" size={20} style={styles.iconStyle} />
+          <Icon name='calendar' size={20} style={styles.iconStyle} />
           &nbsp;&nbsp; Calendar
         </MenuItem>
 
         <MenuItem
           onPress={() => {
-            Actions.meetingsScreen();
-            this.context.drawer.close();
+            Actions.meetingsScreen()
+            this.context.drawer.close()
           }}
         >
-          <Icon name="calendar-o" size={20} style={styles.iconStyle} />
+          <Icon name='calendar-o' size={20} style={styles.iconStyle} />
           &nbsp;&nbsp; Meetings
         </MenuItem>
 
         <MenuItem
           onPress={() => {
-            Actions.meetingsScreen();
-            this.context.drawer.close();
+            Actions.meetingsScreen()
+            this.context.drawer.close()
           }}
         >
-          <Icon name="user" size={20} style={styles.iconStyle} />
+          <Icon name='user' size={20} style={styles.iconStyle} />
           &nbsp;&nbsp; Profile
         </MenuItem>
 
         <MenuItem
           onPress={() => {
-            this.handlePressLogout();
-            Actions.loginScreen();
-            this.context.drawer.close();
+            this.handlePressLogout()
+            Actions.loginScreen()
+            this.context.drawer.close()
           }}
         >
-          <Icon name="user-o" size={17} style={styles.iconStyle} />
+          <Icon name='user-o' size={17} style={styles.iconStyle} />
           &nbsp;&nbsp; Logout
         </MenuItem>
       </ScrollView>
-    );
+    )
   }
 }
 
 DrawerContent.contextTypes = {
   drawer: React.PropTypes.object
-};
+}
 
 const mapStateToProps = state => {
-  return {};
-};
+  return {}
+}
 
 const mapDispatchToProps = dispatch => {
   return {
     attemptLogout: () => dispatch(LoginActions.logoutRequest())
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(DrawerContent);
+export default connect(mapStateToProps, mapDispatchToProps)(DrawerContent)

@@ -1,5 +1,5 @@
-import {StyleSheet} from 'react-native';
-import {Fonts, Colors, Metrics} from '../../Themes/';
+import {StyleSheet} from 'react-native'
+import {Fonts, Colors, Metrics} from '../../Themes/'
 
 export default StyleSheet.create({
   buttonSubmit: {
@@ -12,7 +12,7 @@ export default StyleSheet.create({
     marginVertical: Metrics.baseMargin,
     backgroundColor: '#378834',
     justifyContent: 'center',
-    alignSelf: 'center',
+    alignSelf: 'center'
   },
   buttonCancel: {
     height: 40,
@@ -24,7 +24,7 @@ export default StyleSheet.create({
     marginVertical: Metrics.baseMargin,
     backgroundColor: '#c0241b',
     justifyContent: 'center',
-    alignSelf: 'center',
+    alignSelf: 'center'
   },
 
   buttonText: {
@@ -32,6 +32,6 @@ export default StyleSheet.create({
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: Fonts.size.medium,
-    marginVertical: Metrics.baseMargin,
-  },
-});
+    marginVertical: Metrics.baseMargin
+  }
+})

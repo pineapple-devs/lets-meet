@@ -19,7 +19,7 @@ export default StyleSheet.create({
   mainView: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#007769',
+    backgroundColor: '#007769'
   },
   section: {
     paddingTop: 10,

@@ -1,19 +1,18 @@
-import React, { PropTypes } from "react";
+import React, { PropTypes } from 'react'
 import {
   View,
   ScrollView,
   Text,
   TextInput,
   TouchableOpacity,
-  Image,
   Keyboard,
   LayoutAnimation
-} from "react-native";
-import { connect } from "react-redux";
-import Styles from "./Styles/LoginScreenStyles";
-import { Images, Metrics } from "../Themes";
-import LoginActions from "../Redux/LoginRedux";
-import { Actions as NavigationActions } from "react-native-router-flux";
+} from 'react-native'
+import { connect } from 'react-redux'
+import Styles from './Styles/LoginScreenStyles'
+import { Metrics } from '../Themes'
+import LoginActions from '../Redux/LoginRedux'
+import { Actions as NavigationActions } from 'react-native-router-flux'
 
 class LoginScreen extends React.Component {
   static propTypes = {
@@ -26,124 +25,124 @@ class LoginScreen extends React.Component {
   keyboardDidShowListener = {};
   keyboardDidHideListener = {};
 
-  constructor(props) {
-    super(props);
+  constructor (props) {
+    super(props)
     this.state = {
-      username: "",
-      password: "",
+      username: '',
+      password: '',
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth }
-    };
-    this.isAttempting = false;
+    }
+    this.isAttempting = false
   }
 
-  componentWillReceiveProps(newProps) {
-    this.forceUpdate();
+  componentWillReceiveProps (newProps) {
+    this.forceUpdate()
     // Did the login attempt complete?
     if (newProps.userId) {
-      //NavigationActions.pop()
-      NavigationActions.launchScreen({ hideNavBar: false });
+      // NavigationActions.pop()
+      NavigationActions.launchScreen({ hideNavBar: false })
     }
   }
 
-  componentWillMount() {
+  componentWillMount () {
     // Using keyboardWillShow/Hide looks 1,000 times better, but doesn't work on Android
     // TODO: Revisit this if Android begins to support - https://github.com/facebook/react-native/issues/3468
     this.keyboardDidShowListener = Keyboard.addListener(
-      "keyboardDidShow",
+      'keyboardDidShow',
       this.keyboardDidShow
-    );
+    )
     this.keyboardDidHideListener = Keyboard.addListener(
-      "keyboardDidHide",
+      'keyboardDidHide',
       this.keyboardDidHide
-    );
+    )
   }
 
-  componentWillUnmount() {
-    this.keyboardDidShowListener.remove();
-    this.keyboardDidHideListener.remove();
+  componentWillUnmount () {
+    this.keyboardDidShowListener.remove()
+    this.keyboardDidHideListener.remove()
   }
 
   keyboardDidShow = e => {
     // Animation types easeInEaseOut/linear/spring
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
-    let newSize = Metrics.screenHeight - e.endCoordinates.height;
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
+    let newSize = Metrics.screenHeight - e.endCoordinates.height
     this.setState({
       visibleHeight: newSize,
       topLogo: { width: 100, height: 70 }
-    });
+    })
   };
 
   keyboardDidHide = e => {
     // Animation types easeInEaseOut/linear/spring
-    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
+    LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut)
     this.setState({
       visibleHeight: Metrics.screenHeight,
       topLogo: { width: Metrics.screenWidth }
-    });
+    })
   };
 
   handlePressLogin = () => {
-    const { username, password } = this.state;
-    this.isAttempting = true;
+    const { username, password } = this.state
+    this.isAttempting = true
     // attempt a login - a saga is listening to pick it up from here.
-    this.props.attemptLogin(username, password);
+    this.props.attemptLogin(username, password)
   };
 
   handleChangeUsername = text => {
-    this.setState({ username: text });
+    this.setState({ username: text })
   };
 
   handleChangePassword = text => {
-    this.setState({ password: text });
+    this.setState({ password: text })
   };
 
-  render() {
-    const { username, password } = this.state;
-    const { fetching } = this.props;
-    const editable = !fetching;
+  render () {
+    const { username, password } = this.state
+    const { fetching } = this.props
+    const editable = !fetching
     const textInputStyle = editable
       ? Styles.textInput
-      : Styles.textInputReadonly;
+      : Styles.textInputReadonly
     return (
       <ScrollView
-        contentContainerStyle={{ justifyContent: "center" }}
+        contentContainerStyle={{ justifyContent: 'center' }}
         style={[Styles.container, { height: this.state.visibleHeight }]}
-        keyboardShouldPersistTaps="always"
+        keyboardShouldPersistTaps='always'
       >
         <View style={Styles.form}>
           <View style={Styles.row}>
             <TextInput
-              ref="username"
+              ref='username'
               style={textInputStyle}
               value={username}
               editable={editable}
-              keyboardType="default"
-              returnKeyType="next"
-              autoCapitalize="none"
+              keyboardType='default'
+              returnKeyType='next'
+              autoCapitalize='none'
               autoCorrect={false}
               onChangeText={this.handleChangeUsername}
-              underlineColorAndroid="transparent"
+              underlineColorAndroid='transparent'
               onSubmitEditing={() => this.refs.password.focus()}
-              placeholder="Username"
+              placeholder='Username'
             />
           </View>
 
           <View style={Styles.row}>
             <TextInput
-              ref="password"
+              ref='password'
               style={textInputStyle}
               value={password}
               editable={editable}
-              keyboardType="default"
-              returnKeyType="go"
-              autoCapitalize="none"
+              keyboardType='default'
+              returnKeyType='go'
+              autoCapitalize='none'
               autoCorrect={false}
               secureTextEntry
               onChangeText={this.handleChangePassword}
-              underlineColorAndroid="transparent"
+              underlineColorAndroid='transparent'
               onSubmitEditing={this.handlePressLogin}
-              placeholder="Password"
+              placeholder='Password'
             />
           </View>
 
@@ -167,7 +166,7 @@ class LoginScreen extends React.Component {
           </View>
         </View>
       </ScrollView>
-    );
+    )
   }
 }
 
@@ -176,14 +175,14 @@ const mapStateToProps = state => {
     fetching: state.login.fetching,
     userId: state.login.userId,
     error: state.login.error
-  };
-};
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
     attemptLogin: (username, password) =>
       dispatch(LoginActions.loginRequest(username, password))
-  };
-};
+  }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen)
