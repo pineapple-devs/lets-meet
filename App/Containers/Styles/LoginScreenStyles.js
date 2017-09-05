@@ -64,11 +64,11 @@ export default StyleSheet.create({
     resizeMode: 'contain'
   },
   pattern: {
-     flex: 1,
-     width: undefined,
-     height: undefined,
-     backgroundColor:'transparent',
-     justifyContent: 'center',
-     alignItems: 'center',
+    flex: 1,
+    width: undefined,
+    height: undefined,
+    backgroundColor: 'transparent',
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

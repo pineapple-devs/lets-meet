@@ -1,9 +1,8 @@
 import React from 'react'
 import { View, Text, ListView, Image, ScrollView } from 'react-native'
 import { connect } from 'react-redux'
-import { Colors } from '../Themes/'
 import MeetingActions from '../Redux/MeetingRedux'
-import { Images } from '../Themes/'
+import Images from '../Themes/Images'
 
 // For empty lists
 import AlertMessage from '../Components/AlertMessage'
@@ -20,7 +19,6 @@ class HourListView extends React.Component {
     * Usually this should come from Redux mapStateToProps
     * USING IT FROM REDUX
     *************************************************************/
-
 
     /* ***********************************************************
     * STEP 2
@@ -60,7 +58,7 @@ class HourListView extends React.Component {
     // dif je start time u satima, npr za 15:30 dif je 15.5 -> dif * visina jednog sata odvaja tacno do pocetka meetinga
     // isto za event * 58 -> trajanje meetinga
     return (
-      <View style={{backgroundColor: 'rgba(250,0,0,0.2)', position:'absolute', height: event * 58, top: dif * 58, left: 0, right: 0}}><Text>{rowData.title}</Text></View>
+      <View style={{backgroundColor: 'rgba(250,0,0,0.2)', position: 'absolute', height: event * 58, top: dif * 58, left: 0, right: 0}}><Text>{rowData.title}</Text></View>
     )
   }
 
@@ -103,18 +101,16 @@ class HourListView extends React.Component {
       for (var i = 0; i < newProps.intervals.length; i++) {
         start = new Date(newProps.intervals[i].start_time)
         end = new Date(newProps.intervals[i].end_time)
-        if (start >= newProps.date && start < tomorrow)
+        if (start >= newProps.date && start < tomorrow) { newIntervals.push(newProps.intervals[i]) } else if (end > newProps.date && end <= tomorrow) {
           newIntervals.push(newProps.intervals[i])
-        else if (end > newProps.date && end <= tomorrow)
+        } else if (start < newProps && end > tomorrow) {
           newIntervals.push(newProps.intervals[i])
-        else if (start < newProps && end > tomorrow)
-          newIntervals.push(newProps.intervals[i])
+        }
       }
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(newIntervals)
       })
-    }
-    else console.log(newProps.intervals)
+    } else console.log(newProps.intervals)
   }
 
   render () {

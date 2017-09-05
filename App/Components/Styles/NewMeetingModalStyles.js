@@ -1,26 +1,26 @@
 import { StyleSheet } from 'react-native'
-import { Metrics, ApplicationStyles, Colors } from '../../Themes/'
+import { ApplicationStyles } from '../../Themes/'
 
 export default StyleSheet.create({
-...ApplicationStyles.screen,
+  ...ApplicationStyles.screen,
   container: {
     flex: 1,
     justifyContent: 'center',
-    padding: 20,
+    padding: 20
   },
   innerContainer: {
     borderRadius: 10,
-    alignItems: 'center',
+    alignItems: 'center'
   },
   row: {
     alignItems: 'center',
     flex: 1,
     flexDirection: 'row',
-    marginBottom: 20,
+    marginBottom: 20
   },
   rowTitle: {
     flex: 1,
-    fontWeight: 'bold',
+    fontWeight: 'bold'
   },
   button: {
     borderRadius: 5,
@@ -28,17 +28,17 @@ export default StyleSheet.create({
     height: 44,
     alignSelf: 'stretch',
     justifyContent: 'center',
-    overflow: 'hidden',
+    overflow: 'hidden'
   },
   buttonText: {
     fontSize: 18,
     margin: 5,
-    textAlign: 'center',
+    textAlign: 'center'
   },
   modalButton: {
-    marginTop: 10,
+    marginTop: 10
   },
   pickerItem: {
-    fontSize: 16,
-  },
+    fontSize: 16
+  }
 })
