@@ -4,9 +4,9 @@ import MeetingActions from '../Redux/MeetingRedux';
 export function* getMeetings(api, action) {
   const {userId} = action;
 
-  const response = yield call(api.getMeetings, userId);
-
   yield put(MeetingActions.performingRequest());
+
+  const response = yield call(api.getMeetings, userId);
 
   if (response.ok) {
     yield put(MeetingActions.fetchMeetingsSuccess(response.data));
@@ -18,9 +18,9 @@ export function* getMeetings(api, action) {
 export function* getMeeting(api, action) {
   const {userId, meetingId} = action;
 
-  const response = yield call(api.getMeeting, userId, meetingId);
-
   yield put(MeetingActions.performingRequest());
+
+  const response = yield call(api.getMeeting, userId, meetingId);
 
   if (response.ok) {
     yield put(MeetingActions.fetchMeeting(response.data));
