@@ -21,7 +21,7 @@
     "android:shake": "$ANDROID_HOME/platform-tools/adb devices | grep '\\t' | awk '{print $1}' | sed 's/\\s//g' | xargs -I {} $ANDROID_HOME/platform-tools/adb -s {} shell input keyevent 82",
     "precommit": "npm run git-hook",
     "prepush": "npm run git-hook",
-    "git-hook": "npm run lint -s && npm test -s"
+    "git-hook": "npm run lint -s"
   },
   "dependencies": {
     "apisauce": "0.11.0",
