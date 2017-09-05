@@ -26,6 +26,8 @@ const GooglePlacesInput = (apiKey, setLocation) => {
         // 'details' is provided when fetchDetails = true
         const location = data.description || data.name;
         setLocation(location);
+
+        console.log(location);
         console.log(data);
         console.log(details);
       }}

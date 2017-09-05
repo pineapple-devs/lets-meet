@@ -80,6 +80,7 @@ export class NewMeetingForm extends React.Component {
     // call API here and create meeting
     const formData = this.state.formData;
     const userId = this.props.userId;
+    const location = this.state.location;
     const startTime = this.state.startDate;
     const endTime = this.state.endDate;
     const invitedGuests = this.state.guests.filter(guest => guest.checked);
@@ -92,6 +93,7 @@ export class NewMeetingForm extends React.Component {
         title: formData.meetingName,
         description: formData.meetingDescription,
         user_id: userId,
+        location: location
       },
       intervals: [{start_time: startTime, end_time: endTime}],
       invitations: invitations,
