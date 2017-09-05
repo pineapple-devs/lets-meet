@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import MeetingActions from '../Redux/MeetingRedux';
+import GooglePlacesInput from '../Services/GooglePlacesAutoComplete'
 
 import {
   StyleSheet,
@@ -49,12 +50,14 @@ export class NewMeetingForm extends React.Component {
       startDate: new Date(),
       endDate: new Date(),
       guests: guests,
+      location: null,
       newGuest: 'invite.user@via.email',
       showModal: false,
     };
 
     this.handleSubmit = this.handleSubmit.bind(this);
     this.addToGuests = this.addToGuests.bind(this);
+    this.setLocation = this.setLocation.bind(this);
   }
 
   componentWillReceiveProps(newProps) {
@@ -77,6 +80,7 @@ export class NewMeetingForm extends React.Component {
     // call API here and create meeting
     const formData = this.state.formData;
     const userId = this.props.userId;
+    const location = this.state.location;
     const startTime = this.state.startDate;
     const endTime = this.state.endDate;
     const invitedGuests = this.state.guests.filter(guest => guest.checked);
@@ -89,6 +93,7 @@ export class NewMeetingForm extends React.Component {
         title: formData.meetingName,
         description: formData.meetingDescription,
         user_id: userId,
+        location: location
       },
       intervals: [{start_time: startTime, end_time: endTime}],
       invitations: invitations,
@@ -131,7 +136,16 @@ export class NewMeetingForm extends React.Component {
     this.setState({newGuest: 'invite.user@via.email', guests});
   }
 
+  setLocation(location) {
+    this.setState({location});
+  }
+
   render() {
+    const GooglePlacesInputField = GooglePlacesInput(
+      this.props.googlePlacesApiKey,
+      this.setLocation
+    );
+
     return (
       <ScrollView
         keyboardShouldPersistTaps="always"
@@ -227,6 +241,7 @@ export class NewMeetingForm extends React.Component {
         <Text>{'Having guests?'}</Text>
         {this.state.guests.map(guest => (
           <CheckBox
+            key={guest.email}
             rightText={`${guest.name} ${guest.email}`.trim()}
             onClick={() => this.toggleGuest(guest)}
             isChecked={guest.checked}
@@ -241,6 +256,10 @@ export class NewMeetingForm extends React.Component {
           onSubmitEditing={this.addToGuests}
           keyboardType="email-address"
         />
+
+        <Text></Text>
+        <Text>{'Where will your meeting take place?'}</Text>
+        { GooglePlacesInputField }
 
         <Text>{JSON.stringify(this.state.formData)}</Text>
         <Text>{JSON.stringify(this.state.startDate)}</Text>
@@ -263,6 +282,7 @@ const mapStateToProps = state => {
   return {
     fetching: state.meeting.fetching,
     userId: state.login.userId,
+    googlePlacesApiKey: state.login.googlePlacesApiKey,
     meeting: state.meeting.meeting,
   };
 };

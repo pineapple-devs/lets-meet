@@ -5,7 +5,7 @@ import Immutable from "seamless-immutable";
 
 const { Types, Creators } = createActions({
   loginRequest: ["username", "password"],
-  loginSuccess: ["userId"],
+  loginSuccess: ["data"],
   loginFailure: ["error"],
   logout: null,
   logoutRequest: null
@@ -18,6 +18,7 @@ export default Creators;
 
 export const INITIAL_STATE = Immutable({
   userId: null,
+  googlePlacesApiKey: null,
   error: null,
   fetching: false
 });
@@ -28,18 +29,18 @@ export const INITIAL_STATE = Immutable({
 export const request = state => state.merge({ fetching: true });
 
 // we've successfully logged in
-export const success = (state, { userId }) =>
-  state.merge({ fetching: false, error: null, userId });
+export const success = (state, { data }) =>
+  state.merge({ fetching: false,
+                error: null,
+                googlePlacesApiKey: data.appCredentials.googlePlacesApiKey,
+                userId: data.userId });
 
 // we've had a problem logging in
 export const failure = (state, { error }) =>
   state.merge({ fetching: false, error });
 
 // we've logged out
-export const logout = state => {
-  debugger;
-  return INITIAL_STATE;
-};
+export const logout = state => INITIAL_STATE;
 
 /* ------------- Hookup Reducers To Types ------------- */
 
