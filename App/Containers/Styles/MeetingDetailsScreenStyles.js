@@ -11,7 +11,7 @@ export default StyleSheet.create({
     paddingRight: 10,
     paddingTop: 20,
     height: 200,
-    backgroundColor: "yellow",
+    backgroundColor: "white",
     alignSelf: "center",
     width: width * .7
   },
@@ -21,8 +21,23 @@ export default StyleSheet.create({
 
   editButtonTH: {
     marginTop: 20,
-    width: 25
+    width: 30
 
+  },
+  boldLabel: {
+    fontWeight: 'bold',
+    color: '#004c40',
+    alignSelf: 'center',
+    textAlign: 'center',
+    marginVertical: Metrics.smallMargin,
+    marginBottom: 20
+  },
+  boldTime: {
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    color: '#004c40',
+    textAlign: 'center',
+    marginVertical: Metrics.smallMargin
   }
 
 });

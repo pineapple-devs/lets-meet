@@ -96,10 +96,12 @@ class NavigationRouter extends Component {
             <Scene
               key="editMeetingForm"
               component={EditMeetingForm}
-              title="Edit a meeting"
+              title="Edit"
               sceneStyle={{ paddingTop: 54 }}
-              renderBackButton={NavItems.saveButton}
-              onRight={ ()=> (null) } rightTitle='Save'
+              onRight={ ()=> {debugger; console.log('Save changes')} }
+              rightTitle='Save'
+              leftButtonIconStyle={Styles.leftButton}
+              leftTitle='Cancel'
             />
           </Scene>
         </Scene>
