@@ -8,7 +8,8 @@ export default () => {
     github: require('./GithubRedux').reducer,
     login: require('./LoginRedux').reducer,
     search: require('./SearchRedux').reducer,
-    meeting: require('./MeetingRedux').reducer
+    meeting: require('./MeetingRedux').reducer,
+    invitation: require('./InvitationRedux').reducer
   })
 
   return configureStore(rootReducer, rootSaga)
