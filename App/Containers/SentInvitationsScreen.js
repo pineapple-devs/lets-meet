@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 // import YourActions from '../Redux/YourRedux'
 
 // Styles
-import styles from './Styles/SentInvitationsScreenScreenStyle'
+import styles from './Styles/SentInvitationsScreenStyle'
 
 class SentInvitationsScreenScreen extends React.Component {
 
