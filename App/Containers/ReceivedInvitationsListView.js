@@ -28,7 +28,7 @@ class ReceivedInvitationsListView extends React.Component {
   }
 
   renderRow (rowData) {
-    const invitationId = rowData.invitationId
+    const invitationId = rowData.id
     const meetingId = rowData.meeting.id
     const userId = rowData.user.id
     const name = rowData.user.name
@@ -58,11 +58,11 @@ class ReceivedInvitationsListView extends React.Component {
           <View>
             <RoundedButton
               text='Accept'
-              onPress={() => this.props.handleAccept(userId, meetingId, invitationId)}
+              onPress={() => this.handleAccept(userId, meetingId, invitationId)}
             />
             <RoundedButton
               text='Decline'
-              onPress={() => this.props.handleDecline(userId, meetingId, invitationId)}
+              onPress={() => this.handleDecline(userId, meetingId, invitationId)}
             />
           </View>
         }
@@ -94,11 +94,11 @@ class ReceivedInvitationsListView extends React.Component {
   }
 
   handleAccept (userId, meetingId, invitationId) {
-    this.props.acceptInvitation(userId, meetingId, invitationId)
+    this.props.updateInvitationAccepted(userId, meetingId, invitationId, true)
   }
 
   handleDecline (userId, meetingId, invitationId) {
-    this.props.declineInvitation(userId, meetingId, invitationId)
+    this.props.updateInvitationAccepted(userId, meetingId, invitationId, false)
   }
 
   render () {
@@ -132,11 +132,8 @@ const mapDispatchToProps = dispatch => {
     fetchReceivedInvitations: userId => dispatch(
       InvitationsActions.fetchReceivedInvitations(userId)
     ),
-    acceptInvitation: (userId, meetingId, invitationId) => dispatch(
-      InvitationsActions.sendInvitationAccepted(userId, meetingId, invitationId)
-    ),
-    declineInvitation: (userId, meetingId, invitationId) => dispatch(
-      InvitationsActions.sendInvitationDeclined(userId, meetingId, invitationId)
+    updateInvitationAccepted: (userId, meetingId, invitationId, accepted) => dispatch(
+      InvitationsActions.updateInvitationAccepted(userId, meetingId, invitationId, accepted)
     )
   }
 }

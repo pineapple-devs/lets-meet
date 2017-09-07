@@ -17,21 +17,29 @@ const create = (baseURL = 'https://lets-meet-api.herokuapp.com/') => {
   const getRoot = () => api.get('')
   const getSentInvitations = (userId) => {
     return api.get(`users/${userId}/sent_invitations`)
-    .then((response) => {
-      return response
-    })
+    .then(response => response)
   }
   const getReceivedInvitations = (userId) => {
     return api.get(`users/${userId}/received_invitations`)
-    .then((response) => {
-      return response
-    })
+    .then(response => response)
+  }
+  const updateInvitation = (userId, meetingId, invitationId, invitationParams) => {
+    return api.put(
+      `users/${userId}/meetings/${meetingId}/invitations/${invitationId}`,
+      invitationParams
+    )
+    .then(response => response)
+  }
+  const updateInvitationAccepted = (userId, meetingId, invitationId, accepted) => {
+    const invitationParams = { invitation: { accepted: accepted } }
+    return updateInvitation(userId, meetingId, invitationId, invitationParams)
   }
 
   return {
     getRoot,
     getSentInvitations,
-    getReceivedInvitations
+    getReceivedInvitations,
+    updateInvitationAccepted
   }
 }
 

@@ -28,3 +28,21 @@ export function* getReceivedInvitations (api, action) {
     yield put(InvitationActions.invitationRequestFailed())
   }
 }
+
+export function* updateInvitationAccepted (api, action) {
+  const {userId, meetingId, invitationId, accepted} = action
+
+  yield put(InvitationActions.performingInvitationRequest())
+
+  const response = yield call(api.updateInvitationAccepted,
+                              userId,
+                              meetingId,
+                              invitationId,
+                              accepted)
+
+  if (response.ok) {
+    yield put(InvitationActions.receivedInvitationChangedSuccess(response.data))
+  } else {
+    yield put(InvitationActions.invitationRequestFailed())
+  }
+}
