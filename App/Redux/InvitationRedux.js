@@ -4,7 +4,7 @@ import Immutable from 'seamless-immutable'
 /* ------------- Types and Action Creators ------------- */
 
 const { Types, Creators } = createActions({
-  performingRequest: [],
+  performingInvitationRequest: [],
   requestFailed: ['error'],
   fetchSentInvitations: ['userId'],
   fetchSentInvitationsSuccess: ['sentInvitations'],
@@ -12,7 +12,7 @@ const { Types, Creators } = createActions({
   fetchReceivedInvitationsSuccess: ['receivedInvitations']
 })
 
-export const MeetingTypes = Types
+export const InvitationTypes = Types
 export default Creators
 
 /* ------------- Initial State ------------- */
@@ -37,11 +37,11 @@ export const sentInvitationsFetched = (state, { sentInvitations }) =>
   })
 
 // we've fetched received invitations for a user
-export const receivedInvitationsFetched = (state, { meeting }) => {
+export const receivedInvitationsFetched = (state, { receivedInvitations }) => {
   return state.merge({
     fetching: false,
     error: null,
-    meeting: meeting
+    receivedInvitations: receivedInvitations
   })
 }
 
@@ -52,7 +52,7 @@ export const failure = (state, { error }) =>
 /* ------------- Hookup Reducers To Types ------------- */
 
 export const reducer = createReducer(INITIAL_STATE, {
-  [Types.PERFORMING_REQUEST]: request,
+  [Types.PERFORMING_INVITATION_REQUEST]: request,
   [Types.REQUEST_FAILED]: failure,
   [Types.FETCH_SENT_INVITATIONS_SUCCESS]: sentInvitationsFetched,
   [Types.FETCH_RECEIVED_INVITATIONS_SUCCESS]: receivedInvitationsFetched

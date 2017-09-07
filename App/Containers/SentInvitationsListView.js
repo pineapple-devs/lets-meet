@@ -27,8 +27,8 @@ class SentInvitationsListView extends React.Component {
     return (
       <TouchableOpacity onPress={() => console.log(rowData)}>
         <View style={styles.row}>
-          <Text style={styles.boldLabel}>{rowData.title}</Text>
-          <Text style={styles.label} />
+          <Text style={styles.boldLabel}>{rowData.email}</Text>
+          <Text style={styles.label}>They have accepted</Text>
           <Text style={styles.label} />
         </View>
       </TouchableOpacity>
@@ -47,9 +47,9 @@ class SentInvitationsListView extends React.Component {
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.intervals) {
+    if (newProps.sentInvitations) {
       this.setState({
-        dataSource: this.state.dataSource.cloneWithRows(newProps.intervals)
+        dataSource: this.state.dataSource.cloneWithRows(newProps.sentInvitations)
       })
     }
   }
