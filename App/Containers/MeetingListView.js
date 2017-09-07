@@ -3,6 +3,7 @@ import {View, Text, ListView, TouchableOpacity} from 'react-native'
 import {connect} from 'react-redux'
 import MeetingActions from '../Redux/MeetingRedux'
 import dateFormat from 'dateformat'
+import { Actions } from 'react-native-router-flux'
 
 // For empty lists
 import AlertMessage from '../Components/AlertMessage'
@@ -16,7 +17,7 @@ class MeetingListView extends React.Component {
     const rowHasChanged = (r1, r2) => r1 !== r2
 
     // DataSource configured
-    const ds = new ListView.DataSource({rowHasChanged})
+    const ds = new ListView.DataSource({ rowHasChanged })
 
     // Datasource is always in state
     this.state = {
@@ -26,7 +27,12 @@ class MeetingListView extends React.Component {
 
   renderRow (rowData) {
     return (
-      <TouchableOpacity onPress={() => console.log(rowData)}>
+      <TouchableOpacity
+        onPress={() => {
+          console.log(rowData)
+          Actions.meetingDetailsScreen({ meetingData: rowData })
+        }}
+      >
         <View style={styles.row}>
           <Text style={styles.boldLabel}>{rowData.title}</Text>
           <Text style={styles.label}>

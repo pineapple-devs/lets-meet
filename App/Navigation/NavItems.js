@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, Text } from 'react-native'
 import styles from './Styles/NavItemsStyles'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -45,6 +45,26 @@ export default {
           color={Colors.snow}
           style={styles.searchButton}
         />
+      </TouchableOpacity>
+    )
+  },
+
+  saveButton () {
+    return (
+      <TouchableOpacity onPress={this.PropTypes}>
+        <Icon name='save'
+          size={Metrics.icons.small}
+          color={Colors.snow}
+          style={styles.searchButton}
+        />
+      </TouchableOpacity>
+    )
+  },
+
+  cancelButton () {
+    return (
+      <TouchableOpacity onPress={NavigationActions.pop}>
+        <Text style={{ color: 'white', textAlign: 'left', fontSize: 17 }}>Cancel</Text>
       </TouchableOpacity>
     )
   }
