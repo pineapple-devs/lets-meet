@@ -28,7 +28,11 @@ class SentInvitationsListView extends React.Component {
       <TouchableOpacity onPress={() => console.log(rowData)}>
         <View style={styles.row}>
           <Text style={styles.boldLabel}>{rowData.email}</Text>
-          <Text style={styles.label}>They have accepted</Text>
+          <Text style={styles.label}>
+            {rowData.accepted === null && "They haven't answered yet."}
+            {rowData.accepted === true && 'They have accepted! Yay!'}
+            {rowData.accepted === false && 'They have cancelled. Bummer.'}
+          </Text>
           <Text style={styles.label} />
         </View>
       </TouchableOpacity>

@@ -71,6 +71,7 @@ class NavigationRouter extends Component {
 
             <Scene
               key='calendarScreen'
+              title='Choose a date'
               component={CalendarScreen}
               sceneStyle={{ paddingTop: 54 }}
             />
@@ -82,6 +83,7 @@ class NavigationRouter extends Component {
             />
             <Scene
               key='meetingsScreen'
+              title='Meetings'
               component={MeetingsScreen}
               sceneStyle={{ paddingTop: 54 }}
             />
@@ -103,6 +105,7 @@ class NavigationRouter extends Component {
             />
             <Scene
               key='sentInvitationsScreen'
+              title='Sent Invitations'
               component={SentInvitationsScreen}
               sceneStyle={{ paddingTop: 54 }}
             />
