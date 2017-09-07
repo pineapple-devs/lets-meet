@@ -6,15 +6,15 @@ import { connect } from 'react-redux'
 
 // Styles
 import styles from './Styles/SentInvitationsScreenStyle'
-import ListviewSectionsExample from './ListviewSectionsExample'
+import SentInvitationsListView from './SentInvitationsListView'
 
-class SentInvitationsScreenScreen extends React.Component {
+class SentInvitationsScreen extends React.Component {
 
   render () {
     return (
       <ScrollView style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
-          <ListviewSectionsExample />
+          <SentInvitationsListView />
         </KeyboardAvoidingView>
       </ScrollView>
     )
@@ -32,4 +32,4 @@ const mapDispatchToProps = (dispatch) => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SentInvitationsScreenScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(SentInvitationsScreen)
