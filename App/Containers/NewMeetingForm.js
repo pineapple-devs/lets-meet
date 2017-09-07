@@ -27,9 +27,9 @@ export class NewMeetingForm extends Component {
     super(props)
 
     const guests = [
-      {name: 'Nikola', email: '<nikolaseap@gmail.com>', checked: false},
-      {name: 'Jana', email: '<jana_vojnovic@hotmail.com>', checked: false},
-      {name: 'Marina', email: '<marina_nenic@hotmail.com>', checked: false}
+      {name: 'Nikola', email: 'nikolaseap@gmail.com', checked: false},
+      {name: 'Jana', email: 'jana_vojnovic@hotmail.com', checked: false},
+      {name: 'Marina', email: 'marina_nenic@hotmail.com', checked: false}
     ]
 
     this.state = {

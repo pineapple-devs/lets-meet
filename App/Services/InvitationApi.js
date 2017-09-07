@@ -16,14 +16,22 @@ const create = (baseURL = 'https://lets-meet-api.herokuapp.com/') => {
 
   const getRoot = () => api.get('')
   const getSentInvitations = (userId) => {
-    return api.get(`users/${userId}/invitations`)
+    return api.get(`users/${userId}/sent_invitations`)
     .then((response) => {
       return response
     })
   }
+  const getReceivedInvitations = (userId) => {
+    return api.get(`users/${userId}/received_invitations`)
+    .then((response) => {
+      return response
+    })
+  }
+
   return {
     getRoot,
-    getSentInvitations
+    getSentInvitations,
+    getReceivedInvitations
   }
 }
 
