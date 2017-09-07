@@ -1,7 +1,9 @@
 import React from 'react'
-import {View, Text, ListView, TouchableOpacity} from 'react-native'
+import {View, Text, ListView} from 'react-native'
 import {connect} from 'react-redux'
 import InvitationsActions from '../Redux/InvitationRedux'
+import RoundedButton from '../Components/RoundedButton'
+import Moment from 'moment'
 
 // For empty lists
 import AlertMessage from '../Components/AlertMessage'
@@ -21,21 +23,54 @@ class ReceivedInvitationsListView extends React.Component {
     this.state = {
       dataSource: ds
     }
+
+    this.renderRow = this.renderRow.bind(this)
   }
 
   renderRow (rowData) {
+    const invitationId = rowData.invitationId
+    const meetingId = rowData.meeting.id
+    const userId = rowData.user.id
+    const name = rowData.user.name
+    const meetingTitle = rowData.meeting.title
+    const meetingDescription = rowData.meeting.description
+    const startDate = Moment(rowData.meeting.start_date).format('MMM d, YYYY HH:mm')
+    const endDate = Moment(rowData.meeting.end_date).format('MMM d, YYYY HH:mm')
+    const accepted = rowData.accepted
+
     return (
-      <TouchableOpacity onPress={() => console.log(rowData)}>
-        <View style={styles.row}>
-          <Text style={styles.boldLabel}>{rowData.email}</Text>
-          <Text style={styles.label}>
-            {rowData.accepted === null && "They haven't answered yet."}
-            {rowData.accepted === true && 'They have accepted! Yay!'}
-            {rowData.accepted === false && 'They have cancelled. Bummer.'}
-          </Text>
-          <Text style={styles.label} />
-        </View>
-      </TouchableOpacity>
+      <View style={styles.row}>
+        <Text style={styles.boldLabel}>
+          {name} invited you to {meetingTitle}
+        </Text>
+        {meetingDescription &&
+        <Text style={styles.label}>
+          Description: {meetingDescription}
+        </Text>
+        }
+        <Text style={styles.label}>
+          From &nbsp;{startDate}h
+        </Text>
+        <Text style={styles.label}>
+          To &nbsp;{endDate}h
+        </Text>
+        {accepted === null &&
+          <View>
+            <RoundedButton
+              text='Accept'
+              onPress={() => this.props.handleAccept(userId, meetingId, invitationId)}
+            />
+            <RoundedButton
+              text='Decline'
+              onPress={() => this.props.handleDecline(userId, meetingId, invitationId)}
+            />
+          </View>
+        }
+        <Text style={styles.label}>
+          {accepted === true && 'You have accepted! Yay!'}
+          {accepted === false && 'You have cancelled. Bummer.'}
+        </Text>
+      </View>
     )
   }
 
@@ -56,6 +91,14 @@ class ReceivedInvitationsListView extends React.Component {
         dataSource: this.state.dataSource.cloneWithRows(newProps.receivedInvitations)
       })
     }
+  }
+
+  handleAccept (userId, meetingId, invitationId) {
+    this.props.acceptInvitation(userId, meetingId, invitationId)
+  }
+
+  handleDecline (userId, meetingId, invitationId) {
+    this.props.declineInvitation(userId, meetingId, invitationId)
   }
 
   render () {
@@ -88,6 +131,12 @@ const mapDispatchToProps = dispatch => {
   return {
     fetchReceivedInvitations: userId => dispatch(
       InvitationsActions.fetchReceivedInvitations(userId)
+    ),
+    acceptInvitation: (userId, meetingId, invitationId) => dispatch(
+      InvitationsActions.sendInvitationAccepted(userId, meetingId, invitationId)
+    ),
+    declineInvitation: (userId, meetingId, invitationId) => dispatch(
+      InvitationsActions.sendInvitationDeclined(userId, meetingId, invitationId)
     )
   }
 }
