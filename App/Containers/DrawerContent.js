@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { ScrollView, Image, BackAndroid } from 'react-native'
+import { ScrollView, Image, BackHandler } from 'react-native'
 import styles from './Styles/DrawerContentStyles'
 import { Images } from '../Themes'
 import { Actions } from 'react-native-router-flux'
@@ -12,7 +12,7 @@ import { connect } from 'react-redux'
 
 class DrawerContent extends Component {
   componentDidMount () {
-    BackAndroid.addEventListener('hardwareBackPress', () => {
+    BackHandler.addEventListener('hardwareBackPress', () => {
       if (this.context.drawer.props.open) {
         this.toggleDrawer()
         return true
