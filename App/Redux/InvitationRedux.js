@@ -5,7 +5,7 @@ import Immutable from 'seamless-immutable'
 
 const { Types, Creators } = createActions({
   performingInvitationRequest: [],
-  requestFailed: ['error'],
+  invitationRequestFailed: ['error'],
   fetchSentInvitations: ['userId'],
   fetchSentInvitationsSuccess: ['sentInvitations'],
   fetchReceivedInvitations: ['userId'],
@@ -53,7 +53,7 @@ export const failure = (state, { error }) =>
 
 export const reducer = createReducer(INITIAL_STATE, {
   [Types.PERFORMING_INVITATION_REQUEST]: request,
-  [Types.REQUEST_FAILED]: failure,
+  [Types.INVITATION_REQUEST_FAILED]: failure,
   [Types.FETCH_SENT_INVITATIONS_SUCCESS]: sentInvitationsFetched,
   [Types.FETCH_RECEIVED_INVITATIONS_SUCCESS]: receivedInvitationsFetched
 })

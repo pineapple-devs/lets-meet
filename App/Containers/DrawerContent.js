@@ -75,6 +75,16 @@ class DrawerContent extends Component {
 
         <MenuItem
           onPress={() => {
+            Actions.receivedInvitationsScreen()
+            this.context.drawer.close()
+          }}
+        >
+          <Icon name='send-o' size={20} style={styles.iconStyle} />
+          &nbsp;&nbsp; Received Invitations
+        </MenuItem>
+
+        <MenuItem
+          onPress={() => {
             Actions.profileScreen()
             this.context.drawer.close()
           }}
@@ -102,14 +112,10 @@ DrawerContent.contextTypes = {
   drawer: React.PropTypes.object
 }
 
-const mapStateToProps = state => {
-  return {}
-}
-
 const mapDispatchToProps = dispatch => {
   return {
     attemptLogout: () => dispatch(LoginActions.logoutRequest())
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(DrawerContent)
+export default connect(null, mapDispatchToProps)(DrawerContent)

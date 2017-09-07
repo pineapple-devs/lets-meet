@@ -11,6 +11,6 @@ export function* getSentInvitations (api, action) {
   if (response.ok) {
     yield put(InvitationActions.fetchSentInvitationsSuccess(response.data))
   } else {
-    yield put(InvitationActions.requestFailed())
+    yield put(InvitationActions.invitationRequestFailed())
   }
 }

@@ -7,7 +7,6 @@ import styles from './Styles/SentInvitationsScreenStyle'
 import SentInvitationsListView from './SentInvitationsListView'
 
 class SentInvitationsScreen extends React.Component {
-
   render () {
     return (
       <ScrollView style={styles.container}>
@@ -17,7 +16,6 @@ class SentInvitationsScreen extends React.Component {
       </ScrollView>
     )
   }
-
 }
 
 export default SentInvitationsScreen
