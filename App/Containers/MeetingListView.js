@@ -3,33 +3,34 @@ import {View, Text, ListView, TouchableOpacity} from 'react-native'
 import {connect} from 'react-redux'
 import MeetingActions from '../Redux/MeetingRedux'
 import dateFormat from 'dateformat'
+import { Actions } from 'react-native-router-flux'
 
 // For empty lists
-import AlertMessage from "../Components/AlertMessage";
+import AlertMessage from '../Components/AlertMessage'
 
 // Styles
-import styles from "./Styles/ListviewExampleStyles";
+import styles from './Styles/ListviewExampleStyles'
 
 class MeetingListView extends React.Component {
-  constructor(props) {
-    super(props);
-    const rowHasChanged = (r1, r2) => r1 !== r2;
+  constructor (props) {
+    super(props)
+    const rowHasChanged = (r1, r2) => r1 !== r2
 
     // DataSource configured
-    const ds = new ListView.DataSource({ rowHasChanged });
+    const ds = new ListView.DataSource({ rowHasChanged })
 
     // Datasource is always in state
     this.state = {
       dataSource: ds
-    };
+    }
   }
 
   renderRow (rowData) {
     return (
       <TouchableOpacity
         onPress={() => {
-          console.log(rowData);
-          Actions.meetingDetailsScreen({ meetingData: rowData });
+          console.log(rowData)
+          Actions.meetingDetailsScreen({ meetingData: rowData })
         }}
       >
         <View style={styles.row}>
@@ -49,11 +50,11 @@ class MeetingListView extends React.Component {
           </Text>
         </View>
       </TouchableOpacity>
-    );
+    )
   }
 
-  noRowData() {
-    return this.state.dataSource.getRowCount() === 0;
+  noRowData () {
+    return this.state.dataSource.getRowCount() === 0
   }
 
   componentDidMount () {
@@ -63,15 +64,15 @@ class MeetingListView extends React.Component {
     }
   }
 
-  componentWillReceiveProps(newProps) {
+  componentWillReceiveProps (newProps) {
     if (newProps.intervals) {
       this.setState({
         dataSource: this.state.dataSource.cloneWithRows(newProps.intervals)
-      });
+      })
     }
   }
 
-  render() {
+  render () {
     return (
       <View style={styles.container}>
         <AlertMessage
@@ -85,7 +86,7 @@ class MeetingListView extends React.Component {
           pageSize={15}
         />
       </View>
-    );
+    )
   }
 }
 
@@ -94,8 +95,8 @@ const mapStateToProps = state => {
     fetching: state.meeting.fetching,
     intervals: state.meeting.intervals,
     userId: state.login.userId
-  };
-};
+  }
+}
 
 const mapDispatchToProps = dispatch => {
   return {
@@ -103,4 +104,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(MeetingListView);
+export default connect(mapStateToProps, mapDispatchToProps)(MeetingListView)

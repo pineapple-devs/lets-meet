@@ -6,7 +6,6 @@ import NavigationDrawer from './NavigationDrawer'
 import { connect } from 'react-redux'
 
 // screens identified by the router
-<<<<<<< HEAD
 import LaunchScreen from '../Containers/LaunchScreen'
 import LoginScreen from '../Containers/LoginScreen'
 import CalendarScreen from '../Containers/CalendarScreen'
@@ -14,7 +13,6 @@ import HoursScreen from '../Containers/HoursScreen'
 import MeetingsScreen from '../Containers/MeetingsScreen'
 import MeetingDetailsScreen from '../Containers/MeetingDetailsScreen'
 import EditMeetingForm from '../Containers/EditMeetingForm'
-import NavItems from './NavItems'
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -88,17 +86,17 @@ class NavigationRouter extends Component {
               sceneStyle={{ paddingTop: 54 }}
             />
             <Scene
-              key="meetingDetailsScreen"
+              key='meetingDetailsScreen'
               component={MeetingDetailsScreen}
-              title="Meeting details"
+              title='Meeting details'
               sceneStyle={{ paddingTop: 54 }}
             />
             <Scene
-              key="editMeetingForm"
+              key='editMeetingForm'
               component={EditMeetingForm}
-              title="Edit"
+              title='Edit'
               sceneStyle={{ paddingTop: 54 }}
-              onRight={ ()=> {debugger; console.log('Save changes')} }
+              onRight={() => { console.log('Save changes') }}
               rightTitle='Save'
               leftButtonIconStyle={Styles.leftButton}
               leftTitle='Cancel'

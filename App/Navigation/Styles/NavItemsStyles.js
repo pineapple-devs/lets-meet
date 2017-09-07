@@ -21,6 +21,6 @@ export default StyleSheet.create({
   saveButton: {
     ...navButton,
     marginTop: Metrics.section,
-    marginRight: Metrics.baseMargin,
+    marginRight: Metrics.baseMargin
   }
 })

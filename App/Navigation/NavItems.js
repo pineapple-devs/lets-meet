@@ -1,5 +1,5 @@
 import React from 'react'
-import { TouchableOpacity } from 'react-native'
+import { TouchableOpacity, Text } from 'react-native'
 import styles from './Styles/NavItemsStyles'
 import { Actions as NavigationActions } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
@@ -50,7 +50,7 @@ export default {
   },
 
   saveButton () {
-    return(
+    return (
       <TouchableOpacity onPress={this.PropTypes}>
         <Icon name='save'
           size={Metrics.icons.small}
@@ -62,11 +62,11 @@ export default {
   },
 
   cancelButton () {
-      return (
-        <TouchableOpacity onPress={NavigationActions.pop}>
-          <Text style={{color: 'white',textAlign: 'left',fontSize: 17,}}>Cancel</Text>
-        </TouchableOpacity>
-      )
-    },
+    return (
+      <TouchableOpacity onPress={NavigationActions.pop}>
+        <Text style={{ color: 'white', textAlign: 'left', fontSize: 17 }}>Cancel</Text>
+      </TouchableOpacity>
+    )
+  }
 
 }
