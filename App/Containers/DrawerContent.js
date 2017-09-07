@@ -65,7 +65,17 @@ class DrawerContent extends Component {
 
         <MenuItem
           onPress={() => {
-            Actions.meetingsScreen()
+            Actions.sentInvitationsScreen()
+            this.context.drawer.close()
+          }}
+        >
+          <Icon name='send' size={20} style={styles.iconStyle} />
+          &nbsp;&nbsp; Sent Invitations
+        </MenuItem>
+
+        <MenuItem
+          onPress={() => {
+            Actions.profileScreen()
             this.context.drawer.close()
           }}
         >

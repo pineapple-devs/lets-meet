@@ -8,7 +8,8 @@ import {
   ScrollView,
   ToastAndroid,
   TextInput,
-  Button
+  Button,
+  KeyboardAvoidingView
 } from 'react-native'
 import CheckBox from 'react-native-check-box'
 import {DatePicker} from 'react-native-ui-xg'
@@ -136,129 +137,131 @@ export class NewMeetingForm extends Component {
       <ScrollView
         keyboardShouldPersistTaps='always'
         style={{paddingLeft: 10, paddingRight: 10, height: 200}}>
-        <Form
-          ref='addNewMeetingForm'
-          onFocus={this.handleFormFocus.bind(this)}
-          onChange={this.handleFormChange.bind(this)}
-          label='New Meeting'>
-          <InputField ref='meetingName' placeholder='Meeting name' />
+        <KeyboardAvoidingView behavior='padding'>
+          <Form
+            ref='addNewMeetingForm'
+            onFocus={this.handleFormFocus.bind(this)}
+            onChange={this.handleFormChange.bind(this)}
+            label='New Meeting'>
+            <InputField ref='meetingName' placeholder='Meeting name' />
 
-          <InputField
-            multiline
-            ref='meetingDescription'
-            placeholder='Meeting description'
-            helpText='Write down some special reminders for your meeting!'
-          />
+            <InputField
+              multiline
+              ref='meetingDescription'
+              placeholder='Meeting description'
+              helpText='Write down some special reminders for your meeting!'
+            />
 
-          <SwitchField
-            label='Repeat'
-            ref='repeat'
-            helpText='Check if you want your meeting to repeat.'
-          />
+            <SwitchField
+              label='Repeat'
+              ref='repeat'
+              helpText='Check if you want your meeting to repeat.'
+            />
 
-          {this.state.formData.repeat && (
-            <PickerField
-              ref='repeatFrequency'
-              label='Repeat settings'
-              options={{
-                every_day: 'Every day',
-                every_week: 'Every week',
-                every_month: 'Every month'
+            {this.state.formData.repeat && (
+              <PickerField
+                ref='repeatFrequency'
+                label='Repeat settings'
+                options={{
+                  every_day: 'Every day',
+                  every_week: 'Every week',
+                  every_month: 'Every month'
+                }}
+              />
+            )}
+
+            {/*
+            DatePicker is not from react-native-form-generator package
+            so we're not fetching it from ref. We're setting onDateChange
+            function which will do setState({date: date})
+            */}
+            <Text>{'When will this meeting start?'}</Text>
+            <DatePicker
+              style={{width: 200}}
+              date={this.state.startDate}
+              mode='datetime'
+              format='YYYY-MM-DD HH:mm'
+              confirmBtnText='Confirm'
+              cancelBtnText='Cancel'
+              customStyles={{
+                dateIcon: {
+                  position: 'absolute',
+                  left: 0,
+                  top: 4,
+                  marginLeft: 0
+                },
+                dateInput: {
+                  marginLeft: 36
+                }
+              }}
+              minuteInterval={10}
+              onDateChange={chosenDate => {
+                this.setState({startDate: chosenDate})
               }}
             />
-          )}
 
-          {/*
-          DatePicker is not from react-native-form-generator package
-          so we're not fetching it from ref. We're setting onDateChange
-          function which will do setState({date: date})
-          */}
-          <Text>{'When will this meeting start?'}</Text>
-          <DatePicker
-            style={{width: 200}}
-            date={this.state.startDate}
-            mode='datetime'
-            format='YYYY-MM-DD HH:mm'
-            confirmBtnText='Confirm'
-            cancelBtnText='Cancel'
-            customStyles={{
-              dateIcon: {
-                position: 'absolute',
-                left: 0,
-                top: 4,
-                marginLeft: 0
-              },
-              dateInput: {
-                marginLeft: 36
-              }
-            }}
-            minuteInterval={10}
-            onDateChange={chosenDate => {
-              this.setState({startDate: chosenDate})
-            }}
+            <Text>{'When will this meeting end?'}</Text>
+            <DatePicker
+              style={{width: 200}}
+              date={this.state.endDate}
+              mode='datetime'
+              format='YYYY-MM-DD HH:mm'
+              confirmBtnText='Confirm'
+              cancelBtnText='Cancel'
+              customStyles={{
+                dateIcon: {
+                  position: 'absolute',
+                  left: 0,
+                  top: 4,
+                  marginLeft: 0
+                },
+                dateInput: {
+                  marginLeft: 36
+                }
+              }}
+              minuteInterval={10}
+              onDateChange={chosenDate => {
+                this.setState({endDate: chosenDate})
+              }}
+            />
+          </Form>
+
+          <Text>{'Having guests?'}</Text>
+          {this.state.guests.map(guest => (
+            <CheckBox
+              key={guest.email}
+              rightText={`${guest.name} ${guest.email}`.trim()}
+              onClick={() => this.toggleGuest(guest)}
+              isChecked={guest.checked}
+            />
+          ))}
+
+          <TextInput
+            style={{height: 40, borderColor: 'gray', borderWidth: 1}}
+            onChangeText={text => this.setState({newGuest: text})}
+            value={this.state.newGuest}
+            underlineColorAndroid='transparent'
+            onSubmitEditing={this.addToGuests}
+            keyboardType='email-address'
           />
 
-          <Text>{'When will this meeting end?'}</Text>
-          <DatePicker
-            style={{width: 200}}
-            date={this.state.endDate}
-            mode='datetime'
-            format='YYYY-MM-DD HH:mm'
-            confirmBtnText='Confirm'
-            cancelBtnText='Cancel'
-            customStyles={{
-              dateIcon: {
-                position: 'absolute',
-                left: 0,
-                top: 4,
-                marginLeft: 0
-              },
-              dateInput: {
-                marginLeft: 36
-              }
-            }}
-            minuteInterval={10}
-            onDateChange={chosenDate => {
-              this.setState({endDate: chosenDate})
-            }}
-          />
-        </Form>
+          <Text />
+          <Text>{'Where will your meeting take place?'}</Text>
+          { GooglePlacesInputField }
 
-        <Text>{'Having guests?'}</Text>
-        {this.state.guests.map(guest => (
-          <CheckBox
-            key={guest.email}
-            rightText={`${guest.name} ${guest.email}`.trim()}
-            onClick={() => this.toggleGuest(guest)}
-            isChecked={guest.checked}
-          />
-        ))}
+          <Text>{JSON.stringify(this.state.formData)}</Text>
+          <Text>{JSON.stringify(this.state.startDate)}</Text>
+          <Text>{JSON.stringify(this.state.endDate)}</Text>
+          <Text>{JSON.stringify(this.state.guests)}</Text>
 
-        <TextInput
-          style={{height: 40, borderColor: 'gray', borderWidth: 1}}
-          onChangeText={text => this.setState({newGuest: text})}
-          value={this.state.newGuest}
-          underlineColorAndroid='transparent'
-          onSubmitEditing={this.addToGuests}
-          keyboardType='email-address'
-        />
-
-        <Text />
-        <Text>{'Where will your meeting take place?'}</Text>
-        { GooglePlacesInputField }
-
-        <Text>{JSON.stringify(this.state.formData)}</Text>
-        <Text>{JSON.stringify(this.state.startDate)}</Text>
-        <Text>{JSON.stringify(this.state.endDate)}</Text>
-        <Text>{JSON.stringify(this.state.guests)}</Text>
-
-        <Button
-          icon='md-checkmark'
-          iconPlacement='right'
-          onPress={this.handleSubmit}
-          title='Save'>
-          "Save"
-        </Button>
+          <Button
+            icon='md-checkmark'
+            iconPlacement='right'
+            onPress={this.handleSubmit}
+            title='Save'>
+            "Save"
+          </Button>
+        </KeyboardAvoidingView>
       </ScrollView>
     )
   }

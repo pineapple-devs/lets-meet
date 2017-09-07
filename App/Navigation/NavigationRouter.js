@@ -13,6 +13,7 @@ import HoursScreen from '../Containers/HoursScreen'
 import MeetingsScreen from '../Containers/MeetingsScreen'
 import MeetingDetailsScreen from '../Containers/MeetingDetailsScreen'
 import EditMeetingForm from '../Containers/EditMeetingForm'
+import SentInvitationsScreen from '../Containers/SentInvitationsScreen'
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -70,8 +71,8 @@ class NavigationRouter extends Component {
 
             <Scene
               key='calendarScreen'
+              title='Choose a date'
               component={CalendarScreen}
-              title=''
               sceneStyle={{ paddingTop: 54 }}
             />
             <Scene
@@ -82,6 +83,7 @@ class NavigationRouter extends Component {
             />
             <Scene
               key='meetingsScreen'
+              title='Meetings'
               component={MeetingsScreen}
               sceneStyle={{ paddingTop: 54 }}
             />
@@ -100,6 +102,12 @@ class NavigationRouter extends Component {
               rightTitle='Save'
               leftButtonIconStyle={Styles.leftButton}
               leftTitle='Cancel'
+            />
+            <Scene
+              key='sentInvitationsScreen'
+              title='Sent Invitations'
+              component={SentInvitationsScreen}
+              sceneStyle={{ paddingTop: 54 }}
             />
           </Scene>
         </Scene>
