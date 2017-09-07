@@ -14,6 +14,7 @@ import MeetingsScreen from '../Containers/MeetingsScreen'
 import MeetingDetailsScreen from '../Containers/MeetingDetailsScreen'
 import EditMeetingForm from '../Containers/EditMeetingForm'
 import SentInvitationsScreen from '../Containers/SentInvitationsScreen'
+import ReceivedInvitationsScreen from '../Containers/ReceivedInvitationsScreen'
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -107,6 +108,12 @@ class NavigationRouter extends Component {
               key='sentInvitationsScreen'
               title='Sent Invitations'
               component={SentInvitationsScreen}
+              sceneStyle={{ paddingTop: 54 }}
+            />
+            <Scene
+              key='receivedInvitationsScreen'
+              title='Received Invitations'
+              component={ReceivedInvitationsScreen}
               sceneStyle={{ paddingTop: 54 }}
             />
           </Scene>

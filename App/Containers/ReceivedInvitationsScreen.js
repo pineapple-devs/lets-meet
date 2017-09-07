@@ -2,20 +2,19 @@ import React from 'react'
 import { ScrollView, KeyboardAvoidingView } from 'react-native'
 
 // Styles
-import styles from './Styles/SentInvitationsScreenStyle'
+import styles from './Styles/ReceivedInvitationsScreenStyle'
+import ReceivedInvitationsListView from './ReceivedInvitationsListView'
 
-import SentInvitationsListView from './SentInvitationsListView'
-
-class SentInvitationsScreen extends React.Component {
+class ReceivedInvitationsScreen extends React.Component {
   render () {
     return (
       <ScrollView style={styles.container}>
         <KeyboardAvoidingView behavior='position'>
-          <SentInvitationsListView />
+          <ReceivedInvitationsListView />
         </KeyboardAvoidingView>
       </ScrollView>
     )
   }
 }
 
-export default SentInvitationsScreen
+export default ReceivedInvitationsScreen
