@@ -1,5 +1,6 @@
 import { call, put } from 'redux-saga/effects'
 import LoginActions from '../Redux/LoginRedux'
+import PushNotification from 'react-native-push-notification'
 
 // attempts to login
 export function* login (api, action) {
@@ -16,6 +17,9 @@ export function* login (api, action) {
   const response = yield call(api.login, 'nikolalsvk', 'voce')
 
   if (response.ok) {
+    const senderId = response.data.appCredentials.senderId
+    PushNotification.configure({ senderID: senderId })
+
     yield put(LoginActions.loginSuccess(response.data))
   } else {
     yield put(LoginActions.loginFailure('Invalid username/password!'))
