@@ -30,8 +30,8 @@ class ReceivedInvitationsListView extends React.Component {
   renderRow (rowData) {
     const invitationId = rowData.id
     const meetingId = rowData.meeting.id
-    const userId = rowData.user.id
-    const name = rowData.user.name
+    const userId = rowData.meeting.user.id
+    const name = rowData.meeting.user.name
     const meetingTitle = rowData.meeting.title
     const meetingDescription = rowData.meeting.description
     const startDate = Moment(rowData.meeting.start_date).format('MMM d, YYYY HH:mm')
