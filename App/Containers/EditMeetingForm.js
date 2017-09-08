@@ -17,7 +17,7 @@ import {
   PickerField
 } from 'react-native-form-generator'
 
-export class NewMeetingForm extends Component {
+export class AddMeetingForm extends Component {
   constructor (props) {
     super(props)
 
@@ -73,7 +73,7 @@ export class NewMeetingForm extends Component {
         style={{ paddingLeft: 10, paddingRight: 10, height: 200 }}
       >
         <Form
-          ref='addNewMeetingForm'
+          ref='addAddMeetingForm'
           onFocus={this.handleFormFocus.bind(this)}
           onChange={this.handleFormChange.bind(this)}
           label='New Meeting'
@@ -196,4 +196,4 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(NewMeetingForm)
+export default connect(mapStateToProps, mapDispatchToProps)(AddMeetingForm)
