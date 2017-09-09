@@ -22,7 +22,7 @@ export function* login (api, action) {
 
     yield put(LoginActions.loginSuccess(response.data))
   } else {
-    yield put(LoginActions.loginFailure('Invalid username/password!'))
+    yield put(LoginActions.loginFailure('Sorry, those are invalid credentials!'))
   }
 }
 
