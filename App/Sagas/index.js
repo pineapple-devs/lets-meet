@@ -24,9 +24,12 @@ import { login, logout } from './LoginSagas'
 import { getUserAvatar } from './GithubSagas'
 import { openScreen } from './OpenScreenSagas'
 import { getMeetings, getMeeting, createMeeting } from './MeetingSagas'
-import { getSentInvitations,
-         getReceivedInvitations,
-         updateInvitationAccepted } from './InvitationSagas'
+import {
+  getSentInvitations,
+  getReceivedInvitations,
+  updateInvitationAccepted,
+  getSentInvitationsByMeeting
+} from './InvitationSagas'
 import { notificationSignup } from './NotificationSagas'
 
 /* ------------- API ------------- */
@@ -58,13 +61,22 @@ export default function* root () {
     takeLatest(MeetingTypes.CREATE_MEETING, createMeeting, meetingApi),
 
     // invitation sagas
-    takeLatest(InvitationTypes.FETCH_SENT_INVITATIONS, getSentInvitations, invitationApi),
-    takeLatest(InvitationTypes.FETCH_RECEIVED_INVITATIONS,
-               getReceivedInvitations,
-               invitationApi),
-    takeLatest(InvitationTypes.UPDATE_INVITATION_ACCEPTED,
-               updateInvitationAccepted,
-               invitationApi),
+    takeLatest(
+      InvitationTypes.FETCH_SENT_INVITATIONS,
+      getSentInvitations,
+      invitationApi
+    ),
+    takeLatest(
+      InvitationTypes.FETCH_RECEIVED_INVITATIONS,
+      getReceivedInvitations,
+      invitationApi
+    ),
+    takeLatest(
+      InvitationTypes.UPDATE_INVITATION_ACCEPTED,
+      updateInvitationAccepted,
+      invitationApi
+    ),
+    takeLatest(InvitationTypes.FETCH_SENT_INVITATIONS_BY_MEETING, getSentInvitationsByMeeting, invitationApi),
 
     // notification sagas
     takeLatest(NotificationTypes.NOTIFICATION_SIGNUP, notificationSignup, notificationApi)
