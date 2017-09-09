@@ -18,10 +18,13 @@ PushNotification.configure({
   onNotification: (notification) => {
     if (__DEV__) console.log('NOTIFICATION:', notification)
 
-    PushNotification.localNotification({
-      title: notification.title,
-      message: notification.body
-    })
+    const userId = store.getState().login.userId
+    if (userId === notification.user_id) {
+      PushNotification.localNotification({
+        title: notification.title,
+        message: notification.body
+      })
+    }
   },
 
   // ANDROID ONLY: (optional) GCM Sender ID.
