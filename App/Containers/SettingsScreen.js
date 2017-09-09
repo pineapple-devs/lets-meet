@@ -1,13 +1,38 @@
 import React from 'react'
-import { ScrollView, View, Text, Switch, KeyboardAvoidingView } from 'react-native'
+import {
+  ScrollView,
+  ToastAndroid,
+  View,
+  Text,
+  Switch,
+  KeyboardAvoidingView
+} from 'react-native'
 import { connect } from 'react-redux'
 // Add Actions - replace 'Your' with whatever your reducer is called :)
 // import YourActions from '../Redux/YourRedux'
+import UserActions from '../Redux/UserRedux'
 
 // Styles
 import styles from './Styles/SettingsScreenStyle'
 
-class SettingsScreenScreen extends React.Component {
+class SettingsScreen extends React.Component {
+  constructor () {
+    super()
+
+    this.handlePushNotificationSwitch = this.handlePushNotificationSwitch.bind(this)
+    this.handleEmailNotificationSwitch = this.handleEmailNotificationSwitch.bind(this)
+  }
+
+  componentWillReceiveProps (newProps) {
+    if (newProps.error) {
+      ToastAndroid.showWithGravity(
+        newProps.error,
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+      )
+    }
+  }
+
   render () {
     return (
       <ScrollView style={styles.container}>
@@ -18,6 +43,7 @@ class SettingsScreenScreen extends React.Component {
             </Text>
             <Switch
               onValueChange={this.handleEmailNotificationSwitch}
+              value={this.props.user.email_opt_in}
             />
           </View>
 
@@ -29,6 +55,7 @@ class SettingsScreenScreen extends React.Component {
             </Text>
             <Switch
               onValueChange={this.handlePushNotificationSwitch}
+              value={this.props.user.push_opt_in}
             />
           </View>
         </KeyboardAvoidingView>
@@ -37,22 +64,28 @@ class SettingsScreenScreen extends React.Component {
   }
 
   handleEmailNotificationSwitch (value) {
-
+    this.props.updateUser(this.props.userId, { user: { email_opt_in: value } })
   }
 
   handlePushNotificationSwitch (value) {
-
+    this.props.updateUser(this.props.userId, { user: { push_opt_in: value } })
   }
 }
 
 const mapStateToProps = (state) => {
   return {
+    userId: state.login.userId,
+    user: state.user.user,
+    error: state.user.error
   }
 }
 
 const mapDispatchToProps = (dispatch) => {
   return {
+    updateUser: (userId, userParams) => dispatch(
+      UserActions.updateUserRequest(userId, userParams)
+    )
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreenScreen)
+export default connect(mapStateToProps, mapDispatchToProps)(SettingsScreen)

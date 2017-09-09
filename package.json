@@ -65,6 +65,7 @@
     "ignite-animatable": "^0.3.1",
     "ignite-dev-screens": "^2.0.0-beta.8",
     "ignite-i18n": "^0.1.1",
+    "ignite-ir-boilerplate": "^2.1.1",
     "ignite-ir-boilerplate-2016": "^0.2.2",
     "ignite-vector-icons": "^0.2.1",
     "mockery": "^2.0.0",

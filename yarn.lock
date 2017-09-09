@@ -2864,6 +2864,12 @@ ignite-ir-boilerplate-2016@^0.2.2:
   dependencies:
     ramda "^0.23.0"
 
+ignite-ir-boilerplate@^2.1.1:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/ignite-ir-boilerplate/-/ignite-ir-boilerplate-2.1.1.tgz#261c1abace4cafc68feba34568a076bde85fc119"
+  dependencies:
+    ramda "^0.23.0"
+
 ignite-vector-icons@^0.2.1:
   version "0.2.1"
   resolved "https://registry.yarnpkg.com/ignite-vector-icons/-/ignite-vector-icons-0.2.1.tgz#c8056f7ce344e058ae99664aaf5509a0c322cd1b"
@@ -3502,7 +3508,7 @@ lodash.bind@^4.1.4:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/lodash.bind/-/lodash.bind-4.2.1.tgz#7ae3017e939622ac31b7d7d7dcb1b34db1690d35"
 
-lodash.debounce@^4.0.3:
+lodash.debounce@^4.0.3, lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
 
@@ -3807,7 +3813,7 @@ mockery@^2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/mockery/-/mockery-2.0.0.tgz#0569a11a1848461fdc347cf8cca2df2f3129bc03"
 
-moment@2.x.x, moment@>=2.10.3, moment@^2.17.1:
+moment@2.x.x, moment@>=2.10.3, moment@^2.17.1, moment@^2.18.1:
   version "2.18.1"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.18.1.tgz#c36193dd3ce1c2eed2adb7c802dbbc77a81b1c0f"
 
@@ -4412,7 +4418,7 @@ prop-types@^15.0.0, prop-types@^15.5.4, prop-types@~15.5.7:
   dependencies:
     fbjs "^0.8.9"
 
-prop-types@^15.5.10:
+prop-types@^15.5.10, prop-types@^15.5.7:
   version "15.5.10"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.5.10.tgz#2797dfc3126182e3a95e3dfbb2e893ddd7456154"
   dependencies:
@@ -4434,6 +4440,10 @@ punycode@^1.4.1:
 qs@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-4.0.0.tgz#c31d9b74ec27df75e543a86c78728ed8d4623607"
+
+qs@^5.2.0:
+  version "5.2.1"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-5.2.1.tgz#801fee030e0b9450d6385adc48a4cc55b44aedfc"
 
 qs@~6.4.0:
   version "6.4.0"
@@ -4601,6 +4611,12 @@ react-native-calendars@^1.2.20:
     prop-types "^15.5.10"
     xdate "^0.8.0"
 
+react-native-check-box@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-check-box/-/react-native-check-box-2.0.1.tgz#3813fac9571fea3680498f94789e547dfc52d33a"
+  dependencies:
+    prop-types "^15.5.7"
+
 react-native-colortool@^0.0.1:
   version "0.0.1"
   resolved "https://registry.yarnpkg.com/react-native-colortool/-/react-native-colortool-0.0.1.tgz#0ae21efe2e3df18a1c3d9b48c30acaaa647dfb66"
@@ -4617,7 +4633,7 @@ react-native-confirm@^0.0.1:
     react-native-input-xg "^0.0.2"
     react-native-stylesheet-xg "^1.1.0"
 
-react-native-datepicker@^1.4.4, react-native-datepicker@^1.5.1:
+react-native-datepicker@^1.4.4:
   version "1.5.1"
   resolved "https://registry.yarnpkg.com/react-native-datepicker/-/react-native-datepicker-1.5.1.tgz#c9ba7c92da9552ad5deac18a7fc742673996e57c"
   dependencies:
@@ -4668,6 +4684,14 @@ react-native-form-generator@^0.9.9:
   version "0.9.9"
   resolved "https://registry.yarnpkg.com/react-native-form-generator/-/react-native-form-generator-0.9.9.tgz#68aae26d1e8dc3e30073ccd7bb298fbdfdce1bca"
 
+react-native-google-places-autocomplete@^1.3.2:
+  version "1.3.4"
+  resolved "https://registry.yarnpkg.com/react-native-google-places-autocomplete/-/react-native-google-places-autocomplete-1.3.4.tgz#3eeddc1f6c5cbe1a4230933a11aa59ed5fe1f585"
+  dependencies:
+    lodash.debounce "^4.0.8"
+    prop-types "^15.5.10"
+    qs "^5.2.0"
+
 react-native-grading@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-native-grading/-/react-native-grading-1.0.3.tgz#5d62ee2c46ba1013e0f6aca504191038ff57bd20"
@@ -4712,6 +4736,10 @@ react-native-mock@^0.3.1:
 react-native-modalbox@^1.3.9:
   version "1.3.9"
   resolved "https://registry.yarnpkg.com/react-native-modalbox/-/react-native-modalbox-1.3.9.tgz#9991c51ebc69c720d8a778aaa47c89137ddea111"
+
+react-native-push-notification@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/react-native-push-notification/-/react-native-push-notification-3.0.1.tgz#0e23db302d03bb4a3f28dc072dcaf2a9a1178ed8"
 
 react-native-router-flux@3.38.0:
   version "3.38.0"

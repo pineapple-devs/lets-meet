@@ -4,6 +4,7 @@ import MeetingAPI from '../Services/MeetingApi'
 import LoginAPI from '../Services/LoginApi'
 import InvitationApi from '../Services/InvitationApi'
 import NotificationApi from '../Services/NotificationApi'
+import UserApi from '../Services/UserApi'
 import FixtureAPI from '../Services/FixtureApi'
 import DebugConfig from '../Config/DebugConfig'
 
@@ -16,6 +17,7 @@ import { OpenScreenTypes } from '../Redux/OpenScreenRedux'
 import { MeetingTypes } from '../Redux/MeetingRedux'
 import { InvitationTypes } from '../Redux/InvitationRedux'
 import { NotificationTypes } from '../Redux/NotificationRedux'
+import { UserTypes } from '../Redux/UserRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -31,6 +33,7 @@ import {
   getSentInvitationsByMeeting
 } from './InvitationSagas'
 import { notificationSignup } from './NotificationSagas'
+import { updateUser } from './UserSagas'
 
 /* ------------- API ------------- */
 
@@ -41,6 +44,7 @@ const meetingApi = MeetingAPI.create()
 const loginApi = LoginAPI.create()
 const invitationApi = InvitationApi.create()
 const notificationApi = NotificationApi.create()
+const userApi = UserApi.create()
 
 /* ------------- Connect Types To Sagas ------------- */
 
@@ -79,6 +83,9 @@ export default function* root () {
     takeLatest(InvitationTypes.FETCH_SENT_INVITATIONS_BY_MEETING, getSentInvitationsByMeeting, invitationApi),
 
     // notification sagas
-    takeLatest(NotificationTypes.NOTIFICATION_SIGNUP, notificationSignup, notificationApi)
+    takeLatest(NotificationTypes.NOTIFICATION_SIGNUP, notificationSignup, notificationApi),
+
+    // user sagas
+    takeLatest(UserTypes.UPDATE_USER_REQUEST, updateUser, userApi)
   ]
 }
