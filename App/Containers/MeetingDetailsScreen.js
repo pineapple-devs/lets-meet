@@ -69,7 +69,7 @@ class MeetingDetailsScreen extends React.Component {
 
           <Text style={styles.text}>Who else is going?</Text>
           {this.props.invitations && this.props.invitations.map(invitation => (
-            <Text style={styles.boldLabel}>
+            <Text style={styles.boldLabel} key={invitation.email}>
               <Icon name='user' size={13} /> &nbsp;{invitation.email}
             </Text>
         ))}

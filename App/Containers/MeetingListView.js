@@ -36,12 +36,12 @@ class MeetingListView extends React.Component {
         <View style={styles.row}>
           <Text style={styles.boldLabel}>{rowData.title}</Text>
           <Text style={styles.label}>
-            {dateFormat(rowData.start_time, 'dd.mm.yyyy')}
+            {dateFormat(rowData.start_time, 'mm/dd/yyyy')}
             {new Date(rowData.start_time).toLocaleDateString() ===
             new Date(rowData.end_time).toLocaleDateString() ? (
               ''
             ) : (
-              dateFormat(rowData.end_time, ' - dd.mm.yyyy')
+              dateFormat(rowData.end_time, ' - mm/dd/yyyy')
             )}
           </Text>
           <Text style={styles.label}>
