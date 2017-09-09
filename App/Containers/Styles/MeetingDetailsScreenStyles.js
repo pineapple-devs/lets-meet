@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native'
 import { Metrics, ApplicationStyles } from '../../Themes/'
 
-var width = Dimensions.get('window').width
+var {height, width} = Dimensions.get('window')
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -10,19 +10,29 @@ export default StyleSheet.create({
     paddingLeft: 10,
     paddingRight: 10,
     paddingTop: 20,
-    height: 200,
     backgroundColor: 'white',
     alignSelf: 'center',
-    width: width * 0.7
+    width: width
   },
   text: {
     textAlign: 'center'
   },
-
   editButtonTH: {
+    flex: 1,
+    backgroundColor: 'white',
     marginTop: 20,
-    width: 30
-
+    width: 35,
+    height: 35,
+    marginRight: 4
+  },
+  deleteButtonTH: {
+    flex: 1,
+    backgroundColor: 'white',
+    marginTop: 20,
+    width: 35,
+    height: 35,
+    marginLeft: 4,
+    marginBottom: 4
   },
   boldLabel: {
     fontWeight: 'bold',
@@ -32,12 +42,25 @@ export default StyleSheet.create({
     marginVertical: Metrics.smallMargin,
     marginBottom: 20
   },
-  boldTime: {
+  boldDate: {
     fontWeight: 'bold',
     alignSelf: 'center',
     color: '#004c40',
     textAlign: 'center',
     marginVertical: Metrics.smallMargin
+  },
+  boldTime: {
+    fontWeight: 'bold',
+    alignSelf: 'center',
+    color: '#004c40',
+    textAlign: 'center',
+    marginVertical: Metrics.smallMargin,
+    marginBottom: 20
+  },
+  footer: {
+    height: 50,
+    backgroundColor: 'white',
+    flexDirection: 'row',
+    alignItems: 'center'
   }
-
 })

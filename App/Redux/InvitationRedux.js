@@ -8,6 +8,8 @@ const { Types, Creators } = createActions({
   invitationRequestFailed: ['error'],
   fetchSentInvitations: ['userId'],
   fetchSentInvitationsSuccess: ['sentInvitations'],
+  fetchSentInvitationsByMeeting: ['userId', 'meetingId'],
+  fetchSentInvitationsByMeetingSuccess: ['meetingInvitations'],
   fetchReceivedInvitations: ['userId'],
   fetchReceivedInvitationsSuccess: ['receivedInvitations'],
   updateInvitationAccepted: ['userId', 'meetingId', 'invitationId', 'accepted'],
@@ -22,13 +24,14 @@ export default Creators
 export const INITIAL_STATE = Immutable({
   sentInvitations: null,
   receivedInvitations: null,
+  meetingInvitations: null,
   fetching: false
 })
 
 /* ------------- reducers ------------- */
 
 // we're attempting to login
-export const request = (state) => state.merge({ fetching: true })
+export const request = state => state.merge({ fetching: true })
 
 // we've had a problem
 export const failure = (state, { error }) =>
@@ -52,18 +55,29 @@ export const receivedInvitationsFetched = (state, { receivedInvitations }) => {
 }
 
 export const updateReceivedInvitation = (state, { invitation }) => {
-  const receivedInvitations = state.receivedInvitations.map((receivedInvitation) => {
-    if (receivedInvitation.id === invitation.id) {
-      return invitation
-    }
+  const receivedInvitations = state.receivedInvitations.map(
+    receivedInvitation => {
+      if (receivedInvitation.id === invitation.id) {
+        return invitation
+      }
 
-    return receivedInvitation
-  })
+      return receivedInvitation
+    }
+  )
 
   return state.merge({
     fetching: false,
     error: null,
     receivedInvitations: receivedInvitations
+  })
+}
+
+export const invitationsByMeetingFetched = (state, {meetingInvitations}) => {
+  debugger
+  return state.merge({
+    fetching: false,
+    error: null,
+    meetingInvitations: meetingInvitations
   })
 }
 
@@ -74,5 +88,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.INVITATION_REQUEST_FAILED]: failure,
   [Types.FETCH_SENT_INVITATIONS_SUCCESS]: sentInvitationsFetched,
   [Types.FETCH_RECEIVED_INVITATIONS_SUCCESS]: receivedInvitationsFetched,
-  [Types.RECEIVED_INVITATION_CHANGED_SUCCESS]: updateReceivedInvitation
+  [Types.RECEIVED_INVITATION_CHANGED_SUCCESS]: updateReceivedInvitation,
+  [Types.FETCH_SENT_INVITATIONS_BY_MEETING_SUCCESS]: invitationsByMeetingFetched
 })

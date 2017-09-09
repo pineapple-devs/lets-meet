@@ -1,8 +1,8 @@
-import {call, put} from 'redux-saga/effects'
+import { call, put } from 'redux-saga/effects'
 import InvitationActions from '../Redux/InvitationRedux'
 
 export function* getSentInvitations (api, action) {
-  const {userId} = action
+  const { userId } = action
 
   yield put(InvitationActions.performingInvitationRequest())
 
@@ -16,7 +16,7 @@ export function* getSentInvitations (api, action) {
 }
 
 export function* getReceivedInvitations (api, action) {
-  const {userId} = action
+  const { userId } = action
 
   yield put(InvitationActions.performingInvitationRequest())
 
@@ -30,18 +30,42 @@ export function* getReceivedInvitations (api, action) {
 }
 
 export function* updateInvitationAccepted (api, action) {
-  const {userId, meetingId, invitationId, accepted} = action
+  const { userId, meetingId, invitationId, accepted } = action
 
   yield put(InvitationActions.performingInvitationRequest())
 
-  const response = yield call(api.updateInvitationAccepted,
-                              userId,
-                              meetingId,
-                              invitationId,
-                              accepted)
+  const response = yield call(
+    api.updateInvitationAccepted,
+    userId,
+    meetingId,
+    invitationId,
+    accepted
+  )
 
   if (response.ok) {
-    yield put(InvitationActions.receivedInvitationChangedSuccess(response.data))
+    yield put(
+      InvitationActions.receivedInvitationChangedSuccess(response.data)
+    )
+  } else {
+    yield put(InvitationActions.invitationRequestFailed())
+  }
+}
+
+export function* getSentInvitationsByMeeting (api, action) {
+  const { userId, meetingId } = action
+
+  yield put(InvitationActions.performingInvitationRequest())
+
+  const response = yield call(
+    api.getInvitationsByMeeting,  // ovo je funkcija definisana u services
+    userId,
+    meetingId
+  )
+
+  if (response.ok) {
+    yield put(
+      InvitationActions.fetchSentInvitationsByMeetingSuccess(response.data)
+    )
   } else {
     yield put(InvitationActions.invitationRequestFailed())
   }

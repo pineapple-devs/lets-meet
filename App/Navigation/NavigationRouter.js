@@ -98,7 +98,7 @@ class NavigationRouter extends Component {
             <Scene
               key='addMeetingForm'
               component={AddMeetingForm}
-              title='Add New Meeting'
+              title='New meeting'
               sceneStyle={{ paddingTop: 54 }}
               onRight={() => { console.log('Save new meeting') }}
               rightTitle='Save'
@@ -108,7 +108,7 @@ class NavigationRouter extends Component {
             <Scene
               key='editMeetingForm'
               component={EditMeetingForm}
-              title='Edit'
+              title='Edit meeting'
               sceneStyle={{ paddingTop: 54 }}
               onRight={() => { console.log('Save changes') }}
               rightTitle='Save'
@@ -117,13 +117,13 @@ class NavigationRouter extends Component {
             />
             <Scene
               key='sentInvitationsScreen'
-              title='Sent Invitations'
+              title='Sent invitations'
               component={SentInvitationsScreen}
               sceneStyle={{ paddingTop: 54 }}
             />
             <Scene
               key='receivedInvitationsScreen'
-              title='Received Invitations'
+              title='Received invitations'
               component={ReceivedInvitationsScreen}
               sceneStyle={{ paddingTop: 54 }}
             />
