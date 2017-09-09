@@ -6,7 +6,8 @@ import {
   TextInput,
   TouchableOpacity,
   Keyboard,
-  LayoutAnimation
+  LayoutAnimation,
+  ToastAndroid
 } from 'react-native'
 import { connect } from 'react-redux'
 import Styles from './Styles/LoginScreenStyles'
@@ -42,6 +43,14 @@ class LoginScreen extends React.Component {
     if (newProps.userId) {
       // NavigationActions.pop()
       NavigationActions.launchScreen({ hideNavBar: false })
+    }
+
+    if (newProps.error) {
+      ToastAndroid.showWithGravity(
+        newProps.error,
+        ToastAndroid.SHORT,
+        ToastAndroid.BOTTOM,
+      )
     }
   }
 

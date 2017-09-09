@@ -3,6 +3,7 @@ import API from '../Services/Api'
 import MeetingAPI from '../Services/MeetingApi'
 import LoginAPI from '../Services/LoginApi'
 import InvitationApi from '../Services/InvitationApi'
+import NotificationApi from '../Services/NotificationApi'
 import FixtureAPI from '../Services/FixtureApi'
 import DebugConfig from '../Config/DebugConfig'
 
@@ -14,6 +15,7 @@ import { LoginTypes } from '../Redux/LoginRedux'
 import { OpenScreenTypes } from '../Redux/OpenScreenRedux'
 import { MeetingTypes } from '../Redux/MeetingRedux'
 import { InvitationTypes } from '../Redux/InvitationRedux'
+import { NotificationTypes } from '../Redux/NotificationRedux'
 
 /* ------------- Sagas ------------- */
 
@@ -28,6 +30,7 @@ import {
   updateInvitationAccepted,
   getSentInvitationsByMeeting
 } from './InvitationSagas'
+import { notificationSignup } from './NotificationSagas'
 
 /* ------------- API ------------- */
 
@@ -37,6 +40,7 @@ const api = DebugConfig.useFixtures ? FixtureAPI : API.create()
 const meetingApi = MeetingAPI.create()
 const loginApi = LoginAPI.create()
 const invitationApi = InvitationApi.create()
+const notificationApi = NotificationApi.create()
 
 /* ------------- Connect Types To Sagas ------------- */
 
@@ -73,5 +77,8 @@ export default function* root () {
       invitationApi
     ),
     takeLatest(InvitationTypes.FETCH_SENT_INVITATIONS_BY_MEETING, getSentInvitationsByMeeting, invitationApi)
+
+    // notification sagas
+    takeLatest(NotificationTypes.NOTIFICATION_SIGNUP, notificationSignup, notificationApi)
   ]
 }
