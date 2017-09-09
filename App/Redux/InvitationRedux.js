@@ -72,8 +72,7 @@ export const updateReceivedInvitation = (state, { invitation }) => {
   })
 }
 
-export const invitationsByMeetingFetched = (state, {meetingInvitations}) => {
-  debugger
+export const invitationsByMeetingFetched = (state, { meetingInvitations }) => {
   return state.merge({
     fetching: false,
     error: null,

@@ -9,13 +9,11 @@ import {
   ToastAndroid,
   TextInput,
   Button,
-  KeyboardAvoidingView,
-  View
+  KeyboardAvoidingView
 } from 'react-native'
 import CheckBox from 'react-native-check-box'
 import { DatePicker } from 'react-native-ui-xg'
 import { Actions as NavigationActions } from 'react-native-router-flux'
-import Icon from 'react-native-vector-icons/FontAwesome'
 
 import {
   Form,

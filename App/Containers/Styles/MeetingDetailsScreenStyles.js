@@ -1,7 +1,7 @@
 import { StyleSheet, Dimensions } from 'react-native'
 import { Metrics, ApplicationStyles } from '../../Themes/'
 
-var {height, width} = Dimensions.get('window')
+var { height, width } = Dimensions.get('window')
 
 export default StyleSheet.create({
   ...ApplicationStyles.screen,
@@ -12,7 +12,8 @@ export default StyleSheet.create({
     paddingTop: 20,
     backgroundColor: 'white',
     alignSelf: 'center',
-    width: width
+    width: width,
+    height: height
   },
   text: {
     textAlign: 'center'
