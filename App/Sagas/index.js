@@ -76,7 +76,7 @@ export default function* root () {
       updateInvitationAccepted,
       invitationApi
     ),
-    takeLatest(InvitationTypes.FETCH_SENT_INVITATIONS_BY_MEETING, getSentInvitationsByMeeting, invitationApi)
+    takeLatest(InvitationTypes.FETCH_SENT_INVITATIONS_BY_MEETING, getSentInvitationsByMeeting, invitationApi),
 
     // notification sagas
     takeLatest(NotificationTypes.NOTIFICATION_SIGNUP, notificationSignup, notificationApi)
