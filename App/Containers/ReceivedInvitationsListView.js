@@ -38,12 +38,11 @@ class ReceivedInvitationsListView extends React.Component {
     const startDate = Moment(rowData.meeting.start_date).format('MMM DD, YYYY HH:mm')
     const endDate = Moment(rowData.meeting.end_date).format('MMM DD, YYYY HH:mm')
     const accepted = rowData.accepted
-    const noName = <Text style={styles.noName}>No name meeting</Text>
 
     return (
       <View style={styles.row}>
         <Text style={styles.boldLabel}>
-          <Icon name='user-o' size={13} /> &nbsp;{name} invited you to {meetingTitle ? {meetingTitle} : noName}
+          <Icon name='user-o' size={13} /> &nbsp;{name} invited you to { meetingTitle }
         </Text>
         {meetingDescription &&
         <Text style={styles.label}>

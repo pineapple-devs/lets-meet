@@ -62,7 +62,7 @@ export default StyleSheet.create({
   boldPeople: {
     fontWeight: 'bold',
     color: '#004c40',
-    textAlign: 'left',
+    textAlign: 'center',
     marginVertical: Metrics.smallMargin
   },
   viewPeople: {
