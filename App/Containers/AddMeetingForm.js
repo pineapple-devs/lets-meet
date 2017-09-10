@@ -48,6 +48,7 @@ export class AddMeetingForm extends Component {
   componentWillReceiveProps (newProps) {
     if (newProps.meeting) {
       NavigationActions.meetingsScreen()
+      NavigationActions.pop()
     }
   }
 
@@ -127,7 +128,8 @@ export class AddMeetingForm extends Component {
   render () {
     const GooglePlacesInputField = GooglePlacesInput(
       this.props.googlePlacesApiKey,
-      this.setLocation
+      this.setLocation,
+      this.state.location
     )
 
     return (
@@ -287,6 +289,7 @@ export class AddMeetingForm extends Component {
           <Text>{JSON.stringify(this.state.startDate)}</Text>
           <Text>{JSON.stringify(this.state.endDate)}</Text>
           <Text>{JSON.stringify(this.state.guests)}</Text>
+          <Text>{JSON.stringify(this.state.location)}</Text>
 
           <Button
             icon='md-checkmark'
