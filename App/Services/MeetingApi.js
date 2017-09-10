@@ -58,6 +58,10 @@ const create = (baseURL = 'https://lets-meet-api.herokuapp.com/') => {
     return api.delete(`users/${userId}/meetings/${meetingId}`)
     .then(response => response)
   }
+  const updateMeeting = (userId, meetingId, meetingParams) => {
+    return api.put(`users/${userId}/meetings/${meetingId}`, meetingParams)
+    .then(response => response)
+  }
 
   // ------
   // STEP 3
@@ -77,7 +81,8 @@ const create = (baseURL = 'https://lets-meet-api.herokuapp.com/') => {
     getMeetings,
     getMeeting,
     createMeeting,
-    destroyMeeting
+    destroyMeeting,
+    updateMeeting
   }
 }
 

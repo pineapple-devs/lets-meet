@@ -29,7 +29,8 @@ import {
   getMeetings,
   getMeeting,
   createMeeting,
-  destroyMeeting
+  destroyMeeting,
+  updateMeeting
 } from './MeetingSagas'
 import {
   getSentInvitations,
@@ -69,6 +70,7 @@ export default function* root () {
     takeLatest(MeetingTypes.SHOW_MEETING, getMeeting, meetingApi),
     takeLatest(MeetingTypes.CREATE_MEETING, createMeeting, meetingApi),
     takeLatest(MeetingTypes.DESTROY_MEETING_REQUEST, destroyMeeting, meetingApi),
+    takeLatest(MeetingTypes.UPDATE_MEETING, updateMeeting, meetingApi),
 
     // invitation sagas
     takeLatest(

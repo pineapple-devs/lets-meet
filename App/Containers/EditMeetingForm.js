@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MeetingActions from '../Redux/MeetingRedux'
+import GooglePlacesInput from '../Services/GooglePlacesAutoComplete'
 
 import { Text, ScrollView, TouchableHighlight } from 'react-native'
 import { DatePicker } from 'react-native-ui-xg'
@@ -12,7 +13,7 @@ import {
   InputField
 } from 'react-native-form-generator'
 
-export class AddMeetingForm extends Component {
+export class EditMeetingForm extends Component {
   constructor (props) {
     super(props)
 
@@ -20,17 +21,15 @@ export class AddMeetingForm extends Component {
       formData: {},
       startDate: this.props.meetingData.start_time,
       endDate: this.props.meetingData.end_time,
-      showModal: false
+      location: this.props.meetingData.location
     }
 
     this.handleSubmit = this.handleSubmit.bind(this)
+    this.setLocation = this.setLocation.bind(this)
   }
 
   componentWillReceiveProps (newProps) {
-    if (newProps.meeting) {
-      this.props.screenProps.toggle()
-      NavigationActions.meetingsScreen()
-    }
+    NavigationActions.meetingsScreen()
   }
 
   handleFormChange (formData) {
@@ -43,25 +42,37 @@ export class AddMeetingForm extends Component {
   }
 
   handleSubmit () {
-    // call API here and create meeting
+    const meetingId = this.props.meetingData.meeting_id
     const formData = this.state.formData
     const userId = this.props.userId
     const startTime = this.state.startDate
     const endTime = this.state.endDate
+    const location = this.state.location
 
     const meetingParams = {
       meeting: {
         title: formData.meetingName,
         description: formData.meetingDescription,
-        user_id: userId
+        user_id: userId,
+        location: location
       },
       intervals: [{ start_time: startTime, end_time: endTime }]
     }
 
-    this.props.createMeeting(userId, meetingParams)
+    this.props.updateMeeting(userId, meetingId, meetingParams)
+  }
+
+  setLocation (location) {
+    this.setState({ location })
   }
 
   render () {
+    const GooglePlacesInputField = GooglePlacesInput(
+      this.props.googlePlacesApiKey,
+      this.setLocation,
+      this.state.location
+    )
+
     return (
       <ScrollView
         keyboardShouldPersistTaps='always'
@@ -135,6 +146,11 @@ export class AddMeetingForm extends Component {
               this.setState({ endDate: chosenDate })
             }}
           />
+
+          <Text style={{ marginTop: 20 }} >
+            {'Where will your meeting take place?'}
+          </Text>
+          {GooglePlacesInputField}
         </Form>
 
         <Text>{JSON.stringify(this.state.formData)}</Text>
@@ -157,16 +173,17 @@ const mapStateToProps = state => {
   return {
     fetching: state.meeting.fetching,
     userId: state.login.userId,
+    googlePlacesApiKey: state.login.googlePlacesApiKey,
     meeting: state.meeting.meeting
   }
 }
 
 const mapDispatchToProps = dispatch => {
   return {
-    createMeeting: (userId, meetingParams) => {
-      return dispatch(MeetingActions.createMeeting(userId, meetingParams))
+    updateMeeting: (userId, meetingId, meetingParams) => {
+      return dispatch(MeetingActions.updateMeeting(userId, meetingId, meetingParams))
     }
   }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(AddMeetingForm)
+export default connect(mapStateToProps, mapDispatchToProps)(EditMeetingForm)

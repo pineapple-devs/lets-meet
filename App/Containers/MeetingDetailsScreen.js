@@ -25,7 +25,7 @@ class MeetingDetailsScreen extends React.Component {
 
   componentDidMount () {
     const userId = this.props.userId
-    const meetingId = this.props.meetingData.id
+    const meetingId = this.props.meetingData.meeting_id
     if (!this.props.fetching) {
       this.props.fetchMeetings(userId, meetingId)
     }
@@ -33,7 +33,7 @@ class MeetingDetailsScreen extends React.Component {
 
   showAlert () {
     const userId = this.props.userId
-    const meetingId = this.props.meetingData.id
+    const meetingId = this.props.meetingData.meeting_id
 
     Alert.alert(
       'Are you sure you want to delete this meeting?',
