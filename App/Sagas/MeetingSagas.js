@@ -37,8 +37,20 @@ export function* createMeeting (api, action) {
   yield put(MeetingActions.performingRequest())
 
   if (response.ok) {
-    yield put(MeetingActions.fetchMeetingSuccess(response.data))
+    yield put(MeetingActions.createMeetingSuccess(response.data))
   } else {
     yield put(MeetingActions.requestFailed())
+  }
+}
+
+export function* destroyMeeting (api, action) {
+  const {userId, meetingId} = action
+
+  const response = yield call(api.destroyMeeting, userId, meetingId)
+
+  if (response.ok) {
+    yield put(MeetingActions.destroyMeetingSuccess(meetingId))
+  } else {
+    yield put(MeetingActions.requestFailed("Couldn't destory a meeting"))
   }
 }

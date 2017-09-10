@@ -45,9 +45,7 @@ class SentInvitationsListView extends React.Component {
 
   componentDidMount () {
     const userId = this.props.userId
-    if (!this.props.fetching) {
-      this.props.fetchSentInvitations(userId)
-    }
+    this.props.fetchSentInvitations(userId)
   }
 
   componentWillReceiveProps (newProps) {

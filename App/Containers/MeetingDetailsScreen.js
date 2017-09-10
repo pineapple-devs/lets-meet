@@ -10,14 +10,18 @@ import { Actions } from 'react-native-router-flux'
 import Icon from 'react-native-vector-icons/FontAwesome'
 import dateFormat from 'dateformat'
 import InvitationActions from '../Redux/InvitationRedux'
+import MeetingActions from '../Redux/MeetingRedux'
 import { connect } from 'react-redux'
+
 // Styles
 import styles from './Styles/MeetingDetailsScreenStyles'
 
 class MeetingDetailsScreen extends React.Component {
-  state = {
-    modalVisible: false
-  };
+  constructor () {
+    super()
+
+    this.showAlert = this.showAlert.bind(this)
+  }
 
   componentDidMount () {
     const userId = this.props.userId
@@ -28,15 +32,24 @@ class MeetingDetailsScreen extends React.Component {
   }
 
   showAlert () {
+    const userId = this.props.userId
+    const meetingId = this.props.meetingData.id
+
     Alert.alert(
       'Are you sure you want to delete this meeting?',
       '',
       [
         { text: 'Cancel', onPress: () => Actions.pop, style: 'cancel' },
-        { text: 'OK', onPress: () => console.log('Meeting deleted.') }
+        { text: 'OK', onPress: () => this.handleDestroyMeeting(userId, meetingId) }
       ],
       { cancelable: true }
     )
+  }
+
+  handleDestroyMeeting (userId, meetingId) {
+    this.props.destroyMeeting(userId, meetingId)
+    Actions.pop()
+    Actions.meetingsScreen()
   }
 
   render () {
@@ -69,14 +82,16 @@ class MeetingDetailsScreen extends React.Component {
 
           <Text style={styles.text}>Where?</Text>
           <Text style={styles.boldLabel}>
-            {this.props.meetingData.location != null ? (
+            {this.props.meetingData.location ? (
               this.props.meetingData.location
             ) : (
               'No location info, sorry.'
             )}
           </Text>
 
-          <Text style={styles.text}>Who else is going?</Text>
+          {this.props.invitations.length > 0 &&
+            <Text style={styles.text}>Who else is going?</Text>
+          }
           {this.props.invitations &&
             this.props.invitations.map(invitation => (
               <Text style={styles.boldLabel} key={invitation.email}>
@@ -138,7 +153,9 @@ const mapDispatchToProps = dispatch => {
     fetchMeetings: (userId, meetingId) =>
       dispatch(
         InvitationActions.fetchSentInvitationsByMeeting(userId, meetingId)
-      )
+      ),
+    destroyMeeting: (userId, meetingId) =>
+      dispatch(MeetingActions.destroyMeetingRequest(userId, meetingId))
   }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(

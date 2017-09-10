@@ -44,21 +44,19 @@ const create = (baseURL = 'https://lets-meet-api.herokuapp.com/') => {
   const getRoot = () => api.get('')
   const getMeetings = (userId) => {
     return api.get(`users/${userId}/meetings`)
-    .then((response) => {
-      return response
-    })
+    .then(response => response)
   }
   const getMeeting = (userId, meetingId) => {
     return api.get(`users/${userId}/meetings/${meetingId}`)
-    .then((response) => {
-      return response
-    })
+    .then(response => response)
   }
   const createMeeting = (userId, meetingParams) => {
     return api.post(`users/${userId}/meetings`, meetingParams)
-    .then((response) => {
-      return response
-    })
+    .then(response => response)
+  }
+  const destroyMeeting = (userId, meetingId) => {
+    return api.delete(`users/${userId}/meetings/${meetingId}`)
+    .then(response => response)
   }
 
   // ------
@@ -78,7 +76,8 @@ const create = (baseURL = 'https://lets-meet-api.herokuapp.com/') => {
     getRoot,
     getMeetings,
     getMeeting,
-    createMeeting
+    createMeeting,
+    destroyMeeting
   }
 }
 

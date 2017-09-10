@@ -1,10 +1,10 @@
 import React from 'react'
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete'
 
-const GooglePlacesInput = (apiKey, setLocation) => {
+const GooglePlacesInput = (apiKey, setLocation, location) => {
   return (
     <GooglePlacesAutocomplete
-      placeholder='Search'
+      placeholder={location || 'Search'}
       minLength={2} // minimum length of text to search
       autoFocus={false}
       returnKeyType={'search'}
