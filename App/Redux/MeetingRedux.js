@@ -13,6 +13,8 @@ const { Types, Creators } = createActions({
   showMeetingSuccess: ['meeting'],
   createMeeting: ['userId', 'meetingParams'],
   createMeetingSuccess: ['meeting'],
+  updateMeeting: ['userId', 'meetingId', 'meetingParams'],
+  updateMeetingSuccess: ['meeting'],
   destroyMeetingRequest: ['userId', 'meetingId'],
   destroyMeetingSuccess: ['meetingId']
 })
@@ -96,6 +98,26 @@ export const addMeeting = (state, { meeting }) => {
   })
 }
 
+export const updateMeeting = (state, { meeting }) => {
+  const meetings = state.meetings.map(
+    existingMeeting => {
+      if (meeting.id === existingMeeting.id) {
+        return meeting
+      }
+
+      return existingMeeting
+    }
+  )
+
+  return state.merge({
+    fetching: false,
+    error: null,
+    meeting: meeting,
+    meetings: meetings,
+    intervals: formIntervalsWithMeetingInfo(meeting)
+  })
+}
+
 export const removeMeeting = (state, { meetingId }) => {
   const meetings = state.meetings.filter(meeting => meeting.id !== meetingId)
 
@@ -120,5 +142,6 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.FETCH_MEETING_SUCCESS]: meetingFetched,
   [Types.SHOW_MEETING_SUCCESS]: meetingFetched,
   [Types.CREATE_MEETING_SUCCESS]: addMeeting,
+  [Types.UPDATE_MEETING_SUCCESS]: updateMeeting,
   [Types.DESTROY_MEETING_SUCCESS]: removeMeeting
 })
