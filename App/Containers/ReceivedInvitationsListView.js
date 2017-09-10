@@ -34,8 +34,8 @@ class ReceivedInvitationsListView extends React.Component {
     const name = rowData.meeting.user.name
     const meetingTitle = rowData.meeting.title
     const meetingDescription = rowData.meeting.description
-    const startDate = Moment(rowData.meeting.start_date).format('MMM d, YYYY HH:mm')
-    const endDate = Moment(rowData.meeting.end_date).format('MMM d, YYYY HH:mm')
+    const startDate = Moment(rowData.meeting.start_date).format('MMM DD, YYYY HH:mm')
+    const endDate = Moment(rowData.meeting.end_date).format('MMM DD, YYYY HH:mm')
     const accepted = rowData.accepted
 
     return (

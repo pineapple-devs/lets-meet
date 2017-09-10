@@ -49,7 +49,6 @@ export class AddMeetingForm extends Component {
 
   componentWillReceiveProps (newProps) {
     if (newProps.meeting) {
-      this.props.screenProps.toggle()
       NavigationActions.meetingsScreen()
     }
   }

@@ -7,7 +7,8 @@ const rootReducer = combineReducers({
   login: require('./LoginRedux').reducer,
   search: require('./SearchRedux').reducer,
   meeting: require('./MeetingRedux').reducer,
-  invitation: require('./InvitationRedux').reducer
+  invitation: require('./InvitationRedux').reducer,
+  user: require('./UserRedux').reducer
 })
 
 export default configureStore(rootReducer, rootSaga)

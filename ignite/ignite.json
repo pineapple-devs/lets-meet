@@ -2,11 +2,12 @@
   "createdWith": "2.0.0-beta.8",
   "examples": "classic",
   "generators": {
-    "component": "ignite-ir-boilerplate-2016",
-    "container": "ignite-ir-boilerplate-2016",
-    "listview": "ignite-ir-boilerplate-2016",
-    "redux": "ignite-ir-boilerplate-2016",
-    "saga": "ignite-ir-boilerplate-2016",
-    "screen": "ignite-ir-boilerplate-2016"
+    "component": "ignite-ir-boilerplate",
+    "container": "ignite-ir-boilerplate",
+    "listview": "ignite-ir-boilerplate",
+    "redux": "ignite-ir-boilerplate",
+    "saga": "ignite-ir-boilerplate",
+    "screen": "ignite-ir-boilerplate",
+    "list": "ignite-ir-boilerplate"
   }
 }

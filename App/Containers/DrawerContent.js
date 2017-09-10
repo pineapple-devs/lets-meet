@@ -85,12 +85,12 @@ class DrawerContent extends Component {
 
         <MenuItem
           onPress={() => {
-            Actions.profileScreen()
+            Actions.settingsScreen()
             this.context.drawer.close()
           }}
         >
           <Icon name='user' size={20} style={styles.iconStyle} />
-          &nbsp;&nbsp; Profile
+          &nbsp;&nbsp; Settings
         </MenuItem>
 
         <MenuItem
