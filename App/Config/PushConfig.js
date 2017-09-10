@@ -19,7 +19,7 @@ PushNotification.configure({
     if (__DEV__) console.log('NOTIFICATION:', notification)
 
     const userId = store.getState().login.userId
-    if (userId === notification.user_id) {
+    if (`${userId}` === notification.user_id) {
       PushNotification.localNotification({
         title: notification.title,
         message: notification.body
