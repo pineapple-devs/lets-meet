@@ -113,7 +113,11 @@ class MeetingDetailsScreen extends React.Component {
             style={styles.deleteButtonTH}
             onPress={() => this.showAlert()}
           >
-            <Icon name='trash-o' size={35} color='#004c40' />
+            <Icon
+              name='trash-o'
+              size={35}
+              color='#004c40'
+            />
           </TouchableHighlight>
         </View>
       </View>
