@@ -24,7 +24,8 @@ export default StyleSheet.create({
     marginTop: 20,
     width: 35,
     height: 35,
-    marginRight: 4
+    marginRight: 4,
+    marginBottom: 20
   },
   deleteButtonTH: {
     flex: 1,
@@ -33,7 +34,7 @@ export default StyleSheet.create({
     width: 35,
     height: 35,
     marginLeft: 4,
-    marginBottom: 4
+    marginBottom: 25
   },
   boldLabel: {
     fontWeight: 'bold',
@@ -73,6 +74,7 @@ export default StyleSheet.create({
     height: 50,
     backgroundColor: 'white',
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginBottom: 20
   }
 })

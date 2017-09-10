@@ -9,9 +9,7 @@ import Icon from 'react-native-vector-icons/FontAwesome'
 
 import {
   Form,
-  InputField,
-  SwitchField,
-  PickerField
+  InputField
 } from 'react-native-form-generator'
 
 export class AddMeetingForm extends Component {
@@ -82,24 +80,6 @@ export class AddMeetingForm extends Component {
             ref='meetingDescription'
             value={this.props.meetingData.description}
           />
-
-          <SwitchField
-            label='Repeat'
-            ref='repeat'
-            helpText='Check if you want your meeting to repeat.'
-          />
-
-          {this.state.formData.repeat && (
-            <PickerField
-              ref='repeatFrequency'
-              label='Repeat settings'
-              options={{
-                every_day: 'Every day',
-                every_week: 'Every week',
-                every_month: 'Every month'
-              }}
-            />
-          )}
 
           {/*
           DatePicker is not from react-native-form-generator package
