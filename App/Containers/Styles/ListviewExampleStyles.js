@@ -38,5 +38,9 @@ export default StyleSheet.create({
   backgroundImage: {
     flex: 1,
     resizeMode: 'cover' // or 'stretch'
+  },
+  noName: {
+    fontStyle: 'italic',
+    fontWeight: 'normal'
   }
 })

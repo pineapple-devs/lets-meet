@@ -180,7 +180,6 @@ export class AddMeetingForm extends Component {
             */}
             <Text
               style={{
-                backgroundColor: 'yellow',
                 marginTop: 20,
                 width: 100,
                 flexDirection: 'row',
@@ -209,9 +208,6 @@ export class AddMeetingForm extends Component {
                 },
                 dateInput: {
                   marginLeft: 36
-                },
-                iconSource: {
-                  uri: 'https://facebook.github.io/react/img/logo_og.png'
                 }
               }}
               minuteInterval={10}
@@ -222,7 +218,6 @@ export class AddMeetingForm extends Component {
 
             <Text
               style={{
-                backgroundColor: 'yellow',
                 marginTop: 20,
                 width: 100,
                 flexDirection: 'row',
@@ -259,7 +254,6 @@ export class AddMeetingForm extends Component {
 
           <Text
             style={{
-              backgroundColor: 'yellow',
               marginTop: 20,
               width: 100,
               flexDirection: 'row',
@@ -294,7 +288,6 @@ export class AddMeetingForm extends Component {
 
           <Text
             style={{
-              backgroundColor: 'yellow',
               marginTop: 20
             }}
           >
@@ -326,7 +319,8 @@ const mapStateToProps = state => {
     fetching: state.meeting.fetching,
     userId: state.login.userId,
     googlePlacesApiKey: state.login.googlePlacesApiKey,
-    meeting: state.meeting.meeting
+    meeting: state.meeting.meeting,
+    onPress: this.handleSubmit
   }
 }
 

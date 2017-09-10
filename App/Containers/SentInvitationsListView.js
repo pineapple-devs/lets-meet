@@ -2,6 +2,7 @@ import React from 'react'
 import {View, Text, ListView, TouchableOpacity} from 'react-native'
 import {connect} from 'react-redux'
 import InvitationsActions from '../Redux/InvitationRedux'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 // For empty lists
 import AlertMessage from '../Components/AlertMessage'
@@ -27,7 +28,7 @@ class SentInvitationsListView extends React.Component {
     return (
       <TouchableOpacity onPress={() => console.log(rowData)}>
         <View style={styles.row}>
-          <Text style={styles.boldLabel}>{rowData.email}</Text>
+          <Text style={styles.boldLabel}><Icon name='user' size={13} /> &nbsp;{rowData.email}</Text>
           <Text style={styles.label}>
             {rowData.accepted === null && "They haven't answered yet."}
             {rowData.accepted === true && 'They have accepted! Yay!'}

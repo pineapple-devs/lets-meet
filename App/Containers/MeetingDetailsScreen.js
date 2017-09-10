@@ -77,20 +77,14 @@ class MeetingDetailsScreen extends React.Component {
           </Text>
 
           <Text style={styles.text}>Who else is going?</Text>
-          {this.props.invitations &&
+          <View style={styles.viewPeople}>
+            {this.props.invitations &&
             this.props.invitations.map(invitation => (
-              <Text style={styles.boldLabel} key={invitation.email}>
+              <Text style={styles.boldPeople} key={invitation.email}>
                 <Icon name='user' size={13} /> &nbsp;{invitation.email}
               </Text>
             ))}
-
-          <View
-            style={{
-              backgroundColor: 'yellow',
-              flexDirection: 'row',
-              marginBottom: 15
-            }}
-          />
+          </View>
         </ScrollView>
 
         <View style={styles.footer}>

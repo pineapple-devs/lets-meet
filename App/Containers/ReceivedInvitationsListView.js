@@ -4,6 +4,7 @@ import {connect} from 'react-redux'
 import InvitationsActions from '../Redux/InvitationRedux'
 import RoundedButton from '../Components/RoundedButton'
 import Moment from 'moment'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 // For empty lists
 import AlertMessage from '../Components/AlertMessage'
@@ -37,11 +38,12 @@ class ReceivedInvitationsListView extends React.Component {
     const startDate = Moment(rowData.meeting.start_date).format('MMM DD, YYYY HH:mm')
     const endDate = Moment(rowData.meeting.end_date).format('MMM DD, YYYY HH:mm')
     const accepted = rowData.accepted
+    const noName = <Text style={styles.noName}>No name meeting</Text>
 
     return (
       <View style={styles.row}>
         <Text style={styles.boldLabel}>
-          {name} invited you to {meetingTitle}
+          <Icon name='user-o' size={13} /> &nbsp;{name} invited you to {meetingTitle ? {meetingTitle} : noName}
         </Text>
         {meetingDescription &&
         <Text style={styles.label}>

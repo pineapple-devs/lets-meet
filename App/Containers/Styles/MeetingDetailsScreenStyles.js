@@ -58,6 +58,17 @@ export default StyleSheet.create({
     marginVertical: Metrics.smallMargin,
     marginBottom: 20
   },
+  boldPeople: {
+    fontWeight: 'bold',
+    color: '#004c40',
+    textAlign: 'left',
+    marginVertical: Metrics.smallMargin
+  },
+  viewPeople: {
+    flex: 0.7,
+    flexDirection: 'column',
+    alignSelf: 'center'
+  },
   footer: {
     height: 50,
     backgroundColor: 'white',

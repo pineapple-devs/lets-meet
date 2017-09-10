@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { TouchableOpacity, Text } from 'react-native'
 import styles from './Styles/NavItemsStyles'
 import { Actions as NavigationActions } from 'react-native-router-flux'
@@ -13,6 +13,7 @@ const openDrawer = () => {
 }
 
 export default {
+
   backButton () {
     return (
       <TouchableOpacity onPress={NavigationActions.pop}>
@@ -51,12 +52,8 @@ export default {
 
   saveButton () {
     return (
-      <TouchableOpacity onPress={this.PropTypes}>
-        <Icon name='save'
-          size={Metrics.icons.small}
-          color={Colors.snow}
-          style={styles.searchButton}
-        />
+      <TouchableOpacity onPress={PropTypes.func} >
+        <Text style={{ color: 'white', textAlign: 'right', fontSize: 17, textAlignVertical: 'center', flexDirection: 'row' }}>SaveSS</Text>
       </TouchableOpacity>
     )
   },

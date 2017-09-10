@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import { Scene, Router, Switch } from 'react-native-router-flux'
 import Styles from './Styles/NavigationBarStyles'
@@ -32,6 +32,10 @@ const loading = props => {
   )
 }
 class NavigationRouter extends Component {
+  static propTypes = {
+    onPress: PropTypes.func
+  }
+
   render () {
     return (
       <Router>
@@ -101,7 +105,7 @@ class NavigationRouter extends Component {
               component={AddMeetingForm}
               title='New meeting'
               sceneStyle={{ paddingTop: 54 }}
-              onRight={() => { console.log('Save new meeting') }}
+              onRight={() => { this.props.onPress }}
               rightTitle='Save'
               leftButtonIconStyle={Styles.leftButton}
               leftTitle='Cancel'
