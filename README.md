@@ -3,6 +3,10 @@
 
 * Standard compliant React Native App Utilizing [Ignite](https://github.com/infinitered/ignite)
 
+App that simplifies your meeting routine
+
+[![Demo](http://img.youtube.com/vi/vOQz4-EOsAQ/0.jpg)](http://www.youtube.com/watch?v=vOQz4-EOsAQ)
+
 ## :arrow_up: How to Setup
 
 **Step 1:** git clone this repo:

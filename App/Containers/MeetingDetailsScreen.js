@@ -92,7 +92,7 @@ class MeetingDetailsScreen extends React.Component {
             )}
           </Text>
 
-          {this.props.invitations.length > 0 && (
+          {this.props.invitations && this.props.invitations.length > 0 && (
             <Text style={styles.text}>Who else is going?</Text>
           )}
           {this.props.invitations &&

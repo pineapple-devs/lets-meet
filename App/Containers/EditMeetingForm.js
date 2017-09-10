@@ -153,10 +153,6 @@ export class EditMeetingForm extends Component {
           {GooglePlacesInputField}
         </Form>
 
-        <Text>{JSON.stringify(this.state.formData)}</Text>
-        <Text>{JSON.stringify(this.state.startDate)}</Text>
-        <Text>{JSON.stringify(this.state.endDate)}</Text>
-
         <TouchableHighlight
           underlyingColor='#cfcfcf'
           style={{ alignSelf: 'center' }}
