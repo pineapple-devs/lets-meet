@@ -1,4 +1,4 @@
-import React, { Component } from 'react'
+import React, { Component, PropTypes } from 'react'
 import { Text, View } from 'react-native'
 import { Scene, Router, Switch } from 'react-native-router-flux'
 import Styles from './Styles/NavigationBarStyles'
@@ -17,6 +17,7 @@ import SentInvitationsScreen from '../Containers/SentInvitationsScreen'
 import ReceivedInvitationsScreen from '../Containers/ReceivedInvitationsScreen'
 import AddMeetingForm from '../Containers/AddMeetingForm'
 import SettingsScreen from '../Containers/SettingsScreen'
+import NavItems from './NavItems'
 
 /* **************************
 * Documentation: https://github.com/aksonov/react-native-router-flux
@@ -32,6 +33,10 @@ const loading = props => {
   )
 }
 class NavigationRouter extends Component {
+  static propTypes = {
+    onPress: PropTypes.func
+  };
+
   render () {
     return (
       <Router>
@@ -101,20 +106,22 @@ class NavigationRouter extends Component {
               component={AddMeetingForm}
               title='New meeting'
               sceneStyle={{ paddingTop: 54 }}
-              onRight={() => { console.log('Save new meeting') }}
+              renderBackButton={NavItems.cancelButton}
+              onRight={() => {
+                console.log('Save changes')
+              }}
               rightTitle='Save'
-              leftButtonIconStyle={Styles.leftButton}
-              leftTitle='Cancel'
             />
             <Scene
               key='editMeetingForm'
               component={EditMeetingForm}
               title='Edit meeting'
               sceneStyle={{ paddingTop: 54 }}
-              onRight={() => { console.log('Save changes') }}
+              renderBackButton={NavItems.cancelButton}
+              onRight={() => {
+                console.log('Save changes')
+              }}
               rightTitle='Save'
-              leftButtonIconStyle={Styles.leftButton}
-              leftTitle='Cancel'
             />
             <Scene
               key='sentInvitationsScreen'

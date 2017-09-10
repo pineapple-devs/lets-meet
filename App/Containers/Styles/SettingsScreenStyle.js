@@ -7,7 +7,8 @@ export default StyleSheet.create({
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
+    marginTop: 18
   },
   boldLabel: {
     fontWeight: 'bold',

@@ -2,13 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import MeetingActions from '../Redux/MeetingRedux'
 
-import {
-  Text,
-  ScrollView,
-  Button
-} from 'react-native'
+import { Text, ScrollView, TouchableHighlight } from 'react-native'
 import { DatePicker } from 'react-native-ui-xg'
 import { Actions as NavigationActions } from 'react-native-router-flux'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import {
   Form,
@@ -76,9 +73,7 @@ export class AddMeetingForm extends Component {
           onChange={this.handleFormChange.bind(this)}
           label='New Meeting'
         >
-          <InputField
-            ref='meetingName'
-            value={this.props.meetingData.title} />
+          <InputField ref='meetingName' value={this.props.meetingData.title} />
 
           <InputField
             multiline
@@ -146,15 +141,13 @@ export class AddMeetingForm extends Component {
         <Text>{JSON.stringify(this.state.startDate)}</Text>
         <Text>{JSON.stringify(this.state.endDate)}</Text>
 
-        <Button
-          icon='md-checkmark'
-          iconPlacement='right'
+        <TouchableHighlight
+          underlyingColor='#cfcfcf'
+          style={{ alignSelf: 'center' }}
           onPress={this.handleSubmit}
-          title='Save'
         >
-          "Save"
-        </Button>
-
+          <Icon name='floppy-o' size={35} color='#004c40' />
+        </TouchableHighlight>
       </ScrollView>
     )
   }

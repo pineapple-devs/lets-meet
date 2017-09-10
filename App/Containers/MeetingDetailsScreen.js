@@ -40,7 +40,10 @@ class MeetingDetailsScreen extends React.Component {
       '',
       [
         { text: 'Cancel', onPress: () => Actions.pop, style: 'cancel' },
-        { text: 'OK', onPress: () => this.handleDestroyMeeting(userId, meetingId) }
+        {
+          text: 'OK',
+          onPress: () => this.handleDestroyMeeting(userId, meetingId)
+        }
       ],
       { cancelable: true }
     )
@@ -89,31 +92,24 @@ class MeetingDetailsScreen extends React.Component {
             )}
           </Text>
 
-          {this.props.invitations.length > 0 &&
+          {this.props.invitations.length > 0 && (
             <Text style={styles.text}>Who else is going?</Text>
-          }
+          )}
           {this.props.invitations &&
             this.props.invitations.map(invitation => (
-              <Text style={styles.boldLabel} key={invitation.email}>
+              <Text style={styles.boldPeople} key={invitation.email}>
                 <Icon name='user' size={13} /> &nbsp;{invitation.email}
               </Text>
             ))}
-
-          <View
-            style={{
-              backgroundColor: 'yellow',
-              flexDirection: 'row',
-              marginBottom: 15
-            }}
-          />
         </ScrollView>
-
         <View style={styles.footer}>
           <TouchableHighlight
             underlyingColor='#cfcfcf'
             style={styles.editButtonTH}
             onPress={() =>
-              Actions.editMeetingForm({ meetingData: this.props.meetingData })}
+              Actions.editMeetingForm({
+                meetingData: this.props.meetingData
+              })}
           >
             <Icon
               name='edit'
@@ -128,11 +124,7 @@ class MeetingDetailsScreen extends React.Component {
             style={styles.deleteButtonTH}
             onPress={() => this.showAlert()}
           >
-            <Icon
-              name='trash-o'
-              size={35}
-              color='#004c40'
-            />
+            <Icon name='trash-o' size={35} color='#004c40' />
           </TouchableHighlight>
         </View>
       </View>

@@ -8,12 +8,13 @@ import {
   ScrollView,
   ToastAndroid,
   TextInput,
-  Button,
-  KeyboardAvoidingView
+  KeyboardAvoidingView,
+  TouchableHighlight
 } from 'react-native'
 import CheckBox from 'react-native-check-box'
 import { DatePicker } from 'react-native-ui-xg'
 import { Actions as NavigationActions } from 'react-native-router-flux'
+import Icon from 'react-native-vector-icons/FontAwesome'
 
 import {
   Form,
@@ -163,7 +164,6 @@ export class AddMeetingForm extends Component {
             */}
             <Text
               style={{
-                backgroundColor: 'yellow',
                 marginTop: 20,
                 width: 100,
                 flexDirection: 'row',
@@ -192,9 +192,6 @@ export class AddMeetingForm extends Component {
                 },
                 dateInput: {
                   marginLeft: 36
-                },
-                iconSource: {
-                  uri: 'https://facebook.github.io/react/img/logo_og.png'
                 }
               }}
               minuteInterval={10}
@@ -205,7 +202,6 @@ export class AddMeetingForm extends Component {
 
             <Text
               style={{
-                backgroundColor: 'yellow',
                 marginTop: 20,
                 width: 100,
                 flexDirection: 'row',
@@ -242,7 +238,6 @@ export class AddMeetingForm extends Component {
 
           <Text
             style={{
-              backgroundColor: 'yellow',
               marginTop: 20,
               width: 100,
               flexDirection: 'row',
@@ -277,7 +272,6 @@ export class AddMeetingForm extends Component {
 
           <Text
             style={{
-              backgroundColor: 'yellow',
               marginTop: 20
             }}
           >
@@ -291,14 +285,13 @@ export class AddMeetingForm extends Component {
           <Text>{JSON.stringify(this.state.guests)}</Text>
           <Text>{JSON.stringify(this.state.location)}</Text>
 
-          <Button
-            icon='md-checkmark'
-            iconPlacement='right'
+          <TouchableHighlight
+            underlyingColor='#cfcfcf'
+            style={{ alignSelf: 'center' }}
             onPress={this.handleSubmit}
-            title='Save'
           >
-            "Save"
-          </Button>
+            <Icon name='floppy-o' size={35} color='#004c40' />
+          </TouchableHighlight>
         </KeyboardAvoidingView>
       </ScrollView>
     )
@@ -310,7 +303,8 @@ const mapStateToProps = state => {
     fetching: state.meeting.fetching,
     userId: state.login.userId,
     googlePlacesApiKey: state.login.googlePlacesApiKey,
-    meeting: state.meeting.meeting
+    meeting: state.meeting.meeting,
+    onPress: this.handleSubmit
   }
 }
 
