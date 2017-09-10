@@ -17,9 +17,7 @@ import { Actions as NavigationActions } from 'react-native-router-flux'
 
 import {
   Form,
-  InputField,
-  SwitchField,
-  PickerField
+  InputField
 } from 'react-native-form-generator'
 
 export class AddMeetingForm extends Component {
@@ -155,23 +153,6 @@ export class AddMeetingForm extends Component {
               placeholder='Meeting description'
               underlineColorAndroid='#004c40'
             />
-            <SwitchField
-              label='Repeat'
-              ref='repeat'
-              underlineColorAndroid='#004c40'
-              style={{ marginTop: 15 }}
-            />
-            {this.state.formData.repeat && (
-              <PickerField
-                ref='repeatFrequency'
-                label='How often?'
-                options={{
-                  every_day: 'Every day',
-                  every_week: 'Every week',
-                  every_month: 'Every month'
-                }}
-              />
-            )}
 
             {/*
             DatePicker is not from react-native-form-generator package
